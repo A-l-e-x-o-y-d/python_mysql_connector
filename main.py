@@ -24,8 +24,6 @@ try:
             print('\nТаблицы:\n1. Customer\n2. Ordering\n3. Employee\n4. Car\n5. Equipment\n6. Insurance\n')
             num_table = int(input('Введите номер таблицы для взаимодействия: '))
 
-            # Взаимодействие с выбранной таблицей
-
             # Клиент
             if num_table == 1:
                 print('\nДействия с таблицей:\n1. Создать запись\n2. Читать запись\n3. Редактировать запись\n4. Удалить запись\n')
@@ -140,12 +138,11 @@ try:
                         id_customer = input('Введите Id клиента: ')
                         mycursor.execute("delete from customer where id_customer = " + id_customer)
 
-                    if num_delete == 2:
+                    elif num_delete == 2:
                         full_name = input('\nВведите ФИО клиента: ')
                         mycursor.execute("select * from customer where full_name = " + '"' + full_name + '"')
                         mycursor.fetchall()
                         count = mycursor.rowcount
-                        print(count)
 
                         if count > 1:
                             mycursor.execute("select * from customer where full_name = " + '"' + full_name + '"')
@@ -155,7 +152,7 @@ try:
                             print(mytable)
                             id_customer = input('\nВведите Id клиента: ')
                             mycursor.execute("delete from customer where id_customer = " + id_customer)
-                            print('Запись клиента успешно удалена')
+                            print('\nЗапись клиента успешно удалена')
 
                         elif count == 0:
                             print('Клиента с таким ФИО нет')
@@ -164,59 +161,100 @@ try:
                             mycursor.execute("delete from customer where full_name = " + "'" + full_name + "'")
                             print('Запись клиента успешно удалена')
 
-                    if num_delete == 3:
+                    elif num_delete == 3:
                         phone_number = input('Введите номер телефона клиента: ')
-                        mycursor.execute("select * customer where phone_number = " + "'" + phone_number + "'")
+                        mycursor.execute("select * from customer where phone_number = " + '"' + phone_number + '"')
+                        mycursor.fetchall()
+                        count = mycursor.rowcount
 
-                        if len(mycursor.fetchall()) > 2:
+                        if count > 1:
+                            mycursor.execute("select * from customer where phone_number = " + '"' + phone_number + '"')
                             mytable = PrettyTable()
-                            mytable.field_names = ['Id_customer', 'Full_name', 'Phone_number', 'Address', 'Date_of_birth', 'Email']
+                            mytable.field_names = ['Id_customer', 'Full_name', 'Phone_number', 'Address',
+                                                   'Date_of_birth', 'Email']
                             mytable.add_rows(mycursor.fetchall())
                             print(mytable)
-                            id_customer = input('Введите Id клиента: ')
+                            id_customer = input('\nВведите Id клиента: ')
                             mycursor.execute("delete from customer where id_customer = " + id_customer)
+                            print('\nЗапись клиента успешно удалена')
 
-                        if len(mycursor.fetchall()) == 0:
+                        if count == 0:
                             print('Клиента с таким номером телефона нет')
 
                         else:
                             mycursor.execute("delete from customer where phone_number = " + "'" + phone_number + "'")
 
-                    if num_delete == 4:
+                    elif num_delete == 4:
                         address = input('Введите адрес клиента: ')
                         mycursor.execute("delete from customer where adress = " + "'" + address + "'")
+                        mycursor.fetchall()
+                        count = mycursor.rowcount
 
-                        if len(mycursor.fetchall()) > 2:
+                        if count > 1:
+                            mycursor.execute("select * from customer where adress = " + '"' + address + '"')
                             mytable = PrettyTable()
-                            mytable.field_names = ['Id_customer', 'Full_name', 'Phone_number', 'Address', 'Date_of_birth', 'Email']
+                            mytable.field_names = ['Id_customer', 'Full_name', 'Phone_number', 'Address',
+                                                   'Date_of_birth', 'Email']
                             mytable.add_rows(mycursor.fetchall())
                             print(mytable)
-                            id_customer = input('Введите Id клиента: ')
+                            id_customer = input('\nВведите Id клиента: ')
                             mycursor.execute("delete from customer where id_customer = " + id_customer)
+                            print('\nЗапись клиента успешно удалена')
 
-                        if len(mycursor.fetchall()) == 0:
+                        if count == 0:
                             print('Клиента с таким адресом нет')
 
                         else:
                             mycursor.execute("delete from customer where adress = " + "'" + address + "'")
 
-                    if num_delete == 5:
+                    elif num_delete == 5:
                         date_of_birth = input('Введите дату рождения клиента: ')
                         mycursor.execute("delete from customer where date_of_birth = " + "'" + date_of_birth + "'")
+                        mycursor.fetchall()
+                        count = mycursor.rowcount
 
-                        if len(mycursor.fetchall()) > 2:
+                        if count > 1:
+                            mycursor.execute("select * from customer where date_of_birth = " + '"' + date_of_birth + '"')
                             mytable = PrettyTable()
-                            mytable.field_names = ['Id_customer', 'Full_name', 'Phone_number', 'Address', 'Date_of_birth', 'Email']
+                            mytable.field_names = ['Id_customer', 'Full_name', 'Phone_number', 'Address',
+                                                   'Date_of_birth', 'Email']
                             mytable.add_rows(mycursor.fetchall())
                             print(mytable)
-                            id_customer = input('Введите Id клиента: ')
+                            id_customer = input('\nВведите Id клиента: ')
                             mycursor.execute("delete from customer where id_customer = " + id_customer)
+                            print('\nЗапись клиента успешно удалена')
 
-                        if len(mycursor.fetchall()) == 0:
+                        if count == 0:
                             print('Клиента с такой датой рождения нет')
 
                         else:
                             mycursor.execute("delete from customer where date_of_birth = " + "'" + date_of_birth + "'")
+
+                    elif num_delete == 6:
+                        email = input('Введите Email клиента: ')
+                        mycursor.execute("delete from customer where email = " + "'" + email + "'")
+                        mycursor.fetchall()
+                        count = mycursor.rowcount
+
+                        if count > 1:
+                            mycursor.execute("select * from customer where email = " + '"' + email + '"')
+                            mytable = PrettyTable()
+                            mytable.field_names = ['Id_customer', 'Full_name', 'Phone_number', 'Address',
+                                                   'Date_of_birth', 'Email']
+                            mytable.add_rows(mycursor.fetchall())
+                            print(mytable)
+                            id_customer = input('\nВведите Id клиента: ')
+                            mycursor.execute("delete from customer where id_customer = " + id_customer)
+                            print('\nЗапись клиента успешно удалена')
+
+                        if count == 0:
+                            print('Клиента с такой датой рождения нет')
+
+                        else:
+                            mycursor.execute("delete from customer where email = " + "'" + email + "'")
+
+                    else:
+                        print('\nНомера выбранной колонки не существует')
 
                     dn_name.commit()
 
@@ -388,19 +426,211 @@ try:
 
                 # Удалить запись
                 elif num_act == 4:
-                    print('\n1. Id order\n2. Payment method\n3. Registartion date\n4. Total amount\n5. Full name customer\n7. Brand and model car\n6. Full name customer ')
-                    id_order = input('Введите Id заказа: ')
-                    mycursor.execute("delete from ordering where id_ordering = " + id_order)
+                    print('\n1. Id order\n2. Payment method\n3. Registartion date\n4. Total amount\n5. Full name customer\n6. Brand and model car\n7. Full name employee')
+
+                    num_delete = int(
+                        input('\nВведите номер колонки, по которой будет производиться удаление заказа: '))
+
+                    if num_delete == 1:
+                        id_order = input('Введите Id заказа: ')
+                        mycursor.execute("delete from ordering where id_ordering = " + id_order)
+
+                    elif num_delete == 2:
+                        payment_method = input('\nВведите способ оплаты заказа(Б/Н): ')
+                        mycursor.execute("select * from ordering where payment_method = " + '"' + payment_method + '"')
+                        mycursor.fetchall()
+                        count = mycursor.rowcount
+
+                        if count > 1:
+                            mycursor.execute("select * from ordering where payment_method = " + '"' + payment_method + '"')
+                            mytable = PrettyTable()
+                            mytable.field_names = ['Id order', 'Payment method', 'Registration date', 'Total amount',
+                                                   'Full name customer', 'Full name employee', 'Car', 'Id car']
+                            mytable.add_rows(mycursor.fetchall())
+                            print(mytable)
+                            id_order = input('\nВведите Id заказа: ')
+                            mycursor.execute("delete from ordering where id_ordering = " + id_order)
+                            print('\nЗапись заказа успешно удалена')
+
+                        elif count == 0:
+                            print('Сотрудника с таким ФИО нет')
+
+                        else:
+                            mycursor.execute("delete from ordering where payment_method = " + "'" + payment_method + "'")
+                            print('Запись заказа успешно удалена')
+
+                    elif num_delete == 3:
+                        registration_date = input('Введите дату регистрации заказа: ')
+                        mycursor.execute("select * from ordering where registration_date = " + '"' + registration_date + '"')
+                        mycursor.fetchall()
+                        count = mycursor.rowcount
+
+                        if count > 1:
+                            mycursor.execute("select * from ordering where registration_date = " + '"' + registration_date + '"')
+                            mytable = PrettyTable()
+                            mytable.field_names = ['Id order', 'Payment method', 'Registration date', 'Total amount',
+                                                   'Full name customer', 'Full name employee', 'Car', 'Id car']
+                            mytable.add_rows(mycursor.fetchall())
+                            print(mytable)
+                            id_order = input('\nВведите Id заказа: ')
+                            mycursor.execute("delete from ordering where id_ordering = " + id_order)
+                            print('\nЗапись заказа успешно удалена')
+
+                        elif count == 0:
+                            print('Заказа с такой датой регистрации нет')
+
+                        else:
+                            mycursor.execute("delete from ordering where registration_date = " + "'" + registration_date + "'")
+                            print('\nЗапись заказа успешно удалена')
+
+                    elif num_delete == 4:
+                        total_amount = input('Введите итоговую цену заказа: ')
+                        mycursor.execute("delete from ordering where total_amount = " + "'" + total_amount + "'")
+                        mycursor.fetchall()
+                        count = mycursor.rowcount
+
+                        if count > 1:
+                            mycursor.execute("select * from ordering where total_amount = " + '"' + total_amount + '"')
+                            mytable = PrettyTable()
+                            mytable.field_names = ['Id_order', 'Payment method', 'Registration date', 'Total amount',
+                                                   'Full name customer', 'Full name employee', 'Car', 'Id car']
+                            mytable.add_rows(mycursor.fetchall())
+                            print(mytable)
+                            id_order = input('\nВведите Id заказа: ')
+                            mycursor.execute("delete from ordering where id_ordering = " + id_order)
+                            print('\nЗапись заказа успешно удалена')
+
+                        if count == 0:
+                            print('Заказа с такой итоговой ценой нет')
+
+                        else:
+                            mycursor.execute("delete from ordering where total_amount = " + total_amount)
+                            print('\nЗапись заказа успешно удалена')
+
+                    elif num_delete == 5:
+                        full_name_customer = input('Введите ФИО клиента: ')
+                        mycursor.execute('select * from ordering '
+                                        'join customer on ordering.id_customer = customer.id_customer '
+                                        'join employee on ordering.id_employee = employee.id_employee '
+                                        'join car on ordering.id_car = car.id_car '
+                                        'where customer.full_name = ' + '"' + full_name_customer + '"')
+                        mycursor.fetchall()
+                        count = mycursor.rowcount
+
+                        if count > 1:
+                            mycursor.execute('select * from ordering '
+                                            'join customer on ordering.id_customer = customer.id_customer '
+                                            'join employee on ordering.id_employee = employee.id_employee '
+                                            'join car on ordering.id_car = car.id_car '
+                                            'where customer.full_name = ' + '"' + full_name_customer + '"')
+                            mytable = PrettyTable()
+                            mytable.field_names = ['Id order', 'Payment method', 'Registration date', 'Total amount',
+                                                   'Full name customer', 'Full name employee', 'Car', 'Id car']
+                            mytable.add_rows(mycursor.fetchall())
+                            print(mytable)
+                            id_order = input('\nВведите Id заказа: ')
+                            mycursor.execute('delete ordering from ordering '
+                                            'join customer on ordering.id_customer = customer.id_customer '
+                                            'join employee on ordering.id_employee = employee.id_employee '
+                                            'join car on ordering.id_car = car.id_car '
+                                            'where customer.full_name = ' + '"' + full_name_customer + '"')
+                            print('\nЗапись заказа успешно удалена')
+
+                        if count == 0:
+                            print('Заказа с таким клиентом нет')
+
+                        else:
+                            mycursor.execute('delete ordering from ordering '
+                                            'join customer on ordering.id_customer = customer.id_customer '
+                                            'join employee on ordering.id_employee = employee.id_employee '
+                                            'join car on ordering.id_car = car.id_car '
+                                            'where customer.full_name = ' + '"' + full_name_customer + '"')
+                            print('\nЗапись заказа успешно удалена')
+
+                    elif num_delete == 6:
+                        brand_and_model = input('Введите марку и модель автомобиля: ')
+                        mycursor.execute('select * from ordering '
+                                        'join customer on ordering.id_customer = customer.id_customer '
+                                        'join employee on ordering.id_employee = employee.id_employee '
+                                        'join car on ordering.id_car = car.id_car '
+                                        'where concat(car.brand, ' ', car.model) = ' + '"' + brand_and_model + '"')
+                        mycursor.fetchall()
+                        count = mycursor.rowcount
+
+                        if count > 1:
+                            mycursor.execute('select * from ordering '
+                                        'join customer on ordering.id_customer = customer.id_customer '
+                                        'join employee on ordering.id_employee = employee.id_employee '
+                                        'join car on ordering.id_car = car.id_car '
+                                        'where concat(car.brand, ' ', car.model) = ' + '"' + brand_and_model + '"')
+                            mytable = PrettyTable()
+                            mytable.field_names = ['Id order', 'Payment method', 'Registration date', 'Total amount',
+                                                   'Full name customer', 'Full name employee', 'Car', 'Id car']
+                            mytable.add_rows(mycursor.fetchall())
+                            print(mytable)
+                            id_order = input('\nВведите Id заказа: ')
+                            mycursor.execute("delete from ordering where id_ordering = " + id_order)
+                            print('\nЗапись заказа успешно удалена')
+
+                        if count == 0:
+                            print('Сотрудника с такой датой рождения нет')
+
+                        else:
+                            mycursor.execute('select * from ordering '
+                                        'join customer on ordering.id_customer = customer.id_customer '
+                                        'join employee on ordering.id_employee = employee.id_employee '
+                                        'join car on ordering.id_car = car.id_car '
+                                        'where concat(car.brand, ' ', car.model) = ' + '"' + brand_and_model + '"')
+                            print('\nЗапись заказа успешно удалена')
+
+                    elif num_delete == 7:
+                        full_name_employee = input('Введите ФИО сотрудника: ')
+                        mycursor.execute('select * from ordering '
+                                        'join customer on ordering.id_customer = customer.id_customer '
+                                        'join employee on ordering.id_employee = employee.id_employee '
+                                        'join car on ordering.id_car = car.id_car '
+                                        'where employee.full_name = ' + '"' + full_name_employee + '"')
+                        mycursor.fetchall()
+                        count = mycursor.rowcount
+
+                        if count > 1:
+                            mycursor.execute('select * from ordering '
+                                            'join customer on ordering.id_customer = customer.id_customer '
+                                            'join employee on ordering.id_employee = employee.id_employee '
+                                            'join car on ordering.id_car = car.id_car '
+                                            'where employee.full_name = ' + '"' + full_name_employee + '"')
+                            mytable = PrettyTable()
+                            mytable.field_names = ['Id order', 'Payment method', 'Registration date', 'Total amount',
+                                                   'Full name customer', 'Full name employee', 'Car', 'Id car']
+                            mytable.add_rows(mycursor.fetchall())
+                            print(mytable)
+                            id_order = input('\nВведите Id заказа: ')
+                            mycursor.execute('delete ordering from ordering '
+                                            'join customer on ordering.id_customer = customer.id_customer '
+                                            'join employee on ordering.id_employee = employee.id_employee '
+                                            'join car on ordering.id_car = car.id_car '
+                                            'where employee.full_name = ' + '"' + full_name_employee + '"')
+                            print('\nЗапись заказа успешно удалена')
+
+                        if count == 0:
+                            print('Заказа с таким клиентом нет')
+
+                        else:
+                            mycursor.execute('delete ordering from ordering '
+                                            'join customer on ordering.id_customer = customer.id_customer '
+                                            'join employee on ordering.id_employee = employee.id_employee '
+                                            'join car on ordering.id_car = car.id_car '
+                                            'where employee.full_name = ' + '"' + full_name_employee + '"')
+                            print('\nЗапись заказа успешно удалена')
+
                     dn_name.commit()
-                    print('Запись заказа успешно удалена')
 
                 else:
                     print('\nНомер выбранного действия не существует!')
 
             # Сотрудник
             elif num_table == 3:
-                print(
-                    '\nДействия с таблицей:\n1. Создать запись\n2. Читать запись\n3. Редактировать запись\n4. Удалить запись\n')
+                print('\nДействия с таблицей:\n1. Создать запись\n2. Читать запись\n3. Редактировать запись\n4. Удалить запись\n')
                 num_act = int(input('Введите номер действия: '))
 
                 # Создать запись
@@ -451,8 +681,8 @@ try:
                         print(mytable)
 
                     if num_search == 4:
-                        email = input('\nВведите адрес сотрудника: ')
-                        mycursor.execute("select * from employee where email = " + '"' + address + '"')
+                        address = input('\nВведите адрес сотрудника: ')
+                        mycursor.execute("select * from employee where adress = " + '"' + address + '"')
                         mytable = PrettyTable()
                         mytable.field_names = ['Id_customer', 'Full_name', 'Phone_number', 'Address', 'Date_of_birth',
                                                'Email', 'Salary']
@@ -533,10 +763,155 @@ try:
 
                 # Удалить запись
                 elif num_act == 4:
-                    id_employee = input('Введите Id сотрудника: ')
-                    mycursor.execute("delete from employee where id_employee = " + id_employee)
-                    dn_name.commit()
-                    print('Запись сотрудника успешно удалена')
+                    print('\n1. Id\n2. Full name\n3. Phone number\n4. Address\n5. Date of birth\n6. Email\n7. Salary')
+                    num_delete = int(
+                        input('\nВведите номер колонки, по которой будет производиться удаление сотрудника: '))
+
+                    if num_delete == 1:
+                        id_employee = input('Введите Id сотрудника: ')
+                        mycursor.execute("delete from employee where id_employee = " + id_employee)
+
+                    elif num_delete == 2:
+                        full_name = input('\nВведите ФИО сотрудника: ')
+                        mycursor.execute("select * from employee where full_name = " + '"' + full_name + '"')
+                        mycursor.fetchall()
+                        count = mycursor.rowcount
+
+                        if count > 1:
+                            mycursor.execute("select * from employee where full_name = " + '"' + full_name + '"')
+                            mytable = PrettyTable()
+                            mytable.field_names = ['Id_customer', 'Full_name', 'Phone_number', 'Address',
+                                                   'Date_of_birth', 'Email', 'Salary']
+                            mytable.add_rows(mycursor.fetchall())
+                            print(mytable)
+                            id_employee = input('\nВведите Id сотрудника: ')
+                            mycursor.execute("delete from employee where id_employee = " + id_employee)
+                            print('\nЗапись сотрудника успешно удалена')
+
+                        elif count == 0:
+                            print('Сотрудника с таким ФИО нет')
+
+                        else:
+                            mycursor.execute("delete from employee where full_name = " + "'" + full_name + "'")
+                            print('Запись сотрудника успешно удалена')
+
+                    elif num_delete == 3:
+                        phone_number = input('Введите номер телефона сотрудника: ')
+                        mycursor.execute("select * from employee where phone_number = " + '"' + phone_number + '"')
+                        mycursor.fetchall()
+                        count = mycursor.rowcount
+
+                        if count > 1:
+                            mycursor.execute("select * from employee where phone_number = " + '"' + phone_number + '"')
+                            mytable = PrettyTable()
+                            mytable.field_names = ['Id_customer', 'Full_name', 'Phone_number', 'Address',
+                                                   'Date_of_birth', 'Email', 'Salary']
+                            mytable.add_rows(mycursor.fetchall())
+                            print(mytable)
+                            id_employee = input('\nВведите Id сотрудника: ')
+                            mycursor.execute("delete from employee where id_employee = " + id_employee)
+                            print('\nЗапись сотрудника успешно удалена')
+
+                        if count == 0:
+                            print('Сотрудника с таким номером телефона нет')
+
+                        else:
+                            mycursor.execute("delete from employee where phone_number = " + "'" + phone_number + "'")
+
+                    elif num_delete == 4:
+                        address = input('Введите адрес сотрудника: ')
+                        mycursor.execute("delete from employee where adress = " + "'" + address + "'")
+                        mycursor.fetchall()
+                        count = mycursor.rowcount
+
+                        if count > 1:
+                            mycursor.execute("select * from employee where phone_number = " + '"' + address + '"')
+                            mytable = PrettyTable()
+                            mytable.field_names = ['Id_customer', 'Full_name', 'Phone_number', 'Address',
+                                                   'Date_of_birth', 'Email', 'Salary']
+                            mytable.add_rows(mycursor.fetchall())
+                            print(mytable)
+                            id_employee = input('\nВведите Id сотрудника: ')
+                            mycursor.execute("delete from employee where id_employee = " + id_employee)
+                            print('\nЗапись сотрудника успешно удалена')
+
+                        if count == 0:
+                            print('Сотрудника с таким адресом нет')
+
+                        else:
+                            mycursor.execute("delete from employee where adress = " + "'" + address + "'")
+
+                    elif num_delete == 5:
+                        date_of_birth = input('Введите дату рождения сотрудника: ')
+                        mycursor.execute("delete from employee where date_of_birth = " + "'" + date_of_birth + "'")
+                        mycursor.fetchall()
+                        count = mycursor.rowcount
+
+                        if count > 1:
+                            mycursor.execute("select * from employee where date_of_birth = " + '"' + date_of_birth + '"')
+                            mytable = PrettyTable()
+                            mytable.field_names = ['Id_customer', 'Full_name', 'Phone_number', 'Address',
+                                                   'Date_of_birth', 'Email', 'Salary']
+                            mytable.add_rows(mycursor.fetchall())
+                            print(mytable)
+                            id_employee = input('\nВведите Id сотрудника: ')
+                            mycursor.execute("delete from employee where id_employee = " + id_employee)
+                            print('\nЗапись сотрудника успешно удалена')
+
+                        if count == 0:
+                            print('Сотрудника с такой датой рождения нет')
+
+                        else:
+                            mycursor.execute("delete from employee where date_of_birth = " + "'" + date_of_birth + "'")
+
+                    elif num_delete == 6:
+                        email = input('Введите Email сотрудника: ')
+                        mycursor.execute("delete from employee where email = " + "'" + email + "'")
+                        mycursor.fetchall()
+                        count = mycursor.rowcount
+
+                        if count > 1:
+                            mycursor.execute("select * from employee where email = " + '"' + email + '"')
+                            mytable = PrettyTable()
+                            mytable.field_names = ['Id_customer', 'Full_name', 'Phone_number', 'Address',
+                                                   'Date_of_birth', 'Email', 'Salary']
+                            mytable.add_rows(mycursor.fetchall())
+                            print(mytable)
+                            id_employee = input('\nВведите Id сотрудника: ')
+                            mycursor.execute("delete from employee where id_employee = " + id_employee)
+                            print('\nЗапись сотрудника успешно удалена')
+
+                        if count == 0:
+                            print('Сотрудника с такой датой рождения нет')
+
+                        else:
+                            mycursor.execute("delete from employee where email = " + "'" + email + "'")
+
+                    elif num_delete == 7:
+                        salary = input('Введите заработную плату сотрудника: ')
+                        mycursor.execute("delete from employee where email = " + "'" + salary + "'")
+                        mycursor.fetchall()
+                        count = mycursor.rowcount
+
+                        if count > 1:
+                            mycursor.execute("select * from employee where salary = " + '"' + salary + '"')
+                            mytable = PrettyTable()
+                            mytable.field_names = ['Id_customer', 'Full_name', 'Phone_number', 'Address',
+                                                   'Date_of_birth', 'Email', 'Salary']
+                            mytable.add_rows(mycursor.fetchall())
+                            print(mytable)
+                            id_employee = input('\nВведите Id сотрудника: ')
+                            mycursor.execute("delete from employee where id_employee = " + id_employee)
+                            print('\nЗапись сотрудника успешно удалена')
+
+                        if count == 0:
+                            print('Сотрудника с такой датой рождения нет')
+
+                        else:
+                            mycursor.execute("delete from employee where salary = " + salary)
+
+                    else:
+                        print('\nНомера выбранной колонки не существует')
 
                 else:
                     print('\nНомер выбранного действия не существует!')
