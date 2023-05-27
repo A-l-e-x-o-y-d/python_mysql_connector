@@ -135,27 +135,34 @@ try:
                 elif num_act == 4:
                     print('\n1. Id\n2. Full name\n3. Phone number\n4. Address\n5. Date of birth\n6. Email')
                     num_delete = int(input('\nВведите номер колонки, по которой будет производиться удаление клиента: '))
+
                     if num_delete == 1:
                         id_customer = input('Введите Id клиента: ')
                         mycursor.execute("delete from customer where id_customer = " + id_customer)
 
                     if num_delete == 2:
-                        full_name = input('Введите ФИО клиента: ')
-                        mycursor.execute("select * from customer where email = " + '"' + full_name + '"')
-                        row_count = mycursor.rowcount
-                        if row_count > 2:
+                        full_name = input('\nВведите ФИО клиента: ')
+                        mycursor.execute("select * from customer where full_name = " + '"' + full_name + '"')
+                        mycursor.fetchall()
+                        count = mycursor.rowcount
+                        print(count)
+
+                        if count > 1:
+                            mycursor.execute("select * from customer where full_name = " + '"' + full_name + '"')
                             mytable = PrettyTable()
                             mytable.field_names = ['Id_customer', 'Full_name', 'Phone_number', 'Address', 'Date_of_birth', 'Email']
                             mytable.add_rows(mycursor.fetchall())
                             print(mytable)
-                            id_customer = input('Введите Id клиента: ')
+                            id_customer = input('\nВведите Id клиента: ')
                             mycursor.execute("delete from customer where id_customer = " + id_customer)
+                            print('Запись клиента успешно удалена')
 
-                        if row_count == 0:
+                        elif count == 0:
                             print('Клиента с таким ФИО нет')
 
                         else:
                             mycursor.execute("delete from customer where full_name = " + "'" + full_name + "'")
+                            print('Запись клиента успешно удалена')
 
                     if num_delete == 3:
                         phone_number = input('Введите номер телефона клиента: ')
@@ -212,7 +219,6 @@ try:
                             mycursor.execute("delete from customer where date_of_birth = " + "'" + date_of_birth + "'")
 
                     dn_name.commit()
-                    print('Запись клиента успешно удалена')
 
                 else:
                     print('\nНомер выбранного действия не существует!')
