@@ -1,6 +1,7 @@
 from prettytable import PrettyTable
 import mysql.connector
 from config import host, user, password, database
+import CRUD
 
 # Соединение с БД
 try:
@@ -49,27 +50,30 @@ try:
 
                     if num_search == 1:
                         id_customer = input('\nВведите Id клиента: ')
-                        mycursor.execute("select * from customer where id_customer = " + id_customer)
-                        mytable = PrettyTable()
-                        mytable.field_names = ['Id_customer', 'Full_name', 'Phone_number', 'Address', 'Date_of_birth', 'Email']
-                        mytable.add_rows(mycursor.fetchall())
-                        print(mytable)
+                        # mycursor.execute("select * from customer where id_customer = " + id_customer)
+                        # mytable = PrettyTable()
+                        # mytable.field_names = ['Id_customer', 'Full_name', 'Phone_number', 'Address', 'Date_of_birth', 'Email']
+                        # mytable.add_rows(mycursor.fetchall())
+                        # print(mytable)
+                        CRUD.read_customer(num_search, 'id_customer', id_customer)
 
                     if num_search == 2:
                         full_name = input('\nВведите ФИО клиента: ')
-                        mycursor.execute("select * from customer where full_name = " + '"' + full_name + '"')
-                        mytable = PrettyTable()
-                        mytable.field_names = ['Id_customer', 'Full_name', 'Phone_number', 'Address', 'Date_of_birth','Email']
-                        mytable.add_rows(mycursor.fetchall())
-                        print(mytable)
+                        # mycursor.execute("select * from customer where full_name = " + '"' + full_name + '"')
+                        # mytable = PrettyTable()
+                        # mytable.field_names = ['Id_customer', 'Full_name', 'Phone_number', 'Address', 'Date_of_birth','Email']
+                        # mytable.add_rows(mycursor.fetchall())
+                        # print(mytable)
+                        CRUD.read_customer(num_search, 'full_name', full_name)
 
                     if num_search == 3:
                         phone_number = input('\nВведите номер телефона клиента: ')
-                        mycursor.execute("select * from customer where phone_number = " + '"' + phone_number + '"')
-                        mytable = PrettyTable()
-                        mytable.field_names = ['Id_customer', 'Full_name', 'Phone_number', 'Address', 'Date_of_birth','Email']
-                        mytable.add_rows(mycursor.fetchall())
-                        print(mytable)
+                        # mycursor.execute("select * from customer where phone_number = " + '"' + phone_number + '"')
+                        # mytable = PrettyTable()
+                        # mytable.field_names = ['Id_customer', 'Full_name', 'Phone_number', 'Address', 'Date_of_birth','Email']
+                        # mytable.add_rows(mycursor.fetchall())
+                        # print(mytable)
+                        CRUD.read_customer(num_search, 'phone_number', phone_number)
 
                     if num_search == 4:
                         address = input('\nВведите адрес клиента: ')
@@ -80,12 +84,13 @@ try:
                         print(mytable)
 
                     if num_search == 5:
-                        date_of_birth = input('\nВведите дату рождения клиента: ')
-                        mycursor.execute("select * from customer where date_of_birth = " + '"' + date_of_birth + '"')
-                        mytable = PrettyTable()
-                        mytable.field_names = ['Id_customer', 'Full_name', 'Phone_number', 'Address', 'Date_of_birth','Email']
-                        mytable.add_rows(mycursor.fetchall())
-                        print(mytable)
+                        date_of_birth = input('\nВведите дату рождения клиента(ГГГГ-ММ-ДД): ')
+                        # mycursor.execute("select * from customer where date_of_birth = " + '"' + date_of_birth + '"')
+                        # mytable = PrettyTable()
+                        # mytable.field_names = ['Id_customer', 'Full_name', 'Phone_number', 'Address', 'Date_of_birth','Email']
+                        # mytable.add_rows(mycursor.fetchall())
+                        # print(mytable)
+                        CRUD.read_customer(5, 'date_of_birth', date_of_birth)
 
                     if num_search == 6:
                         email = input('\nВведите Email клиента: ')
