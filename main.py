@@ -40,7 +40,10 @@ try:
                     email = input('Введите Email клиента: ')
 
                     mycursor.execute('insert into Customer(id_customer, full_name, phone_number, adress, date_of_birth, email) values (' + id_customer + ',"' + full_name + '","' + phone_number + '","' + address + '","' + date_of_birth + '","' + email + '")')
+
+                    # Принять изменения
                     dn_name.commit()
+
                     print('Запись клиента успешно добавлена')
 
                 # Читать запись
@@ -50,55 +53,27 @@ try:
 
                     if num_search == 1:
                         id_customer = input('\nВведите Id клиента: ')
-                        # mycursor.execute("select * from customer where id_customer = " + id_customer)
-                        # mytable = PrettyTable()
-                        # mytable.field_names = ['Id_customer', 'Full_name', 'Phone_number', 'Address', 'Date_of_birth', 'Email']
-                        # mytable.add_rows(mycursor.fetchall())
-                        # print(mytable)
                         CRUD.read_customer(num_search, 'id_customer', id_customer)
 
                     if num_search == 2:
                         full_name = input('\nВведите ФИО клиента: ')
-                        # mycursor.execute("select * from customer where full_name = " + '"' + full_name + '"')
-                        # mytable = PrettyTable()
-                        # mytable.field_names = ['Id_customer', 'Full_name', 'Phone_number', 'Address', 'Date_of_birth','Email']
-                        # mytable.add_rows(mycursor.fetchall())
-                        # print(mytable)
                         CRUD.read_customer(num_search, 'full_name', full_name)
 
                     if num_search == 3:
                         phone_number = input('\nВведите номер телефона клиента: ')
-                        # mycursor.execute("select * from customer where phone_number = " + '"' + phone_number + '"')
-                        # mytable = PrettyTable()
-                        # mytable.field_names = ['Id_customer', 'Full_name', 'Phone_number', 'Address', 'Date_of_birth','Email']
-                        # mytable.add_rows(mycursor.fetchall())
-                        # print(mytable)
                         CRUD.read_customer(num_search, 'phone_number', phone_number)
 
                     if num_search == 4:
                         address = input('\nВведите адрес клиента: ')
-                        mycursor.execute("select * from customer where email = " + '"' + address + '"')
-                        mytable = PrettyTable()
-                        mytable.field_names = ['Id_customer', 'Full_name', 'Phone_number', 'Address', 'Date_of_birth','Email']
-                        mytable.add_rows(mycursor.fetchall())
-                        print(mytable)
+                        CRUD.read_customer(4, 'adress', address)
 
                     if num_search == 5:
                         date_of_birth = input('\nВведите дату рождения клиента(ГГГГ-ММ-ДД): ')
-                        # mycursor.execute("select * from customer where date_of_birth = " + '"' + date_of_birth + '"')
-                        # mytable = PrettyTable()
-                        # mytable.field_names = ['Id_customer', 'Full_name', 'Phone_number', 'Address', 'Date_of_birth','Email']
-                        # mytable.add_rows(mycursor.fetchall())
-                        # print(mytable)
                         CRUD.read_customer(5, 'date_of_birth', date_of_birth)
 
                     if num_search == 6:
                         email = input('\nВведите Email клиента: ')
-                        mycursor.execute("select * from customer where email = " + '"' + email + '"')
-                        mytable = PrettyTable()
-                        mytable.field_names = ['Id_customer', 'Full_name', 'Phone_number', 'Address', 'Date_of_birth','Email']
-                        mytable.add_rows(mycursor.fetchall())
-                        print(mytable)
+                        CRUD.read_customer(6, 'email', email)
 
                 # Редактировать запись
                 elif num_act == 3:
@@ -132,6 +107,7 @@ try:
 
                     # Принять изменения
                     dn_name.commit()
+
                     print('Запись клиента успешно изменена')
 
                 # Удалить запись
@@ -261,6 +237,7 @@ try:
                     else:
                         print('\nНомера выбранной колонки не существует')
 
+                    # Принять изменения
                     dn_name.commit()
 
                 else:
