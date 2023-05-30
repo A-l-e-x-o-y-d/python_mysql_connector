@@ -319,66 +319,31 @@ try:
 
                     if num_search == 1:
                         id_employee = input('\nВведите Id сотрудника: ')
-                        mycursor.execute("select * from employee where id_employee = " + id_employee)
-                        mytable = PrettyTable()
-                        mytable.field_names = ['Id_employee', 'Full_name', 'Phone_number', 'Address', 'Date_of_birth',
-                                               'Email', 'Salary']
-                        mytable.add_rows(mycursor.fetchall())
-                        print(mytable)
+                        CRUD.read_employee(1, 'id_employee', id_employee)
 
                     if num_search == 2:
                         full_name = input('\nВведите ФИО сотрудника: ')
-                        mycursor.execute("select * from employee where full_name = " + '"' + full_name + '"')
-                        mytable = PrettyTable()
-                        mytable.field_names = ['Id_customer', 'Full_name', 'Phone_number', 'Address', 'Date_of_birth',
-                                               'Email', 'Salary']
-                        mytable.add_rows(mycursor.fetchall())
-                        print(mytable)
+                        CRUD.read_employee(2, 'full_name', full_name)
 
                     if num_search == 3:
                         phone_number = input('\nВведите номер телефона сотрудника: ')
-                        mycursor.execute("select * from employee where phone_number = " + '"' + phone_number + '"')
-                        mytable = PrettyTable()
-                        mytable.field_names = ['Id_customer', 'Full_name', 'Phone_number', 'Address', 'Date_of_birth',
-                                               'Email', 'Salary']
-                        mytable.add_rows(mycursor.fetchall())
-                        print(mytable)
+                        CRUD.read_employee(3, 'phone_number', phone_number)
 
                     if num_search == 4:
                         address = input('\nВведите адрес сотрудника: ')
-                        mycursor.execute("select * from employee where adress = " + '"' + address + '"')
-                        mytable = PrettyTable()
-                        mytable.field_names = ['Id_customer', 'Full_name', 'Phone_number', 'Address', 'Date_of_birth',
-                                               'Email', 'Salary']
-                        mytable.add_rows(mycursor.fetchall())
-                        print(mytable)
+                        CRUD.read_employee(4, 'adress', address)
 
                     if num_search == 5:
                         date_of_birth = input('\nВведите дату рождения сотрудника: ')
-                        mycursor.execute("select * from employee where date_of_birth = " + '"' + date_of_birth + '"')
-                        mytable = PrettyTable()
-                        mytable.field_names = ['Id_customer', 'Full_name', 'Phone_number', 'Address', 'Date_of_birth',
-                                               'Email', 'Salary']
-                        mytable.add_rows(mycursor.fetchall())
-                        print(mytable)
+                        CRUD.read_employee(5, 'date_of_birth', date_of_birth)
 
                     if num_search == 6:
                         email = input('\nВведите Email сотрудника: ')
-                        mycursor.execute("select * from employee where email = " + '"' + email + '"')
-                        mytable = PrettyTable()
-                        mytable.field_names = ['Id_customer', 'Full_name', 'Phone_number', 'Address', 'Date_of_birth',
-                                               'Email', 'Salary']
-                        mytable.add_rows(mycursor.fetchall())
-                        print(mytable)
+                        CRUD.read_employee(6, 'email', email)
 
                     if num_search == 7:
                         salary = input('\nВведите заработную плату сотрудника: ')
-                        mycursor.execute("select * from employee where salary = " + '"' + salary + '"')
-                        mytable = PrettyTable()
-                        mytable.field_names = ['Id_customer', 'Full_name', 'Phone_number', 'Address', 'Date_of_birth',
-                                               'Email', 'Salary']
-                        mytable.add_rows(mycursor.fetchall())
-                        print(mytable)
+                        CRUD.read_employee(7, 'salary', salary)
 
                 # Редактировать запись
                 elif num_act == 3:

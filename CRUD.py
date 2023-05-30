@@ -48,6 +48,20 @@ def read_order(num_search, column, value):
         mytable.add_rows(mycursor.fetchall())
         print(mytable)
 
+def read_employee(num_search, column, value):
+    if num_search == 1 or num_search == 7:
+        mycursor.execute("select * from employee where " + column + " = " + value)
+        mytable = PrettyTable()
+        mytable.field_names = ['Id_customer', 'Full_name', 'Phone_number', 'Address', 'Date_of_birth', 'Email', 'Salary']
+        mytable.add_rows(mycursor.fetchall())
+        print(mytable)
+    else:
+        mycursor.execute("select * from employee where " + column + " = " + "'" + value + "'")
+        mytable = PrettyTable()
+        mytable.field_names = ['Id_customer', 'Full_name', 'Phone_number', 'Address', 'Date_of_birth', 'Email', 'Salary']
+        mytable.add_rows(mycursor.fetchall())
+        print(mytable)
+
 def delete_customer(column, value):
 
     mycursor.execute("select * from customer where " + column + " = " + '"' + value + '"')
