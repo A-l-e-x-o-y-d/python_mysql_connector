@@ -272,94 +272,36 @@ try:
 
                     if num_search == 1:
                         id_order = input('\nВведите Id заказа: ')
-                        mycursor.execute(
-                            "select Id_ordering, Payment_method, Registration_date, Total_amount, customer.full_name as Full_name_customer, employee.full_name, concat(brand,' ', model) as Car, car.id_car from ordering "
-                            "join customer on customer.id_customer = ordering.id_customer "
-                            "join employee on employee.id_employee = ordering.id_employee "
-                            "join car on car.id_car = ordering.id_car where id_ordering = " + id_order)
-                        mytable = PrettyTable()
-                        mytable.field_names = ['Id_order', 'Payment_method', 'Registration_date', 'Total_amount',
-                                               'Full_name_customer', 'Full_name_employee', 'Car', 'Id_car']
-                        mytable.add_rows(mycursor.fetchall())
-                        print(mytable)
+                        CRUD.read_order(1, 'Id_ordering', id_order)
+
 
                     if num_search == 2:
                         payment_method = input('\nВведите способ оплаты заказа(Б/Н): ')
-                        mycursor.execute(
-                            "select Id_ordering, Payment_method, Registration_date, Total_amount, customer.full_name as Full_name_customer, employee.full_name, concat(brand,' ', model) as Car, car.id_car from ordering "
-                            "join customer on customer.id_customer = ordering.id_customer "
-                            "join employee on employee.id_employee = ordering.id_employee "
-                            "join car on car.id_car = ordering.id_car where payment_method = " + '"' + payment_method + '"')
-                        mytable = PrettyTable()
-                        mytable.field_names = ['Id_order', 'Payment_method', 'Registration_date', 'Total_amount',
-                                               'Full_name_customer', 'Full_name_employee', 'Car', 'Id_car']
-                        mytable.add_rows(mycursor.fetchall())
-                        print(mytable)
+                        CRUD.read_order(2, 'payment_method', payment_method)
 
                     if num_search == 3:
                         registration_date = input('\nВведите дату регистрации заказа(Б/Н): ')
-                        mycursor.execute(
-                            "select Id_ordering, Payment_method, Registration_date, Total_amount, customer.full_name as Full_name_customer, employee.full_name, concat(brand,' ', model) as Car, car.id_car from ordering "
-                            "join customer on customer.id_customer = ordering.id_customer "
-                            "join employee on employee.id_employee = ordering.id_employee "
-                            "join car on car.id_car = ordering.id_car where registration_date = " + '"' + registration_date + '"')
-                        mytable = PrettyTable()
-                        mytable.field_names = ['Id_order', 'Payment_method', 'Registration_date', 'Total_amount',
-                                               'Full_name_customer', 'Full_name_employee', 'Car', 'Id_car']
-                        mytable.add_rows(mycursor.fetchall())
-                        print(mytable)
+                        CRUD.read_order(3, 'registration_date', registration_date)
 
                     if num_search == 4:
                         total_amount = input('\nВведите итоговую цену заказа: ')
-                        mycursor.execute(
-                            "select Id_ordering, Payment_method, Registration_date, Total_amount, customer.full_name as Full_name_customer, employee.full_name, concat(brand,' ', model) as Car, car.id_car from ordering "
-                            "join customer on customer.id_customer = ordering.id_customer "
-                            "join employee on employee.id_employee = ordering.id_employee "
-                            "join car on car.id_car = ordering.id_car where total_amount = " + '"' + total_amount + '"')
-                        mytable = PrettyTable()
-                        mytable.field_names = ['Id_order', 'Payment_method', 'Registration_date', 'Total_amount',
-                                               'Full_name_customer', 'Full_name_employee', 'Car', 'Id_car']
-                        mytable.add_rows(mycursor.fetchall())
-                        print(mytable)
+                        CRUD.read_order(3, 'total_amount', total_amount)
+
 
                     if num_search == 5:
                         full_name_customer = input('\nВведите ФИО клиента: ')
-                        mycursor.execute(
-                            "select Id_ordering, Payment_method, Registration_date, Total_amount, customer.full_name as Full_name_customer, employee.full_name, concat(brand,' ', model) as Car, car.id_car from ordering "
-                            "join customer on customer.id_customer = ordering.id_customer "
-                            "join employee on employee.id_employee = ordering.id_employee "
-                            "join car on car.id_car = ordering.id_car where customer.full_name = " + '"' + full_name_customer + '"')
-                        mytable = PrettyTable()
-                        mytable.field_names = ['Id_order', 'Payment_method', 'Registration_date', 'Total_amount',
-                                               'Full_name_customer', 'Full_name_employee', 'Car', 'Id_car']
-                        mytable.add_rows(mycursor.fetchall())
-                        print(mytable)
+                        CRUD.read_order(3, 'customer.full_name', full_name_customer)
+
 
                     if num_search == 6:
                         full_name_employee = input('\nВведите ФИО сотруника: ')
-                        mycursor.execute(
-                            "select Id_ordering, Payment_method, Registration_date, Total_amount, customer.full_name as Full_name_customer, employee.full_name, concat(brand,' ', model) as Car, car.id_car from ordering "
-                            "join customer on customer.id_customer = ordering.id_customer "
-                            "join employee on employee.id_employee = ordering.id_employee "
-                            "join car on car.id_car = ordering.id_car where employee.full_name = " + '"' + full_name_employee + '"')
-                        mytable = PrettyTable()
-                        mytable.field_names = ['Id_order', 'Payment_method', 'Registration_date', 'Total_amount',
-                                               'Full_name_customer', 'Full_name_employee', 'Car', 'Id_car']
-                        mytable.add_rows(mycursor.fetchall())
-                        print(mytable)
+                        CRUD.read_order(3, 'employee.full_name', full_name_employee)
+
 
                     if num_search == 7:
                         brand = input('Введите марку автомобиля: ')
-                        mycursor.execute(
-                            "select Id_ordering, Payment_method, Registration_date, Total_amount, customer.full_name as Full_name_customer, employee.full_name, concat(brand,' ', model), car.id_car from ordering "
-                            "join customer on customer.id_customer = ordering.id_customer "
-                            "join employee on employee.id_employee = ordering.id_employee "
-                            "join car on car.id_car = ordering.id_car where car.brand = " + '"' + brand + '"')
-                        mytable = PrettyTable()
-                        mytable.field_names = ['Id_order', 'Payment_method', 'Registration_date', 'Total_amount',
-                                               'Full_name_customer', 'Full_name_employee', 'Car', 'Id_car']
-                        mytable.add_rows(mycursor.fetchall())
-                        print(mytable)
+                        CRUD.read_order(3, 'car.brand', brand)
+
 
                 # Редактировать запись
                 elif num_act == 3:
