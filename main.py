@@ -159,7 +159,7 @@ try:
                             mycursor.execute("delete from customer where id_customer = " + id_customer)
                             print('\nЗапись клиента успешно удалена')
 
-                        if count == 0:
+                        elif count == 0:
                             print('Клиента с таким номером телефона нет')
 
                         else:
@@ -182,7 +182,7 @@ try:
                             mycursor.execute("delete from customer where id_customer = " + id_customer)
                             print('\nЗапись клиента успешно удалена')
 
-                        if count == 0:
+                        elif count == 0:
                             print('Клиента с таким адресом нет')
 
                         else:
@@ -205,7 +205,7 @@ try:
                             mycursor.execute("delete from customer where id_customer = " + id_customer)
                             print('\nЗапись клиента успешно удалена')
 
-                        if count == 0:
+                        elif count == 0:
                             print('Клиента с такой датой рождения нет')
 
                         else:
@@ -228,7 +228,7 @@ try:
                             mycursor.execute("delete from customer where id_customer = " + id_customer)
                             print('\nЗапись клиента успешно удалена')
 
-                        if count == 0:
+                        elif count == 0:
                             print('Клиента с такой датой рождения нет')
 
                         else:
@@ -736,7 +736,7 @@ try:
                             mycursor.execute("delete from employee where id_employee = " + id_employee)
                             print('\nЗапись сотрудника успешно удалена')
 
-                        if count == 0:
+                        elif count == 0:
                             print('Сотрудника с таким номером телефона нет')
 
                         else:
@@ -759,7 +759,7 @@ try:
                             mycursor.execute("delete from employee where id_employee = " + id_employee)
                             print('\nЗапись сотрудника успешно удалена')
 
-                        if count == 0:
+                        elif count == 0:
                             print('Сотрудника с таким адресом нет')
 
                         else:
@@ -782,7 +782,7 @@ try:
                             mycursor.execute("delete from employee where id_employee = " + id_employee)
                             print('\nЗапись сотрудника успешно удалена')
 
-                        if count == 0:
+                        elif count == 0:
                             print('Сотрудника с такой датой рождения нет')
 
                         else:
@@ -805,7 +805,7 @@ try:
                             mycursor.execute("delete from employee where id_employee = " + id_employee)
                             print('\nЗапись сотрудника успешно удалена')
 
-                        if count == 0:
+                        elif count == 0:
                             print('Сотрудника с такой датой рождения нет')
 
                         else:
@@ -828,7 +828,7 @@ try:
                             mycursor.execute("delete from employee where id_employee = " + id_employee)
                             print('\nЗапись сотрудника успешно удалена')
 
-                        if count == 0:
+                        elif count == 0:
                             print('Сотрудника с такой датой рождения нет')
 
                         else:
