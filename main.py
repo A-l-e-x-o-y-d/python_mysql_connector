@@ -518,12 +518,12 @@ try:
 
                     elif num_delete == 7:
                         salary = input('Введите заработную плату сотрудника: ')
-                        mycursor.execute("delete from employee where email = " + "'" + salary + "'")
+                        mycursor.execute("delete from employee where email = " + salary)
                         mycursor.fetchall()
                         count = mycursor.rowcount
 
                         if count > 1:
-                            mycursor.execute("select * from employee where salary = " + '"' + salary + '"')
+                            mycursor.execute("select * from employee where salary = " + salary)
                             mytable = PrettyTable()
                             mytable.field_names = ['Id_customer', 'Full_name', 'Phone_number', 'Address',
                                                    'Date_of_birth', 'Email', 'Salary']
