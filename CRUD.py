@@ -26,6 +26,7 @@ def read_customer(num_search, column, value):
         print(mytable)
 
 def read_order(num_search, column, value):
+
     if num_search == 1 or num_search == 4:
         mycursor.execute(
             "select Id_ordering, Payment_method, Registration_date, Total_amount, customer.full_name as Full_name_customer, employee.full_name, concat(brand,' ', model) as Car, car.id_car from ordering "
@@ -46,3 +47,49 @@ def read_order(num_search, column, value):
         mytable.field_names = ['Id_order', 'Payment_method', 'Registration_date', 'Total_amount', 'Full_name_customer', 'Full_name_employee', 'Car', 'Id_car']
         mytable.add_rows(mycursor.fetchall())
         print(mytable)
+
+def delete_customer(column, value):
+
+    mycursor.execute("select * from customer where " + column + " = " + '"' + value + '"')
+    mycursor.fetchall()
+    count = mycursor.rowcount
+
+    if count > 1:
+        mycursor.execute("select * from customer where " + column + " = " + '"' + value + '"')
+        mytable = PrettyTable()
+        mytable.field_names = ['Id_customer', 'Full_name', 'Phone_number', 'Address', 'Date_of_birth', 'Email']
+        mytable.add_rows(mycursor.fetchall())
+        print(mytable)
+        id_customer = input('\nВведите Id клиента: ')
+        mycursor.execute("delete from customer where id_customer = " + id_customer)
+        print('\nЗапись клиента успешно удалена')
+
+    elif count == 0:
+        print('Клиента с таким ФИО нет')
+
+    else:
+        mycursor.execute("delete from customer where " + column + " = " + '"' + value + '"')
+        print('Запись клиента успешно удалена')
+
+def delete_order(column, value):
+    mycursor.execute("select * from ordering where " + column + " = " + '"' + value + '"')
+    mycursor.fetchall()
+    count = mycursor.rowcount
+
+    if count > 1:
+        mycursor.execute("select * from ordering where " + column + " = " + '"' + value + '"')
+        mytable = PrettyTable()
+        mytable.field_names = ['Id order', 'Payment method', 'Registration date', 'Total amount',
+                               'Full name customer', 'Full name employee', 'Car', 'Id car']
+        mytable.add_rows(mycursor.fetchall())
+        print(mytable)
+        id_order = input('\nВведите Id заказа: ')
+        mycursor.execute("delete from ordering where id_ordering = " + id_order)
+        print('\nЗапись заказа успешно удалена')
+
+    elif count == 0:
+        print('Сотрудника с таким ФИО нет')
+
+    else:
+        mycursor.execute("delete from ordering where " + column + " = " + "'" + value + "'")
+        print('Запись заказа успешно удалена')
