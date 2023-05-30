@@ -1161,7 +1161,6 @@ try:
             if num_query == 1:
                 brand = input('Введите марку автомобиля: ')
                 mycursor.execute('select brand, count(*) from car where brand = "' + brand + '"')
-                print(mycursor.fetchall())
                 mytable = PrettyTable()
                 mytable.field_names = ['Car_brand', 'Count_of_sales']
                 mytable.add_rows(mycursor.fetchall())
@@ -1176,7 +1175,7 @@ try:
                 print(mytable)
 
             elif num_query == 3:
-                year_registration_date = input('Введите год(ГГГГ): ')
+                year_registration_date = input('Введите год регистрации заказа(ГГГГ): ')
                 mycursor.execute('select year(registration_date), count(*) from ordering where year(registration_date) = ' + '"' + year_registration_date + '" group by year(registration_date)')
                 mytable = PrettyTable()
                 mytable.field_names = ['Year', 'Count_of_sales']
