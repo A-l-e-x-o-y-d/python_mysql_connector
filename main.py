@@ -431,7 +431,7 @@ try:
                     id_car = input('Введите Id автомобиля: ')
 
                     mycursor.execute(
-                        'insert into Ordering(id_order, payment_method, registration_date, total_amount, id_customer, id_car, id_employee) values (' + id_order + ',"' + payment_method + '","' + registration_date + '","' + total_amount + '",' + id_customer + ',' + id_car + ',' + id_employee + ')')
+                        'insert into Ordering(id_ordering, payment_method, registration_date, total_amount, id_customer, id_car, id_employee) values (' + id_order + ',"' + payment_method + '","' + registration_date + '","' + total_amount + '",' + id_customer + ',' + id_car + ',' + id_employee + ')')
 
                     # Принять изменения
                     db_name.commit()
