@@ -118,6 +118,7 @@ try:
                     if num_delete == 1:
                         id_customer = input('\nВведите Id клиента: ')
                         CRUD.delete_customer(1, 'id_customer', id_customer)
+                        # mycursor.execute('delete from customer where id_customer = ' + id_customer)
 
                     elif num_delete == 2:
                         full_name = input('\nВведите ФИО клиента: ')
@@ -554,23 +555,23 @@ try:
                     num_delete = int(input('\nВведите номер колонки, по которой будет производиться удаление клиента: '))
 
                     if num_delete == 1:
-                        id_car = input('Введите Id автомобиля: ')
+                        id_car = input('\nВведите Id автомобиля: ')
                         CRUD.delete_car(1, 'id_car', id_car)
 
                     elif num_delete == 2:
-                        brand_and_model = input('Введите марку и модель автомобиля: ')
+                        brand_and_model = input('\nВведите марку и модель автомобиля: ')
                         CRUD.delete_car(2, 'concat(brand, " ", model)', brand_and_model)
 
                     elif num_delete == 3:
-                        year_of_release = input('Введите год релиза автомобиля(ГГГГ-ММ-ДД): ')
+                        year_of_release = input('\nВведите год релиза автомобиля(ГГГГ-ММ-ДД): ')
                         CRUD.delete_car(3, 'year_of_release', year_of_release)
 
                     elif num_delete == 4:
-                        price = input('Введите цену автомобиля: ')
+                        price = input('\nВведите цену автомобиля: ')
                         CRUD.delete_car(4, 'price', price)
 
                     elif num_delete == 5:
-                        color = input('Введите цвет автомобиля')
+                        color = input('\nВведите цвет автомобиля')
                         CRUD.delete_car(5, 'color', color)
 
                     else:
@@ -581,7 +582,6 @@ try:
 
                 else:
                     print('\nНомер выбранного действия не существует!')
-
 
             # Комплектация автомобиля
             elif num_table == 5:
