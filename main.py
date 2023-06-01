@@ -114,7 +114,10 @@ def delete_order(num_delete, column, value):
         print('\nЗапись заказа успешно удалена')
 
     elif num_delete == 4:
-        mycursor.execute("select * from ordering where " + column + " = " + value)
+        mycursor.execute('select * from ordering '
+                         'join customer on ordering.id_customer = customer.id_customer '
+                         'join employee on ordering.id_employee = employee.id_employee '
+                         'join car on ordering.id_car = car.id_car where ' + column + ' = ' + value)
         mycursor.fetchall()
         count = mycursor.rowcount
 
@@ -122,22 +125,21 @@ def delete_order(num_delete, column, value):
             mycursor.execute('select * from ordering '
                              'join customer on ordering.id_customer = customer.id_customer '
                              'join employee on ordering.id_employee = employee.id_employee '
-                             'join car on ordering.id_car = car.id_car '
-                             'where ' + column + ' = ' + value)
+                             'join car on ordering.id_car = car.id_car where ' + column + ' = ' + value)
             mytable = PrettyTable()
             mytable.field_names = ['Id order', 'Payment method', 'Registration date', 'Total amount',
                                    'Full name customer', 'Full name employee', 'C1ar', 'Id car']
             mytable.add_rows(mycursor.fetchall())
             print(mytable)
             id_order = input('\nВведите Id заказа: ')
-            mycursor.execute('delete ordering from ordering where id_ordering = ' + id_order)
+            mycursor.execute('delete from ordering where id_ordering = ' + id_order)
             print('\nЗапись заказа успешно удалена')
 
         elif count == 0:
             print('\nЗаказ с такими данными отсутствует')
 
         else:
-            mycursor.execute('delete from ordering '
+            mycursor.execute('delete ordering from ordering '
                              'join customer on ordering.id_customer = customer.id_customer '
                              'join employee on ordering.id_employee = employee.id_employee '
                              'join car on ordering.id_car = car.id_car '
@@ -145,7 +147,10 @@ def delete_order(num_delete, column, value):
             print('\nЗапись заказа успешно удалена')
 
     else:
-        mycursor.execute("select * from ordering where " + column + " = " + "'" + value + "'")
+        mycursor.execute('select * from ordering '
+                         'join customer on ordering.id_customer = customer.id_customer '
+                         'join employee on ordering.id_employee = employee.id_employee '
+                         'join car on ordering.id_car = car.id_car where ' + column + ' = ' + '"' + value + '"')
         mycursor.fetchall()
         count = mycursor.rowcount
 
@@ -168,11 +173,10 @@ def delete_order(num_delete, column, value):
             print('\nЗаказ с такими данными отсутствует')
 
         else:
-            mycursor.execute("delete from ordering "
+            mycursor.execute('delete ordering from ordering '
                              'join customer on ordering.id_customer = customer.id_customer '
                              'join employee on ordering.id_employee = employee.id_employee '
-                             'join car on ordering.id_car = car.id_car '
-                             'where ' + column + ' = ' + "'" + value + "'")
+                             'join car on ordering.id_car = car.id_car where ' + column + ' = ' + '"' + value + '"')
             print('\nЗапись заказа успешно удалена')
 
 def delete_employee(num_delete, column, value):
@@ -526,7 +530,7 @@ try:
 
                 # Удалить запись
                 elif num_act == 4:
-                    print('\n1. Id order\n2. Payment method\n3. Registartion date\n4. Total amount\n5. Full name customer\n6. Brand and model car\n7. Full name employee\n')
+                    print('\n1. Id order\n2. Payment method\n3. Registartion date\n4. Total amount\n5. Full name customer\n6. Brand and model\n7. Full name employee\n')
 
                     num_delete = int(
                         input('\nВведите номер колонки, по которой будет производиться удаление заказа: '))
@@ -553,11 +557,11 @@ try:
 
                     elif num_delete == 6:
                         brand_and_model = input('\nВведите марку и модель автомобиля: ')
-                        delete_order(5, 'concat(car.brand, " ", car.model)', brand_and_model)
+                        delete_order(6, 'concat(car.brand, " ", car.model)', brand_and_model)
 
                     elif num_delete == 7:
                         full_name_employee = input('\nВведите ФИО сотрудника: ')
-                        delete_order(5, 'employee.full_name', full_name_employee)
+                        delete_order(7, 'employee.Full_name', full_name_employee)
 
                     else:
                         print('\nНомера выбранной колонки не существует')
@@ -1021,7 +1025,7 @@ try:
             num_query = int(input('\nВведите номер аналитического запроса: '))
 
             if num_query == 1:
-                brand = input('Введите марку автомобиля: ')
+                brand = input('\nВведите марку автомобиля: ')
                 mycursor.execute('select brand, count(*) from car where brand = "' + brand + '"')
                 mytable = PrettyTable()
                 mytable.field_names = ['car_brand', 'Count_of_sales']
@@ -1029,7 +1033,7 @@ try:
                 print(mytable)
 
             elif num_query == 2:
-                payment_method = input('Введите способ оплаты(Б/Н): ')
+                payment_method = input('\nВведите способ оплаты(Б/Н): ')
                 mycursor.execute('select payment_method, count(*) from ordering where payment_method = ' + '"' + payment_method + '"')
                 mytable = PrettyTable()
                 mytable.field_names = ['Payment_method', 'Count_of_sales']
@@ -1037,7 +1041,7 @@ try:
                 print(mytable)
 
             elif num_query == 3:
-                year_registration_date = input('Введите год регистрации заказа(ГГГГ): ')
+                year_registration_date = input('\nВведите год регистрации заказа(ГГГГ): ')
                 mycursor.execute('select year(registration_date), count(*) from ordering where year(registration_date) = ' + '"' + year_registration_date + '" group by year(registration_date)')
                 mytable = PrettyTable()
                 mytable.field_names = ['Year', 'Count_of_sales']
