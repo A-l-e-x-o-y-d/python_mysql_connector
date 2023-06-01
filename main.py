@@ -574,7 +574,6 @@ try:
                     car_interior = input('Введите отделку интерьера комплектации: ')
                     electrical_equipment = input('Введите электрооборудование комплектации: ')
 
-
                     mycursor.execute(
                         'insert into equipment(id_equipment, gearbox_type, car_interior, electrical_equipment) values (' + id_equipment + ',"' + gearbox_type + '","' + car_interior + '","' + electrical_equipment + '")')
                     print('Запись комлектации успешно добавлена')
@@ -615,7 +614,7 @@ try:
                         mycursor.execute(
                             "update equipment set electrical_equipment = " + "'" + new_electrical_equipment + "'" + " where id_equipment = " + id_equipment)
 
-                    print('Запись автомобиля успешно изменена')
+                    print('Запись комплектации успешно изменена')
 
                 # Удалить запись
                 elif num_act == 4:
