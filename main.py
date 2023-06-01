@@ -25,7 +25,7 @@ def read_order(num_search, column, value):
             "join employee on employee.id_employee = ordering.id_employee "
             "join car on car.id_car = ordering.id_car where " + column + " = " + value)
         mytable = PrettyTable()
-        mytable.field_names = ['Id_order', 'Payment_method', 'Registration_date', 'Total_amount', 'Full_name_customer', 'Full_name_employee', 'car', 'Id_car']
+        mytable.field_names = ['Id_order', 'Payment_method', 'Registration_date', 'Total_amount', 'Full_name_customer', 'Full_name_employee', 'Car', 'Id_car']
         mytable.add_rows(mycursor.fetchall())
         print(mytable)
     else:
@@ -35,7 +35,7 @@ def read_order(num_search, column, value):
             "join employee on employee.id_employee = ordering.id_employee "
             "join car on car.id_car = ordering.id_car where " + column + " = " + "'" + value + "'")
         mytable = PrettyTable()
-        mytable.field_names = ['Id_order', 'Payment_method', 'Registration_date', 'Total_amount', 'Full_name_customer', 'Full_name_employee', 'car', 'Id_car']
+        mytable.field_names = ['Id_order', 'Payment_method', 'Registration_date', 'Total_amount', 'Full_name_customer', 'Full_name_employee', 'Car', 'Id_car']
         mytable.add_rows(mycursor.fetchall())
         print(mytable)
 
@@ -74,7 +74,7 @@ def read_car(num_search, column, value):
             "join insurance on car.id_insurance = insurance.id_insurance "
             "where " + column + " = " + "'" + value + "'")
         mytable = PrettyTable()
-        mytable.field_names = ['Id_car', 'car', 'Year_of_release', 'Price', 'Color', 'Gearbox_type', 'car_interior',
+        mytable.field_names = ['Id_car', 'car', 'Year_of_release', 'Price', 'Color', 'Gearbox_type', 'Car_interior',
                                'Electrical_equipment', 'Insurance_number']
         mytable.add_rows(mycursor.fetchall())
         print(mytable)
@@ -126,7 +126,7 @@ def delete_order(num_delete, column, value):
                              'where ' + column + ' = ' + value)
             mytable = PrettyTable()
             mytable.field_names = ['Id order', 'Payment method', 'Registration date', 'Total amount',
-                                   'Full name customer', 'Full name employee', 'car', 'Id car']
+                                   'Full name customer', 'Full name employee', 'Car', 'Id car']
             mytable.add_rows(mycursor.fetchall())
             print(mytable)
             id_order = input('\nВведите Id заказа: ')
@@ -153,7 +153,7 @@ def delete_order(num_delete, column, value):
                              'where ' + column + ' = ' + "'" + value + "'")
             mytable = PrettyTable()
             mytable.field_names = ['Id order', 'Payment method', 'Registration date', 'Total amount',
-                                   'Full name customer', 'Full name employee', 'car', 'Id car']
+                                   'Full name customer', 'Full name employee', 'Car', 'Id car']
             mytable.add_rows(mycursor.fetchall())
             print(mytable)
             id_order = input('\nВведите Id заказа: ')
