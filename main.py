@@ -20,22 +20,22 @@ def read_order(num_search, column, value):
 
     if num_search == 1 or num_search == 4:
         mycursor.execute(
-            "select Id_ordering, Payment_method, Registration_date, Total_amount, customer.full_name as Full_name_customer, employee.full_name, concat(brand,' ', model) as Car, car.id_car from ordering "
+            "select Id_ordering, Payment_method, Registration_date, Total_amount, customer.full_name as Full_name_customer, employee.full_name, concat(brand,' ', model) as car, car.id_car from ordering "
             "join customer on customer.id_customer = ordering.id_customer "
             "join employee on employee.id_employee = ordering.id_employee "
             "join car on car.id_car = ordering.id_car where " + column + " = " + value)
         mytable = PrettyTable()
-        mytable.field_names = ['Id_order', 'Payment_method', 'Registration_date', 'Total_amount', 'Full_name_customer', 'Full_name_employee', 'Car', 'Id_car']
+        mytable.field_names = ['Id_order', 'Payment_method', 'Registration_date', 'Total_amount', 'Full_name_customer', 'Full_name_employee', 'car', 'Id_car']
         mytable.add_rows(mycursor.fetchall())
         print(mytable)
     else:
         mycursor.execute(
-            "select Id_ordering, Payment_method, Registration_date, Total_amount, customer.full_name as Full_name_customer, employee.full_name, concat(brand,' ', model) as Car, car.id_car from ordering "
+            "select Id_ordering, Payment_method, Registration_date, Total_amount, customer.full_name as Full_name_customer, employee.full_name, concat(brand,' ', model) as car, car.id_car from ordering "
             "join customer on customer.id_customer = ordering.id_customer "
             "join employee on employee.id_employee = ordering.id_employee "
             "join car on car.id_car = ordering.id_car where " + column + " = " + "'" + value + "'")
         mytable = PrettyTable()
-        mytable.field_names = ['Id_order', 'Payment_method', 'Registration_date', 'Total_amount', 'Full_name_customer', 'Full_name_employee', 'Car', 'Id_car']
+        mytable.field_names = ['Id_order', 'Payment_method', 'Registration_date', 'Total_amount', 'Full_name_customer', 'Full_name_employee', 'car', 'Id_car']
         mytable.add_rows(mycursor.fetchall())
         print(mytable)
 
@@ -62,7 +62,7 @@ def read_car(num_search, column, value):
             "join insurance on car.id_insurance = insurance.id_insurance "
             "where " + column + " = " + value)
         mytable = PrettyTable()
-        mytable.field_names = ['Id_car', 'Car', 'Year_of_release', 'Price', 'Color', 'Gearbox_type', 'Car_interior',
+        mytable.field_names = ['Id_car', 'car', 'Year_of_release', 'Price', 'Color', 'Gearbox_type', 'car_interior',
                                'Electrical_equipment', 'Insurance_number']
         mytable.add_rows(mycursor.fetchall())
         print(mytable)
@@ -74,7 +74,7 @@ def read_car(num_search, column, value):
             "join insurance on car.id_insurance = insurance.id_insurance "
             "where " + column + " = " + "'" + value + "'")
         mytable = PrettyTable()
-        mytable.field_names = ['Id_car', 'Car', 'Year_of_release', 'Price', 'Color', 'Gearbox_type', 'Car_interior',
+        mytable.field_names = ['Id_car', 'car', 'Year_of_release', 'Price', 'Color', 'Gearbox_type', 'car_interior',
                                'Electrical_equipment', 'Insurance_number']
         mytable.add_rows(mycursor.fetchall())
         print(mytable)
@@ -126,7 +126,7 @@ def delete_order(num_delete, column, value):
                              'where ' + column + ' = ' + value)
             mytable = PrettyTable()
             mytable.field_names = ['Id order', 'Payment method', 'Registration date', 'Total amount',
-                                   'Full name customer', 'Full name employee', 'Car', 'Id car']
+                                   'Full name customer', 'Full name employee', 'car', 'Id car']
             mytable.add_rows(mycursor.fetchall())
             print(mytable)
             id_order = input('\nВведите Id заказа: ')
@@ -153,7 +153,7 @@ def delete_order(num_delete, column, value):
                              'where ' + column + ' = ' + "'" + value + "'")
             mytable = PrettyTable()
             mytable.field_names = ['Id order', 'Payment method', 'Registration date', 'Total amount',
-                                   'Full name customer', 'Full name employee', 'Car', 'Id car']
+                                   'Full name customer', 'Full name employee', 'car', 'Id car']
             mytable.add_rows(mycursor.fetchall())
             print(mytable)
             id_order = input('\nВведите Id заказа: ')
@@ -218,53 +218,54 @@ def delete_employee(num_delete, column, value):
 
 def delete_car(num_delete, column, value):
     if num_delete == 1:
-        mycursor.execute("delete from сar where id_car = " + value)
+        mycursor.execute("delete from car where id_car = " + value)
+        print('\nЗапись автомобиля успешно удалена')
 
     elif num_delete == 4:
-        mycursor.execute("select * from сar where " + column + " = " + value)
+        mycursor.execute("select * from car where " + column + " = " + value)
         mycursor.fetchall()
         count = mycursor.rowcount
 
         if count > 1:
-            mycursor.execute("select * from сar where " + column + " = " + value)
+            mycursor.execute("select * from car where " + column + " = " + value)
             mytable = PrettyTable()
-            mytable.field_names = ['Id_car', 'Car', 'Year_of_release', 'Price', 'Color', 'Gearbox_type', 'Car_interior',
+            mytable.field_names = ['Id_car', 'car', 'Year_of_release', 'Price', 'Color', 'Gearbox_type', 'car_interior',
                                    'Electrical_equipment', 'Insurance_number']
             mytable.add_rows(mycursor.fetchall())
             print(mytable)
-            id_car = input('\nВведите Id клиента: ')
-            mycursor.execute("delete from сar where id_car = " + id_car)
-            print('\nЗапись клиента успешно удалена')
+            id_car = input('\nВведите Id автомобиля: ')
+            mycursor.execute("delete from car where id_car = " + id_car)
+            print('\nЗапись автомобиля успешно удалена')
 
         elif count == 0:
             print('\nАвтомобиль с такими данными отсутствует')
 
         else:
-            mycursor.execute("delete from сar where " + column + " = " + value)
+            mycursor.execute("delete from car where " + column + " = " + value)
 
             print('\nЗапись автомобиля успешно удалена')
 
     else:
-        mycursor.execute("select * from сar where " + column + " = " + '"' + value + '"')
+        mycursor.execute("select * from car where " + column + " = " + '"' + value + '"')
         mycursor.fetchall()
         count = mycursor.rowcount
 
         if count > 1:
-            mycursor.execute("select * from сar where " + column + " = " + '"' + value + '"')
+            mycursor.execute("select * from car where " + column + " = " + '"' + value + '"')
             mytable = PrettyTable()
-            mytable.field_names = ['Id_car', 'Car', 'Year_of_release', 'Price', 'Color', 'Gearbox_type', 'Car_interior',
+            mytable.field_names = ['Id_car', 'car', 'Year_of_release', 'Price', 'Color', 'Gearbox_type', 'car_interior',
                                    'Electrical_equipment', 'Insurance_number']
             mytable.add_rows(mycursor.fetchall())
             print(mytable)
             id_car = input('\nВведите Id клиента: ')
-            mycursor.execute("delete from сar where id_car = " + id_car)
+            mycursor.execute("delete from car where id_car = " + id_car)
             print('\nЗапись клиента успешно удалена')
 
         elif count == 0:
             print('\nАвтомобиль с такими данными отсутствует')
 
         else:
-            mycursor.execute("delete from сar where " + column + " = " + '"' + value + '"')
+            mycursor.execute("delete from car where " + column + " = " + '"' + value + '"')
             print('\nЗапись автомобиля успешно удалена')
 
 # Соединение с БД
@@ -439,7 +440,7 @@ try:
                 # Читать запись
                 elif num_act == 2:
 
-                    print('\n1. Id\n2. Payment method\n3. Registration date\n4. Total amount\n5. Full name customer\n6. Full name employee\n7. Car brand\n')
+                    print('\n1. Id\n2. Payment method\n3. Registration date\n4. Total amount\n5. Full name customer\n6. Full name employee\n7. car brand\n')
                     num_search = int(input('\nВведите номер колонки, по которой будет производиться поиск заказа: '))
 
                     if num_search == 1:
@@ -713,18 +714,18 @@ try:
                     id_car = input('\nВведите Id автомобиля: ')
                     brand = input('Введите марку автомобиля: ')
                     model = input('Введите модель автомобиля: ')
-                    year_of_release = input('Введите дату выпуска автомобиля(ГГГГ-ММ-ДД): ')
+                    year_of_release = input('Введите дату выпуска автомобиля(ГГГГ): ')
                     price = input('Введите цену автомобиля: ')
                     color = input('Введите цвет автомобиля: ')
                     id_equipment = input('Введите Id комплектации автомобиля: ')
                     id_insurance = input('Введите Id страховки автомобиля: ')
 
                     mycursor.execute(
-                        'insert into сar(id_car, brand, model, year_of_release, price, color, id_equipment, id_insurance) values (' + id_car + ',"' + brand + '","' + model + '","' + year_of_release + '","' + price + '",' + id_equipment + ',' + id_insurance + ')')
+                        'insert into car(id_car, brand, model, year_of_release, price, color, id_equipment, id_insurance) values (' + id_car + ',"' + brand + '","' + model + '","' + year_of_release + '",' + price + ',"' + color + '",' + id_equipment + ',' + id_insurance + ')')
 
                     # Принять изменения
                     db_name.commit()
-                    print('\nЗапись заказа успешно добавлена')
+                    print('\nЗапись автомобиля успешно добавлена')
 
                 # Читать запись
                 elif num_act == 2:
@@ -763,9 +764,9 @@ try:
                     num_update = int(input('\nВведите номер колонки для изменения: '))
 
                     if num_update == 1:
-                        new_id_car = input('\nВведите новое Id заказа: ')
+                        new_id_car = input('\nВведите новое Id автомобиля: ')
                         mycursor.execute(
-                            "update car set id_ordering = " + new_id_car + " where id_car = " + id_car)
+                            "update car set id_car = " + new_id_car + " where id_car = " + id_car)
 
                     elif num_update == 2:
                         new_brand_and_model = input('\nВведите новую марку и модель автомобиля: ')
@@ -816,7 +817,7 @@ try:
                 # Удалить запись
                 elif num_act == 4:
                     print('\n1. Id\n2. Brand and model\n3. Year of release\n4. Price\n5. Color\n')
-                    num_delete = int(input('\nВведите номер колонки, по которой будет производиться удаление клиента: '))
+                    num_delete = int(input('\nВведите номер колонки, по которой будет производиться удаление автомобиля: '))
 
                     if num_delete == 1:
                         id_car = input('\nВведите Id автомобиля: ')
@@ -873,14 +874,14 @@ try:
                     mycursor.execute(
                         "select * from equipment where id_equipment = " + id_equipment)
                     mytable = PrettyTable()
-                    mytable.field_names = ['Id_equipment', 'Gearbox_type', 'Car_interior', 'Electrical_equipment']
+                    mytable.field_names = ['Id_equipment', 'Gearbox_type', 'car_interior', 'Electrical_equipment']
                     mytable.add_rows(mycursor.fetchall())
                     print(mytable)
 
                 # Редактировать запись
                 elif num_act == 3:
                     id_equipment = input('\nВведите Id комплектации: ')
-                    print('\nКолонки:\n1. Id_equipment\n2. Gearbox_type\n3. Car_interior\n4. Electrical_equipment\n')
+                    print('\nКолонки:\n1. Id_equipment\n2. Gearbox_type\n3. car_interior\n4. Electrical_equipment\n')
                     num_update = int(input('\nВведите номер колонки для изменения: '))
 
                     if num_update == 1:
@@ -1015,7 +1016,7 @@ try:
                 brand = input('Введите марку автомобиля: ')
                 mycursor.execute('select brand, count(*) from car where brand = "' + brand + '"')
                 mytable = PrettyTable()
-                mytable.field_names = ['Car_brand', 'Count_of_sales']
+                mytable.field_names = ['car_brand', 'Count_of_sales']
                 mytable.add_rows(mycursor.fetchall())
                 print(mytable)
 
