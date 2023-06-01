@@ -12,7 +12,7 @@ try:
         password = password,
         database = database
     )
-    print("Successfully connected...")
+    print("\nSuccessfully connected...")
     action = True
     while action == True:
         print('\n1. Таблицы\n2. Аналитические запросы\n3. Закончить работу')
