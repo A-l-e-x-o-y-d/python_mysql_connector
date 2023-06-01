@@ -342,7 +342,7 @@ try:
 
                 # Редактировать запись
                 elif num_act == 3:
-                    id_customer = input('Введите Id клиента: ')
+                    id_customer = input('\nВведите Id клиента: ')
                     print('\nКолонки:\n1. Id customer\n2. Full name\n3. Phone number\n4. Address\n5. Date of birth\n6. Email\n')
                     num_update = int(input('\nВведите номер колонки для изменения: '))
 
