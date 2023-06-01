@@ -109,11 +109,11 @@ def delete_customer(num_delete, column, value):
             print('\nЗапись клиента успешно удалена')
 
         elif count == 0:
-            print('Клиента с такими данными отсутствует')
+            print('\nКлиента с такими данными отсутствует')
 
         else:
             mycursor.execute("delete from customer where " + column + " = " + '"' + value + '"')
-            print('Запись клиента успешно удалена')
+            print('\nЗапись клиента успешно удалена')
 
 def delete_order(num_delete, column, value):
     if num_delete == 4:
@@ -133,11 +133,11 @@ def delete_order(num_delete, column, value):
             print('\nЗапись заказа успешно удалена')
 
         elif count == 0:
-            print('Заказ с такими данными отсутствует')
+            print('\nЗаказ с такими данными отсутствует')
 
         else:
             mycursor.execute("delete from ordering where " + column + " = " + value)
-            print('Запись заказа успешно удалена')
+            print('\nЗапись заказа успешно удалена')
 
     elif num_delete == 5 or num_delete == 6 or num_delete == 7:
         mycursor.execute('select * from ordering '
@@ -168,7 +168,7 @@ def delete_order(num_delete, column, value):
             print('\nЗапись заказа успешно удалена')
 
         if count == 0:
-            print('Заказа с таким клиентом нет')
+            print('\nЗаказа с таким клиентом нет')
 
         else:
             mycursor.execute('delete ordering from ordering '
@@ -195,11 +195,11 @@ def delete_order(num_delete, column, value):
             print('\nЗапись заказа успешно удалена')
 
         elif count == 0:
-            print('Сотрудника с таким ФИО нет')
+            print('\nСотрудника с таким ФИО нет')
 
         else:
             mycursor.execute("delete from ordering where " + column + " = " + "'" + value + "'")
-            print('Запись заказа успешно удалена')
+            print('\nЗапись заказа успешно удалена')
 
 def delete_employee(num_delete, column, value):
     if num_delete == 1:
@@ -222,7 +222,7 @@ def delete_employee(num_delete, column, value):
             print('\nЗапись сотрудника успешно удалена')
 
         elif count == 0:
-            print('Сотрудник с такими данными отсутствует')
+            print('\nСотрудник с такими данными отсутствует')
 
         else:
             mycursor.execute("delete from employee where " + column + " = " + value)
@@ -244,7 +244,7 @@ def delete_employee(num_delete, column, value):
             print('\nЗапись сотрудника успешно удалена')
 
         elif count == 0:
-            print('Сотрудник с такими данными отсутствует')
+            print('\nСотрудник с такими данными отсутствует')
 
         else:
             mycursor.execute("delete from employee where " + column + " = " + "'" + value + "'")
@@ -271,8 +271,8 @@ def delete_car(num_delete, column, value):
             print('\nЗапись клиента успешно удалена')
 
         elif count == 0:
-            print('Автомобиль с такими данными отсутствует')
+            print('\nАвтомобиль с такими данными отсутствует')
 
         else:
             mycursor.execute("delete from сar where " + column + " = " + '"' + value + '"')
-            print('Запись автомобиля успешно удалена')
+            print('\nЗапись автомобиля успешно удалена')
