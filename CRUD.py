@@ -94,7 +94,6 @@ def delete_customer(num_delete, column, value):
         mycursor.execute("delete from customer where " + column + " = " + value)
         print('\nЗапись клиента успешно удалена')
 
-
     else:
         mycursor.execute("select * from customer where " + column + " = " + '"' + value + '"')
         mycursor.fetchall()

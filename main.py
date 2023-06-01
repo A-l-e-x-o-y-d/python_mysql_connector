@@ -43,6 +43,8 @@ try:
 
                     mycursor.execute('insert into Customer(id_customer, full_name, phone_number, adress, date_of_birth, email) values (' + id_customer + ',"' + full_name + '","' + phone_number + '","' + address + '","' + date_of_birth + '","' + email + '")')
 
+                    # Принять изменения
+                    db_name.commit()
                     print('\nЗапись клиента успешно добавлена')
 
                 # Читать запись
@@ -104,6 +106,8 @@ try:
                         new_email = input('\nВведите новый Email клиента: ')
                         mycursor.execute("update customer set email = " + "'" + new_email + "'" + " where id_customer = " + id_customer)
 
+                    # Принять изменения
+                    db_name.commit()
                     print('\nЗапись клиента успешно изменена')
 
                 # Удалить запись
@@ -138,6 +142,9 @@ try:
                     else:
                         print('\nНомера выбранной колонки не существует')
 
+                    # Принять изменения
+                    db_name.commit()
+
                 else:
                     print('\nНомер выбранного действия не существует!')
 
@@ -160,6 +167,8 @@ try:
                     mycursor.execute(
                         'insert into Ordering(id_order, payment_method, registration_date, total_amount, id_customer, id_car, id_employee) values (' + id_order + ',"' + payment_method + '","' + registration_date + '","' + total_amount + '",' + id_customer + ',' + id_car + ',' + id_employee + ')')
 
+                    # Принять изменения
+                    db_name.commit()
                     print('\nЗапись заказа успешно добавлена')
 
                 # Читать запись
@@ -237,6 +246,8 @@ try:
                         mycursor.execute(
                             "update ordering set id_car = " + "'" + new_id_car + "'" + " where id_ordering = " + id_order)
 
+                    # Принять изменения
+                    db_name.commit()
                     print('\nЗапись заказа успешно изменена')
 
                 # Удалить запись
@@ -277,6 +288,9 @@ try:
                     else:
                         print('\nНомера выбранной колонки не существует')
 
+                    # Принять изменения
+                    db_name.commit()
+
                 else:
                     print('\nНомер выбранного действия не существует!')
 
@@ -297,6 +311,8 @@ try:
 
                     mycursor.execute('insert into Employee(id_employee, full_name, phone_number, adress, date_of_birth, email, salary) values (' + id_employee + ',"' + full_name + '","' + phone_number + '","' + address + '","' + date_of_birth + '","' + email + '",' + salary + ')')
 
+                    # Принять изменения
+                    db_name.commit()
                     print('\nЗапись сотрудника успешно добавлена')
 
                 # Читать запись
@@ -374,6 +390,8 @@ try:
                         mycursor.execute(
                             "update employee set email = " + "'" + new_email + "'" + " where id_employee = " + id_employee)
 
+                    # Принять изменения
+                    db_name.commit()
                     print('\nЗапись сотрудника успешно изменена')
 
                 # Удалить запись
@@ -413,6 +431,9 @@ try:
                     else:
                         print('\nНомера выбранной колонки не существует')
 
+                    # Принять изменения
+                    db_name.commit()
+
                 else:
                     print('\nНомер выбранного действия не существует!')
 
@@ -436,6 +457,8 @@ try:
                     mycursor.execute(
                         'insert into сar(id_car, brand, model, year_of_release, price, color, id_equipment, id_insurance) values (' + id_car + ',"' + brand + '","' + model + '","' + year_of_release + '","' + price + '",' + id_equipment + ',' + id_insurance + ')')
 
+                    # Принять изменения
+                    db_name.commit()
                     print('\nЗапись заказа успешно добавлена')
 
                 # Читать запись
@@ -521,6 +544,8 @@ try:
                         mycursor.execute(
                             "update car set id_insurance = " + "'" + new_id_insurance + "'" + " where id_car = " + id_car)
 
+                    # Принять изменения
+                    db_name.commit()
                     print('\nЗапись автомобиля успешно изменена')
 
                 # Удалить запись
@@ -551,6 +576,8 @@ try:
                     else:
                         print('\nНомера выбранной колонки не существует')
 
+                    # Принять изменения
+                    db_name.commit()
                 else:
                     print('\nНомер выбранного действия не существует!')
 
@@ -569,6 +596,9 @@ try:
 
                     mycursor.execute(
                         'insert into equipment(id_equipment, gearbox_type, car_interior, electrical_equipment) values (' + id_equipment + ',"' + gearbox_type + '","' + car_interior + '","' + electrical_equipment + '")')
+
+                    # Принять изменения
+                    db_name.commit()
                     print('\nЗапись комлектации успешно добавлена')
 
                 # Читать запись
@@ -607,6 +637,8 @@ try:
                         mycursor.execute(
                             "update equipment set electrical_equipment = " + "'" + new_electrical_equipment + "'" + " where id_equipment = " + id_equipment)
 
+                    # Принять изменения
+                    db_name.commit()
                     print('\nЗапись комплектации успешно изменена')
 
                 # Удалить запись
@@ -615,8 +647,12 @@ try:
                     mycursor.execute("delete from equipment where id_equipment = " + id_equipment)
                     print('\nЗапись комлектации успешно удалена')
 
+                    # Принять изменения
+                    db_name.commit()
+
                 else:
                     print('\nНомер выбранного действия не существует!')
+
 
             # Страховка автомобиля
             elif num_table == 6:
@@ -633,6 +669,9 @@ try:
 
                     mycursor.execute(
                         'insert into insurance(id_insurance, insurance_number, start_date, end_date) values (' + id_insurance + ',' + insurance_number + ',"' + start_date + '","' + end_date + '")')
+
+                    # Принять изменения
+                    db_name.commit()
                     print('\nЗапись страховки успешно добавлена')
 
                 # Читать запись
@@ -684,6 +723,8 @@ try:
                         mycursor.execute(
                             "update insurance set end_date = " + "'" + new_end_date + "'" + " where id_insurance = " + id_insurance)
 
+                    # Принять изменения
+                    db_name.commit()
                     print('Запись страховки успешно изменена')
 
                 # Удалить запись
@@ -695,11 +736,11 @@ try:
                 else:
                     print('\nНомер выбранного действия не существует!')
 
+                # Принять изменения
+                db_name.commit()
+
             else:
                 print('\nВыбранной таблицы не существует!')
-
-            # Принять изменения
-            db_name.commit()
 
         elif num == 2:
             print('\nАналитические запросы:\n1. Количество продаж определённой марки автомобиля\n2. Вывести количество заказов оплаченных определённым способом(Б/Н)\n3. Вывести количество продаж в определённом году')
