@@ -441,7 +441,7 @@ try:
                 # Читать запись
                 elif num_act == 2:
 
-                    print('\n1. Id\n2. Brand\n3. Model\n4. Year of release\n5. Price\n6. Color\n')
+                    print('\n1. Id\n2. Brand\n3. Brand and model\n4. Year of release\n5. Price\n6. Color\n')
                     num_search = int(input('Введите номер колонки, по которой будет производиться поиск автомобиля: '))
 
                     if num_search == 1:
