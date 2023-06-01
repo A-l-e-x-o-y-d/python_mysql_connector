@@ -249,3 +249,30 @@ def delete_employee(num_delete, column, value):
         else:
             mycursor.execute("delete from employee where " + column + " = " + "'" + value + "'")
             print('\nЗапись сотрудника успешно удалена')
+
+def delete_car(num_delete, column, value):
+    if num_delete == 1:
+        mycursor.execute("delete from сar where " + column + " = " + value)
+
+    else:
+        mycursor.execute("select * from сar where " + column + " = " + '"' + value + '"')
+        mycursor.fetchall()
+        count = mycursor.rowcount
+
+        if count > 1:
+            mycursor.execute("select * from сar where " + column + " = " + '"' + value + '"')
+            mytable = PrettyTable()
+            mytable.field_names = ['Id_car', 'Car', 'Year_of_release', 'Price', 'Color', 'Gearbox_type', 'Car_interior',
+                                   'Electrical_equipment', 'Insurance_number']
+            mytable.add_rows(mycursor.fetchall())
+            print(mytable)
+            id_car = input('\nВведите Id клиента: ')
+            mycursor.execute("delete from сar where id_car = " + id_car)
+            print('\nЗапись клиента успешно удалена')
+
+        elif count == 0:
+            print('Автомобиль с такими данными отсутствует')
+
+        else:
+            mycursor.execute("delete from сar where " + column + " = " + '"' + value + '"')
+            print('Запись автомобиля успешно удалена')

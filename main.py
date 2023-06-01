@@ -5,7 +5,7 @@ import CRUD
 
 # Соединение с БД
 try:
-    dn_name = mysql.connector.connect(
+    db_name = mysql.connector.connect(
         host = host,
         port = 3306,
         user = user,
@@ -17,7 +17,7 @@ try:
     while action == True:
         print('\n1. Таблицы\n2. Аналитические запросы\n3. Закончить работу')
         num = int(input('\nВведите номер для продолжения: '))
-        mycursor = dn_name.cursor()  # Объявление курсора
+        mycursor = db_name.cursor()  # Объявление курсора
 
         if num == 1:
 
@@ -42,7 +42,7 @@ try:
                     mycursor.execute('insert into Customer(id_customer, full_name, phone_number, adress, date_of_birth, email) values (' + id_customer + ',"' + full_name + '","' + phone_number + '","' + address + '","' + date_of_birth + '","' + email + '")')
 
                     # Принять изменения
-                    dn_name.commit()
+                    db_name.commit()
 
                     print('Запись клиента успешно добавлена')
 
@@ -106,7 +106,7 @@ try:
                         mycursor.execute("update customer set email = " + "'" + new_email + "'" + " where id_customer = " + id_customer)
 
                     # Принять изменения
-                    dn_name.commit()
+                    db_name.commit()
 
                     print('Запись клиента успешно изменена')
 
@@ -143,7 +143,7 @@ try:
                         print('\nНомера выбранной колонки не существует')
 
                     # Принять изменения
-                    dn_name.commit()
+                    db_name.commit()
 
                 else:
                     print('\nНомер выбранного действия не существует!')
@@ -166,7 +166,7 @@ try:
 
                     mycursor.execute(
                         'insert into Ordering(id_order, payment_method, registration_date, total_amount, id_customer, id_car, id_employee) values (' + id_order + ',"' + payment_method + '","' + registration_date + '","' + total_amount + '",' + id_customer + ',' + id_car + ',' + id_employee + ')')
-                    dn_name.commit()
+
                     print('Запись заказа успешно добавлена')
 
                 # Читать запись
@@ -194,7 +194,6 @@ try:
                     if num_search == 5:
                         full_name_customer = input('\nВведите ФИО клиента: ')
                         CRUD.read_order(3, 'customer.full_name', full_name_customer)
-
 
                     if num_search == 6:
                         full_name_employee = input('\nВведите ФИО сотруника: ')
@@ -245,8 +244,6 @@ try:
                         mycursor.execute(
                             "update ordering set id_car = " + "'" + new_id_car + "'" + " where id_ordering = " + id_order)
 
-                    # Принять изменения
-                    dn_name.commit()
                     print('Запись заказа успешно изменена')
 
                 # Удалить запись
@@ -276,18 +273,16 @@ try:
                         full_name_customer = input('Введите ФИО клиента: ')
                         CRUD.delete_order(5, 'customer.full_name', full_name_customer)
 
-
                     elif num_delete == 6:
                         brand_and_model = input('Введите марку и модель автомобиля: ')
                         CRUD.delete_order(5, 'concat(car.brand, " ", car.model)', brand_and_model)
-
 
                     elif num_delete == 7:
                         full_name_employee = input('Введите ФИО сотрудника: ')
                         CRUD.delete_order(5, 'employee.full_name', full_name_employee)
 
-                    # Принятие изменений
-                    dn_name.commit()
+                    else:
+                        print('\nНомера выбранной колонки не существует')
 
                 else:
                     print('\nНомер выбранного действия не существует!')
@@ -308,7 +303,7 @@ try:
                     salary = input('Введите заработную плату сотрудника: ')
 
                     mycursor.execute('insert into Employee(id_employee, full_name, phone_number, adress, date_of_birth, email, salary) values (' + id_employee + ',"' + full_name + '","' + phone_number + '","' + address + '","' + date_of_birth + '","' + email + '",' + salary + ')')
-                    dn_name.commit()
+
                     print('Запись сотрудника успешно добавлена')
 
                 # Читать запись
@@ -386,8 +381,6 @@ try:
                         mycursor.execute(
                             "update employee set email = " + "'" + new_email + "'" + " where id_employee = " + id_employee)
 
-                    # Принять изменения
-                    dn_name.commit()
                     print('Запись сотрудника успешно изменена')
 
                 # Удалить запись
@@ -449,7 +442,7 @@ try:
 
                     mycursor.execute(
                         'insert into сar(id_car, brand, model, year_of_release, price, color, id_equipment, id_insurance) values (' + id_car + ',"' + brand + '","' + model + '","' + year_of_release + '","' + price + '",' + id_equipment + ',' + id_insurance + ')')
-                    dn_name.commit()
+
                     print('Запись заказа успешно добавлена')
 
                 # Читать запись
@@ -485,7 +478,7 @@ try:
                 # Редактировать запись
                 elif num_act == 3:
                     id_car = input('\nВведите Id автомобиля: ')
-                    print('\nКолонки:\n1. Id_car\n2. Brand\n3. Model\n4. Year_of_release\n5. Price\n6. Color\n7. Id_equipment\n8. Id_insurance\n')
+                    print('\nКолонки:\n1. Id_car\n2. Brand and model\n3. Model\n4. Year of release\n5. Price\n6. Color\n7. Id equipment\n8. Id insurance\n')
                     num_update = int(input('Введите номер колонки для изменения: '))
 
                     if num_update == 1:
@@ -494,9 +487,16 @@ try:
                             "update car set id_ordering = " + new_id_car + " where id_car = " + id_car)
 
                     if num_update == 2:
-                        new_brand = input('Введите новую марку автомобиля: ')
+                        new_brand_and_model = input('Введите новую марку и модель автомобиля: ')
+                        new_brand_and_model = new_brand_and_model.split()
+                        new_brand = new_brand_and_model[0]
+                        new_model = new_brand_and_model[1]
+                        for value in new_brand_and_model[2:len(new_brand_and_model)]:
+                            new_model = new_model + ' ' + value
                         mycursor.execute(
                             "update car set brand = " + "'" + new_brand + "'" + " where id_car = " + id_car)
+                        mycursor.execute(
+                            "update car set model = " + "'" + new_model + "'" + " where id_car = " + id_car)
 
                     if num_update == 3:
                         new_model = input('Введите новую модель автомобиля: ')
@@ -528,16 +528,35 @@ try:
                         mycursor.execute(
                             "update car set id_insurance = " + "'" + new_id_insurance + "'" + " where id_car = " + id_car)
 
-                    # Принять изменения
-                    dn_name.commit()
                     print('Запись автомобиля успешно изменена')
 
                 # Удалить запись
                 elif num_act == 4:
-                    id_car = input('Введите Id автомобиля: ')
-                    mycursor.execute("delete from car where id_car = " + id_car)
-                    dn_name.commit()
-                    print('Запись автомобиля успешно удалена')
+                    print('\n1. Id\n2. Brand and model\n3. Year of release\n4. Price\n5. Color\n')
+                    num_delete = int(input('\nВведите номер колонки, по которой будет производиться удаление клиента: '))
+
+                    if num_delete == 1:
+                        id_car = input('Введите Id автомобиля: ')
+                        CRUD.delete_car(1, 'id_car', id_car)
+
+                    elif num_delete == 2:
+                        brand_and_model = input('Введите марку и модель автомобиля: ')
+                        CRUD.delete_car(2, 'concat(brand, " ", model)', brand_and_model)
+
+                    elif num_delete == 3:
+                        year_of_release = input('Введите год релиза автомобиля(ГГГГ-ММ-ДД): ')
+                        CRUD.delete_car(3, 'year_of_release', year_of_release)
+
+                    elif num_delete == 4:
+                        price = input('Введите цену автомобиля: ')
+                        CRUD.delete_car(4, 'price', price)
+
+                    elif num_delete == 5:
+                        color = input('Введите цвет автомобиля')
+                        CRUD.delete_car(5, 'color', color)
+
+                    else:
+                        print('\nНомера выбранной колонки не существует')
 
                 else:
                     print('\nНомер выбранного действия не существует!')
@@ -558,7 +577,6 @@ try:
 
                     mycursor.execute(
                         'insert into equipment(id_equipment, gearbox_type, car_interior, electrical_equipment) values (' + id_equipment + ',"' + gearbox_type + '","' + car_interior + '","' + electrical_equipment + '")')
-                    dn_name.commit()
                     print('Запись комлектации успешно добавлена')
 
                 # Читать запись
@@ -597,15 +615,12 @@ try:
                         mycursor.execute(
                             "update equipment set electrical_equipment = " + "'" + new_electrical_equipment + "'" + " where id_equipment = " + id_equipment)
 
-                    # Принять изменения
-                    dn_name.commit()
                     print('Запись автомобиля успешно изменена')
 
                 # Удалить запись
                 elif num_act == 4:
                     id_equipment = input('Введите Id комлектации: ')
                     mycursor.execute("delete from equipment where id_equipment = " + id_equipment)
-                    dn_name.commit()
                     print('Запись комлектации успешно удалена')
 
                 else:
@@ -624,10 +639,8 @@ try:
                     start_date = input('Введите дату начала действия страховки(ГГГГ-ММ-ДД): ')
                     end_date = input('Введите дату окончания действия страховки(ГГГГ-ММ-ДД): ')
 
-
                     mycursor.execute(
                         'insert into insurance(id_insurance, insurance_number, start_date, end_date) values (' + id_insurance + ',' + insurance_number + ',"' + start_date + '","' + end_date + '")')
-                    dn_name.commit()
                     print('Запись страховки успешно добавлена')
 
                 # Читать запись
@@ -679,15 +692,12 @@ try:
                         mycursor.execute(
                             "update insurance set end_date = " + "'" + new_end_date + "'" + " where id_insurance = " + id_insurance)
 
-                    # Принять изменения
-                    dn_name.commit()
                     print('Запись страховки успешно изменена')
 
                 # Удалить запись
                 elif num_act == 4:
                     id_insurance = input('Введите Id страховки: ')
                     mycursor.execute("delete from insurance where id_insurance = " + id_insurance)
-                    dn_name.commit()
                     print('Запись страховки успешно удалена')
 
                 else:
@@ -696,6 +706,9 @@ try:
             else:
                 print('\nВыбранной таблицы не существует!')
 
+            # Принять изменения
+            db_name.commit()
+        
         elif num == 2:
             print('\nАналитические запросы:\n1. Количество продаж определённой марки автомобиля\n2. Вывести количество заказов оплаченных определённым способом(Б/Н)\n3. Вывести количество продаж в определённом году')
             num_query = int(input('\nВведите номер аналитического запроса: '))
@@ -741,4 +754,4 @@ except Exception as ex:
     print(ex)
 
 finally:
-    dn_name.close()
+    db_name.close()
