@@ -117,27 +117,27 @@ try:
 
                     if num_delete == 1:
                         id_customer = input('Введите Id клиента: ')
-                        mycursor.execute("delete from customer where id_customer = " + id_customer)
+                        CRUD.delete_customer(1, 'id_customer', id_customer)
 
                     elif num_delete == 2:
                         full_name = input('\nВведите ФИО клиента: ')
-                        CRUD.delete_customer('full_name', full_name)
+                        CRUD.delete_customer(2, 'full_name', full_name)
 
                     elif num_delete == 3:
                         phone_number = input('Введите номер телефона клиента: ')
-                        CRUD.delete_customer('phone_number', phone_number)
+                        CRUD.delete_customer(3, 'phone_number', phone_number)
 
                     elif num_delete == 4:
                         address = input('Введите адрес клиента: ')
-                        CRUD.delete_customer('adress', address)
+                        CRUD.delete_customer(3, 'adress', address)
 
                     elif num_delete == 5:
                         date_of_birth = input('Введите дату рождения клиента: ')
-                        CRUD.delete_customer('date_of_birth', date_of_birth)
+                        CRUD.delete_customer(4, 'date_of_birth', date_of_birth)
 
                     elif num_delete == 6:
                         email = input('Введите Email клиента: ')
-                        CRUD.delete_customer('email', email)
+                        CRUD.delete_customer(5, 'email', email)
 
                     else:
                         print('\nНомера выбранной колонки не существует')
@@ -398,146 +398,31 @@ try:
 
                     if num_delete == 1:
                         id_employee = input('Введите Id сотрудника: ')
-                        mycursor.execute("delete from employee where id_employee = " + id_employee)
+                        CRUD.delete_employee(1, 'id_employee', id_employee)
 
                     elif num_delete == 2:
                         full_name = input('\nВведите ФИО сотрудника: ')
-                        mycursor.execute("select * from employee where full_name = " + '"' + full_name + '"')
-                        mycursor.fetchall()
-                        count = mycursor.rowcount
-
-                        if count > 1:
-                            mycursor.execute("select * from employee where full_name = " + '"' + full_name + '"')
-                            mytable = PrettyTable()
-                            mytable.field_names = ['Id_customer', 'Full_name', 'Phone_number', 'Address',
-                                                   'Date_of_birth', 'Email', 'Salary']
-                            mytable.add_rows(mycursor.fetchall())
-                            print(mytable)
-                            id_employee = input('\nВведите Id сотрудника: ')
-                            mycursor.execute("delete from employee where id_employee = " + id_employee)
-                            print('\nЗапись сотрудника успешно удалена')
-
-                        elif count == 0:
-                            print('Сотрудника с таким ФИО нет')
-
-                        else:
-                            mycursor.execute("delete from employee where full_name = " + "'" + full_name + "'")
-                            print('Запись сотрудника успешно удалена')
+                        CRUD.delete_employee(2, 'full_name', full_name)
 
                     elif num_delete == 3:
                         phone_number = input('Введите номер телефона сотрудника: ')
-                        mycursor.execute("select * from employee where phone_number = " + '"' + phone_number + '"')
-                        mycursor.fetchall()
-                        count = mycursor.rowcount
-
-                        if count > 1:
-                            mycursor.execute("select * from employee where phone_number = " + '"' + phone_number + '"')
-                            mytable = PrettyTable()
-                            mytable.field_names = ['Id_customer', 'Full_name', 'Phone_number', 'Address',
-                                                   'Date_of_birth', 'Email', 'Salary']
-                            mytable.add_rows(mycursor.fetchall())
-                            print(mytable)
-                            id_employee = input('\nВведите Id сотрудника: ')
-                            mycursor.execute("delete from employee where id_employee = " + id_employee)
-                            print('\nЗапись сотрудника успешно удалена')
-
-                        elif count == 0:
-                            print('Сотрудника с таким номером телефона нет')
-
-                        else:
-                            mycursor.execute("delete from employee where phone_number = " + "'" + phone_number + "'")
+                        CRUD.delete_employee(3, 'phone_number', phone_number)
 
                     elif num_delete == 4:
                         address = input('Введите адрес сотрудника: ')
-                        mycursor.execute("delete from employee where adress = " + "'" + address + "'")
-                        mycursor.fetchall()
-                        count = mycursor.rowcount
-
-                        if count > 1:
-                            mycursor.execute("select * from employee where phone_number = " + '"' + address + '"')
-                            mytable = PrettyTable()
-                            mytable.field_names = ['Id_customer', 'Full_name', 'Phone_number', 'Address',
-                                                   'Date_of_birth', 'Email', 'Salary']
-                            mytable.add_rows(mycursor.fetchall())
-                            print(mytable)
-                            id_employee = input('\nВведите Id сотрудника: ')
-                            mycursor.execute("delete from employee where id_employee = " + id_employee)
-                            print('\nЗапись сотрудника успешно удалена')
-
-                        elif count == 0:
-                            print('Сотрудника с таким адресом нет')
-
-                        else:
-                            mycursor.execute("delete from employee where adress = " + "'" + address + "'")
+                        CRUD.delete_employee(4, 'adress', address)
 
                     elif num_delete == 5:
                         date_of_birth = input('Введите дату рождения сотрудника: ')
-                        mycursor.execute("delete from employee where date_of_birth = " + "'" + date_of_birth + "'")
-                        mycursor.fetchall()
-                        count = mycursor.rowcount
-
-                        if count > 1:
-                            mycursor.execute("select * from employee where date_of_birth = " + '"' + date_of_birth + '"')
-                            mytable = PrettyTable()
-                            mytable.field_names = ['Id_customer', 'Full_name', 'Phone_number', 'Address',
-                                                   'Date_of_birth', 'Email', 'Salary']
-                            mytable.add_rows(mycursor.fetchall())
-                            print(mytable)
-                            id_employee = input('\nВведите Id сотрудника: ')
-                            mycursor.execute("delete from employee where id_employee = " + id_employee)
-                            print('\nЗапись сотрудника успешно удалена')
-
-                        elif count == 0:
-                            print('Сотрудника с такой датой рождения нет')
-
-                        else:
-                            mycursor.execute("delete from employee where date_of_birth = " + "'" + date_of_birth + "'")
+                        CRUD.delete_employee(5, 'date_of_birth', date_of_birth)
 
                     elif num_delete == 6:
                         email = input('Введите Email сотрудника: ')
-                        mycursor.execute("delete from employee where email = " + "'" + email + "'")
-                        mycursor.fetchall()
-                        count = mycursor.rowcount
-
-                        if count > 1:
-                            mycursor.execute("select * from employee where email = " + '"' + email + '"')
-                            mytable = PrettyTable()
-                            mytable.field_names = ['Id_customer', 'Full_name', 'Phone_number', 'Address',
-                                                   'Date_of_birth', 'Email', 'Salary']
-                            mytable.add_rows(mycursor.fetchall())
-                            print(mytable)
-                            id_employee = input('\nВведите Id сотрудника: ')
-                            mycursor.execute("delete from employee where id_employee = " + id_employee)
-                            print('\nЗапись сотрудника успешно удалена')
-
-                        elif count == 0:
-                            print('Сотрудника с такой датой рождения нет')
-
-                        else:
-                            mycursor.execute("delete from employee where email = " + "'" + email + "'")
+                        CRUD.delete_employee(6, 'email', email)
 
                     elif num_delete == 7:
                         salary = input('Введите заработную плату сотрудника: ')
-                        mycursor.execute("delete from employee where email = " + salary)
-                        mycursor.fetchall()
-                        count = mycursor.rowcount
-
-                        if count > 1:
-                            mycursor.execute("select * from employee where salary = " + salary)
-                            mytable = PrettyTable()
-                            mytable.field_names = ['Id_customer', 'Full_name', 'Phone_number', 'Address',
-                                                   'Date_of_birth', 'Email', 'Salary']
-                            mytable.add_rows(mycursor.fetchall())
-                            print(mytable)
-                            id_employee = input('\nВведите Id сотрудника: ')
-                            mycursor.execute("delete from employee where id_employee = " + id_employee)
-                            print('\nЗапись сотрудника успешно удалена')
-
-                        elif count == 0:
-                            print('Сотрудника с такой датой рождения нет')
-
-                        else:
-                            mycursor.execute("delete from employee where salary = " + salary)
+                        CRUD.delete_employee(7, 'salary', salary)
 
                     else:
                         print('\nНомера выбранной колонки не существует')
@@ -575,75 +460,27 @@ try:
 
                     if num_search == 1:
                         id_car = input('Введите Id автомобиля: ')
-                        mycursor.execute(
-                            "select Id_car, concat(brand,' ',model), year_of_release, price, color, equipment.gearbox_type, equipment.car_interior, equipment.electrical_equipment, insurance.insurance_number from car "
-                            "join equipment on car.id_equipment = equipment.id_equipment "
-                            "join insurance on car.id_insurance = insurance.id_insurance "
-                            "where id_car = " + id_car)
-                        mytable = PrettyTable()
-                        mytable.field_names = ['Id_car', 'Car', 'Year_of_release', 'Price', 'Color', 'Gearbox_type', 'Car_interior', 'Electrical_equipment', 'Insurance_number']
-                        mytable.add_rows(mycursor.fetchall())
-                        print(mytable)
+                        CRUD.read_car(1, 'id_car', id_car)
 
                     if num_search == 2:
                         brand = input('Введите марку автомобиля: ')
-                        mycursor.execute(
-                            "select Id_car, concat(brand,' ',model), year_of_release, price, color, equipment.gearbox_type, equipment.car_interior, equipment.electrical_equipment, insurance.insurance_number from car "
-                            "join equipment on car.id_equipment = equipment.id_equipment "
-                            "join insurance on car.id_insurance = insurance.id_insurance "
-                            "where brand = " + '"' + brand + '"')
-                        mytable = PrettyTable()
-                        mytable.field_names = ['Id_car', 'Car', 'Year_of_release', 'Price', 'Color', 'Gearbox_type', 'Car_interior', 'Electrical_equipment', 'Insurance_number']
-                        mytable.add_rows(mycursor.fetchall())
-                        print(mytable)
+                        CRUD.read_car(2, 'brand', brand)
 
                     if num_search == 3:
-                        model = input('Введите модель автомобиля: ')
-                        mycursor.execute(
-                            "select Id_car, concat(brand,' ',model), year_of_release, price, color, equipment.gearbox_type, equipment.car_interior, equipment.electrical_equipment, insurance.insurance_number from car "
-                            "join equipment on car.id_equipment = equipment.id_equipment "
-                            "join insurance on car.id_insurance = insurance.id_insurance "
-                            "where model = " + '"' + model + '"')
-                        mytable = PrettyTable()
-                        mytable.field_names = ['Id_car', 'Car', 'Year_of_release', 'Price', 'Color', 'Gearbox_type', 'Car_interior', 'Electrical_equipment', 'Insurance_number']
-                        mytable.add_rows(mycursor.fetchall())
-                        print(mytable)
+                        brand_and_model = input('Введите марку и модель автомобиля: ')
+                        CRUD.read_car(3, 'concat(brand, " ", model)', brand_and_model)
 
                     if num_search == 4:
                         year_of_release = input('Введите год выпуска автомобиля: ')
-                        mycursor.execute(
-                            "select Id_car, concat(brand,' ',model), year_of_release, price, color, equipment.gearbox_type, equipment.car_interior, equipment.electrical_equipment, insurance.insurance_number from car "
-                            "join equipment on car.id_equipment = equipment.id_equipment "
-                            "join insurance on car.id_insurance = insurance.id_insurance "
-                            "where year_of_release = " + '"' + year_of_release + '"')
-                        mytable = PrettyTable()
-                        mytable.field_names = ['Id_car', 'Car', 'Year_of_release', 'Price', 'Color', 'Gearbox_type', 'Car_interior', 'Electrical_equipment', 'Insurance_number']
-                        mytable.add_rows(mycursor.fetchall())
-                        print(mytable)
+                        CRUD.read_car(4, 'year_of_release', year_of_release)
 
                     if num_search == 5:
                         price = input('Введите цену автомобиля: ')
-                        mycursor.execute(
-                            "select Id_car, concat(brand,' ',model), year_of_release, price, color, equipment.gearbox_type, equipment.car_interior, equipment.electrical_equipment, insurance.insurance_number from car "
-                            "join equipment on car.id_equipment = equipment.id_equipment "
-                            "join insurance on car.id_insurance = insurance.id_insurance "
-                            "where price = " + price)
-                        mytable = PrettyTable()
-                        mytable.field_names = ['Id_car', 'Car', 'Year_of_release', 'Price', 'Color', 'Gearbox_type', 'Car_interior', 'Electrical_equipment', 'Insurance_number']
-                        mytable.add_rows(mycursor.fetchall())
-                        print(mytable)
+                        CRUD.read_car(5, 'price', price)
 
                     if num_search == 6:
                         color = input('Введите цвет автомобиля: ')
-                        mycursor.execute(
-                            "select Id_car, concat(brand,' ',model), year_of_release, price, color, equipment.gearbox_type, equipment.car_interior, equipment.electrical_equipment, insurance.insurance_number from car "
-                            "join equipment on car.id_equipment = equipment.id_equipment "
-                            "join insurance on car.id_insurance = insurance.id_insurance "
-                            "where color = " + '"' + color + '"')
-                        mytable = PrettyTable()
-                        mytable.field_names = ['Id_car', 'Car', 'Year_of_release', 'Price', 'Color', 'Gearbox_type', 'Car_interior', 'Electrical_equipment', 'Insurance_number']
-                        mytable.add_rows(mycursor.fetchall())
-                        print(mytable)
+                        CRUD.read_car(6, 'color', color)
 
                 # Редактировать запись
                 elif num_act == 3:
