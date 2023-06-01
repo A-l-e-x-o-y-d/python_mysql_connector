@@ -56,23 +56,23 @@ try:
                         id_customer = input('\nВведите Id клиента: ')
                         CRUD.read_customer(num_search, 'id_customer', id_customer)
 
-                    if num_search == 2:
+                    elif num_search == 2:
                         full_name = input('\nВведите ФИО клиента: ')
                         CRUD.read_customer(num_search, 'full_name', full_name)
 
-                    if num_search == 3:
+                    elif num_search == 3:
                         phone_number = input('\nВведите номер телефона клиента: ')
                         CRUD.read_customer(num_search, 'phone_number', phone_number)
 
-                    if num_search == 4:
+                    elif num_search == 4:
                         address = input('\nВведите адрес клиента: ')
                         CRUD.read_customer(4, 'adress', address)
 
-                    if num_search == 5:
+                    elif num_search == 5:
                         date_of_birth = input('\nВведите дату рождения клиента(ГГГГ-ММ-ДД): ')
                         CRUD.read_customer(5, 'date_of_birth', date_of_birth)
 
-                    if num_search == 6:
+                    elif num_search == 6:
                         email = input('\nВведите Email клиента: ')
                         CRUD.read_customer(6, 'email', email)
 
@@ -86,23 +86,23 @@ try:
                         new_id_customer = input('\nВведите новое Id клиента: ')
                         mycursor.execute("update customer set id_customer = " + new_id_customer + " where id_customer = " + id_customer)
 
-                    if num_update == 2:
+                    elif num_update == 2:
                         new_full_name = input('\nВведите новое ФИО клиента: ')
                         mycursor.execute("update customer set full_name = " + "'" + new_full_name + "'" + " where id_customer = " + id_customer)
 
-                    if num_update == 3:
+                    elif num_update == 3:
                         new_phone_number = input('\nВведите новый телефон клиента: ')
                         mycursor.execute("update customer set phone_number = " + "'" + new_phone_number + "'" + " where id_customer = " + id_customer)
 
-                    if num_update == 4:
+                    elif num_update == 4:
                         new_address = input('\nВведите новый адрес клиента: ')
                         mycursor.execute("update customer set adress = " + "'" + new_address + "'" + " where id_customer = " + id_customer)
 
-                    if num_update == 5:
+                    elif num_update == 5:
                         new_date_of_birth = input('\nВведите новую дату рождения клиента(ГГГГ-ММ-ДД): ')
                         mycursor.execute("update customer set date_of_birth = " + "'" + new_date_of_birth + "'" + " where id_customer = " + id_customer)
 
-                    if num_update == 6:
+                    elif num_update == 6:
                         new_email = input('\nВведите новый Email клиента: ')
                         mycursor.execute("update customer set email = " + "'" + new_email + "'" + " where id_customer = " + id_customer)
 
@@ -325,27 +325,27 @@ try:
                         id_employee = input('\nВведите Id сотрудника: ')
                         CRUD.read_employee(1, 'id_employee', id_employee)
 
-                    if num_search == 2:
+                    elif num_search == 2:
                         full_name = input('\nВведите ФИО сотрудника: ')
                         CRUD.read_employee(2, 'full_name', full_name)
 
-                    if num_search == 3:
+                    elif num_search == 3:
                         phone_number = input('\nВведите номер телефона сотрудника: ')
                         CRUD.read_employee(3, 'phone_number', phone_number)
 
-                    if num_search == 4:
+                    elif num_search == 4:
                         address = input('\nВведите адрес сотрудника: ')
                         CRUD.read_employee(4, 'adress', address)
 
-                    if num_search == 5:
+                    elif num_search == 5:
                         date_of_birth = input('\nВведите дату рождения сотрудника: ')
                         CRUD.read_employee(5, 'date_of_birth', date_of_birth)
 
-                    if num_search == 6:
+                    elif num_search == 6:
                         email = input('\nВведите Email сотрудника: ')
                         CRUD.read_employee(6, 'email', email)
 
-                    if num_search == 7:
+                    elif num_search == 7:
                         salary = input('\nВведите заработную плату сотрудника: ')
                         CRUD.read_employee(7, 'salary', salary)
 
@@ -360,32 +360,32 @@ try:
                         mycursor.execute(
                             "update employee set id_employee = " + new_id_employee + " where id_employee = " + id_employee)
 
-                    if num_update == 2:
+                    elif num_update == 2:
                         new_full_name = input('\nВведите новое ФИО сотрудника: ')
                         mycursor.execute(
                             "update employee set full_name = " + "'" + new_full_name + "'" + " where id_employee = " + id_employee)
 
-                    if num_update == 3:
+                    elif num_update == 3:
                         new_phone_number = input('\nВведите новый телефон сотрудника: ')
                         mycursor.execute(
                             "update employee set phone_number = " + "'" + new_phone_number + "'" + " where id_employee = " + id_employee)
 
-                    if num_update == 4:
+                    elif num_update == 4:
                         new_address = input('\nВведите новый адрес сотрудника: ')
                         mycursor.execute(
                             "update employee set adress = " + "'" + new_address + "'" + " where id_employee = " + id_employee)
 
-                    if num_update == 5:
+                    elif num_update == 5:
                         new_date_of_birth = input('\nВведите новую дату рождения сотрудника(ГГГГ-ММ-ДД): ')
                         mycursor.execute(
                             "update employee set date_of_birth = " + "'" + new_date_of_birth + "'" + " where id_employee = " + id_employee)
 
-                    if num_update == 6:
+                    elif num_update == 6:
                         new_email = input('\nВведите новый Email сотрудника: ')
                         mycursor.execute(
                             "update employee set email = " + "'" + new_email + "'" + " where id_employee = " + id_employee)
 
-                    if num_update == 7:
+                    elif num_update == 7:
                         new_email = input('\nВведите новую заработную плату сотрудника: ')
                         mycursor.execute(
                             "update employee set email = " + "'" + new_email + "'" + " where id_employee = " + id_employee)
@@ -431,11 +431,11 @@ try:
                     else:
                         print('\nНомера выбранной колонки не существует')
 
-                    # Принять изменения
-                    db_name.commit()
-
                 else:
                     print('\nНомер выбранного действия не существует!')
+
+                # Принять изменения
+                db_name.commit()
 
             # Автомобиль
             elif num_table == 4:
@@ -471,23 +471,23 @@ try:
                         id_car = input('\nВведите Id автомобиля: ')
                         CRUD.read_car(1, 'id_car', id_car)
 
-                    if num_search == 2:
+                    elif num_search == 2:
                         brand = input('\nВведите марку автомобиля: ')
                         CRUD.read_car(2, 'brand', brand)
 
-                    if num_search == 3:
+                    elif num_search == 3:
                         brand_and_model = input('\nВведите марку и модель автомобиля: ')
                         CRUD.read_car(3, 'concat(brand, " ", model)', brand_and_model)
 
-                    if num_search == 4:
+                    elif num_search == 4:
                         year_of_release = input('\nВведите год выпуска автомобиля: ')
                         CRUD.read_car(4, 'year_of_release', year_of_release)
 
-                    if num_search == 5:
+                    elif num_search == 5:
                         price = input('\nВведите цену автомобиля: ')
                         CRUD.read_car(5, 'price', price)
 
-                    if num_search == 6:
+                    elif num_search == 6:
                         color = input('\nВведите цвет автомобиля: ')
                         CRUD.read_car(6, 'color', color)
 
@@ -502,7 +502,7 @@ try:
                         mycursor.execute(
                             "update car set id_ordering = " + new_id_car + " where id_car = " + id_car)
 
-                    if num_update == 2:
+                    elif num_update == 2:
                         new_brand_and_model = input('\nВведите новую марку и модель автомобиля: ')
                         new_brand_and_model = new_brand_and_model.split()
                         new_brand = new_brand_and_model[0]
@@ -514,32 +514,32 @@ try:
                         mycursor.execute(
                             "update car set model = " + "'" + new_model + "'" + " where id_car = " + id_car)
 
-                    if num_update == 3:
+                    elif num_update == 3:
                         new_model = input('\nВведите новую модель автомобиля: ')
                         mycursor.execute(
                             "update car set model = " + "'" + new_model + "'" + " where id_car = " + id_car)
 
-                    if num_update == 4:
+                    elif num_update == 4:
                         new_year_of_release = input('\nВведите новую дату выпуска автомобиля(ГГГГ-ММ-ДД): ')
                         mycursor.execute(
                             "update car set year_of_release = " + "'" + new_year_of_release + "'" + " where id_car = " + id_car)
 
-                    if num_update == 5:
+                    elif num_update == 5:
                         new_price = input('\nВведите новую цену автомобиля: ')
                         mycursor.execute(
                             "update car set price = " + "'" + new_price + "'" + " where id_car = " + id_car)
 
-                    if num_update == 6:
+                    elif num_update == 6:
                         new_color = input('\nВведите новый цвет автомобиля: ')
                         mycursor.execute(
                             "update car set color = " + "'" + new_color + "'" + " where id_car = " + id_car)
 
-                    if num_update == 7:
+                    elif num_update == 7:
                         new_id_equipment = input('\nВведите новое Id комплектации: ')
                         mycursor.execute(
                             "update car set id_equipment = " + "'" + new_id_equipment + "'" + " where id_car = " + id_car)
 
-                    if num_update == 8:
+                    elif num_update == 8:
                         new_id_insurance = input('\nВведите новое Id страховки: ')
                         mycursor.execute(
                             "update car set id_insurance = " + "'" + new_id_insurance + "'" + " where id_car = " + id_car)
@@ -576,10 +576,11 @@ try:
                     else:
                         print('\nНомера выбранной колонки не существует')
 
-                    # Принять изменения
-                    db_name.commit()
                 else:
                     print('\nНомер выбранного действия не существует!')
+
+                # Принять изменения
+                db_name.commit()
 
             # Комплектация автомобиля
             elif num_table == 5:
@@ -622,17 +623,17 @@ try:
                         mycursor.execute(
                             "update equipment set id_equipment = " + new_id_equipment + " where id_equipment = " + id_equipment)
 
-                    if num_update == 2:
+                    elif num_update == 2:
                         new_gearbox_type = input('\nВведите новый тип КПП комлектации: ')
                         mycursor.execute(
                             "update equipment set gearbox_type = " + "'" + new_gearbox_type + "'" + " where id_equipment = " + id_equipment)
 
-                    if num_update == 3:
+                    elif num_update == 3:
                         new_car_interior = input('\nВведите новую отделку интерьера комлектации: ')
                         mycursor.execute(
                             "update equipment set car_interior = " + "'" + new_car_interior + "'" + " where id_equipment = " + id_equipment)
 
-                    if num_update == 4:
+                    elif num_update == 4:
                         new_electrical_equipment = input('\nВведите новое электрооборудование комплектации: ')
                         mycursor.execute(
                             "update equipment set electrical_equipment = " + "'" + new_electrical_equipment + "'" + " where id_equipment = " + id_equipment)
@@ -647,12 +648,11 @@ try:
                     mycursor.execute("delete from equipment where id_equipment = " + id_equipment)
                     print('\nЗапись комлектации успешно удалена')
 
-                    # Принять изменения
-                    db_name.commit()
-
                 else:
                     print('\nНомер выбранного действия не существует!')
 
+                # Принять изменения
+                db_name.commit()
 
             # Страховка автомобиля
             elif num_table == 6:
@@ -688,7 +688,7 @@ try:
                         mytable.add_rows(mycursor.fetchall())
                         print(mytable)
 
-                    if num_search == 2:
+                    elif num_search == 2:
                         insurance_number = input('\nВведите номер страховки: ')
                         mycursor.execute(
                             "select * from insurance where insurance_number = " + insurance_number)
@@ -708,17 +708,17 @@ try:
                         mycursor.execute(
                             "update insurance set id_insurance = " + new_id_insurance + " where id_insurance = " + id_insurance)
 
-                    if num_update == 2:
+                    elif num_update == 2:
                         new_insurance_number = input('\nВведите новый номер страховки: ')
                         mycursor.execute(
                             "update insurance set insurance_number = " + "'" + new_insurance_number + "'" + " where id_insurance = " + id_insurance)
 
-                    if num_update == 3:
+                    elif num_update == 3:
                         new_start_date = input('\nВведите новую дату начала действия страховки(ГГГГ-ММ-ДД): ')
                         mycursor.execute(
                             "update insurance set start_date = " + "'" + new_start_date + "'" + " where id_insurance = " + id_insurance)
 
-                    if num_update == 4:
+                    elif num_update == 4:
                         new_end_date = input('\nВведите новую дату окончания действия страховки(ГГГГ-ММ-ДД): ')
                         mycursor.execute(
                             "update insurance set end_date = " + "'" + new_end_date + "'" + " where id_insurance = " + id_insurance)
@@ -729,15 +729,15 @@ try:
 
                 # Удалить запись
                 elif num_act == 4:
-                    id_insurance = input('В\nведите Id страховки: ')
+                    id_insurance = input('\nВведите Id страховки: ')
                     mycursor.execute("delete from insurance where id_insurance = " + id_insurance)
                     print('\nЗапись страховки успешно удалена')
 
+                    # Принять изменения
+                    db_name.commit()
+
                 else:
                     print('\nНомер выбранного действия не существует!')
-
-                # Принять изменения
-                db_name.commit()
 
             else:
                 print('\nВыбранной таблицы не существует!')
