@@ -5,16 +5,18 @@ import CRUD
 
 # Соединение с БД
 try:
-    db_name = mysql.connector.connect(
-        host = host,
-        port = 3306,
-        user = user,
-        password = password,
-        database = database
-    )
-    print("\nSuccessfully connected...")
     action = True
     while action == True:
+
+        db_name = mysql.connector.connect(
+            host=host,
+            port=3306,
+            user=user,
+            password=password,
+            database=database
+        )
+        print("\nSuccessfully connected...")
+
         print('\n1. Таблицы\n2. Аналитические запросы\n3. Закончить работу')
         num = int(input('\nВведите номер для продолжения: '))
         mycursor = db_name.cursor()  # Объявление курсора
@@ -41,15 +43,12 @@ try:
 
                     mycursor.execute('insert into Customer(id_customer, full_name, phone_number, adress, date_of_birth, email) values (' + id_customer + ',"' + full_name + '","' + phone_number + '","' + address + '","' + date_of_birth + '","' + email + '")')
 
-                    # Принять изменения
-                    db_name.commit()
-
                     print('Запись клиента успешно добавлена')
 
                 # Читать запись
                 elif num_act == 2:
                     print('\n1. Id\n2. Full name\n3. Phone number\n4. Address\n5. Date of birth\n6. Email')
-                    num_search = int(input('Введите номер колонки, по которой будет производиться поиск клиента: '))
+                    num_search = int(input('\nВведите номер колонки, по которой будет производиться поиск клиента: '))
 
                     if num_search == 1:
                         id_customer = input('\nВведите Id клиента: ')
@@ -105,9 +104,6 @@ try:
                         new_email = input('Введите новый Email клиента: ')
                         mycursor.execute("update customer set email = " + "'" + new_email + "'" + " where id_customer = " + id_customer)
 
-                    # Принять изменения
-                    db_name.commit()
-
                     print('Запись клиента успешно изменена')
 
                 # Удалить запись
@@ -141,9 +137,6 @@ try:
 
                     else:
                         print('\nНомера выбранной колонки не существует')
-
-                    # Принять изменения
-                    db_name.commit()
 
                 else:
                     print('\nНомер выбранного действия не существует!')
@@ -739,9 +732,12 @@ try:
             else:
                 print('\nНомер выбранного запроса не существует!')
 
-
         elif num == 3:
             action = False
+
+            # Закрытие курсора и БД
+            mycursor.close()
+            db_name.close()
             exit()
 
         else:
