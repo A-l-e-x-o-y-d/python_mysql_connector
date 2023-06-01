@@ -92,6 +92,8 @@ def delete_customer(num_delete, column, value):
 
     if num_delete == 1:
         mycursor.execute("delete from customer where " + column + " = " + value)
+        print('\nЗапись клиента успешно удалена')
+
 
     else:
         mycursor.execute("select * from customer where " + column + " = " + '"' + value + '"')
@@ -116,13 +118,22 @@ def delete_customer(num_delete, column, value):
             print('\nЗапись клиента успешно удалена')
 
 def delete_order(num_delete, column, value):
-    if num_delete == 4:
-        mycursor.execute("select * from ordering where " + column + " = " + '"' + value + '"')
+
+    if num_delete == 1:
+        mycursor.execute("delete from ordering where id_ordering = " + value)
+        print('\nЗапись заказа успешно удалена')
+
+    elif num_delete == 4:
+        mycursor.execute("select * from ordering where " + column + " = " + value)
         mycursor.fetchall()
         count = mycursor.rowcount
 
         if count > 1:
-            mycursor.execute("select * from ordering where " + column + " = " + value)
+            mycursor.execute('select * from ordering '
+                             'join customer on ordering.id_customer = customer.id_customer '
+                             'join employee on ordering.id_employee = employee.id_employee '
+                             'join car on ordering.id_car = car.id_car '
+                             'where ' + column + ' = ' + value)
             mytable = PrettyTable()
             mytable.field_names = ['Id order', 'Payment method', 'Registration date', 'Total amount',
                                    'Full name customer', 'Full name employee', 'Car', 'Id car']
@@ -139,12 +150,8 @@ def delete_order(num_delete, column, value):
             mycursor.execute("delete from ordering where " + column + " = " + value)
             print('\nЗапись заказа успешно удалена')
 
-    elif num_delete == 5 or num_delete == 6 or num_delete == 7:
-        mycursor.execute('select * from ordering '
-                         'join customer on ordering.id_customer = customer.id_customer '
-                         'join employee on ordering.id_employee = employee.id_employee '
-                         'join car on ordering.id_car = car.id_car '
-                         'where ' + column + ' = ' + '"' + value + '"')
+    else:
+        mycursor.execute("select * from ordering where " + column + " = " + "'" + value + "'")
         mycursor.fetchall()
         count = mycursor.rowcount
 
@@ -153,38 +160,7 @@ def delete_order(num_delete, column, value):
                              'join customer on ordering.id_customer = customer.id_customer '
                              'join employee on ordering.id_employee = employee.id_employee '
                              'join car on ordering.id_car = car.id_car '
-                             'where ' + column + ' = ' + '"' + value + '"')
-            mytable = PrettyTable()
-            mytable.field_names = ['Id order', 'Payment method', 'Registration date', 'Total amount',
-                                   'Full name customer', 'Full name employee', 'Car', 'Id car']
-            mytable.add_rows(mycursor.fetchall())
-            print(mytable)
-            id_order = input('\nВведите Id заказа: ')
-            mycursor.execute('delete ordering from ordering '
-                             'join customer on ordering.id_customer = customer.id_customer '
-                             'join employee on ordering.id_employee = employee.id_employee '
-                             'join car on ordering.id_car = car.id_car '
-                             'where ' + column + ' = ' + '"' + value + '"')
-            print('\nЗапись заказа успешно удалена')
-
-        if count == 0:
-            print('\nЗаказа с таким клиентом нет')
-
-        else:
-            mycursor.execute('delete ordering from ordering '
-                             'join customer on ordering.id_customer = customer.id_customer '
-                             'join employee on ordering.id_employee = employee.id_employee '
-                             'join car on ordering.id_car = car.id_car '
-                             'where ' + column + ' = ' + '"' + value + '"')
-            print('\nЗапись заказа успешно удалена')
-
-    else:
-        mycursor.execute("select * from ordering where " + column + " = " + '"' + value + '"')
-        mycursor.fetchall()
-        count = mycursor.rowcount
-
-        if count > 1:
-            mycursor.execute("select * from ordering where " + column + " = " + '"' + value + '"')
+                             'where ' + column + ' = ' + "'" + value + "'")
             mytable = PrettyTable()
             mytable.field_names = ['Id order', 'Payment method', 'Registration date', 'Total amount',
                                    'Full name customer', 'Full name employee', 'Car', 'Id car']
@@ -195,7 +171,7 @@ def delete_order(num_delete, column, value):
             print('\nЗапись заказа успешно удалена')
 
         elif count == 0:
-            print('\nСотрудника с таким ФИО нет')
+            print('\nЗаказ с такими данными отсутствует')
 
         else:
             mycursor.execute("delete from ordering where " + column + " = " + "'" + value + "'")

@@ -248,7 +248,7 @@ try:
 
                     if num_delete == 1:
                         id_order = input('\nВведите Id заказа: ')
-                        mycursor.execute("delete from ordering where id_ordering = " + id_order)
+                        CRUD.delete_order(1, 'id_ordering', id_order)
 
                     elif num_delete == 2:
                         payment_method = input('\nВведите способ оплаты заказа(Б/Н): ')
