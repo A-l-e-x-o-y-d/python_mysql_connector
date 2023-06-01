@@ -1,7 +1,271 @@
 from prettytable import PrettyTable
 import mysql.connector
 from config import host, user, password, database
-import CRUD
+
+def read_customer(num_search, column, value):
+    if num_search == 1:
+        mycursor.execute("select * from customer where " + column + " = " + value)
+        mytable = PrettyTable()
+        mytable.field_names = ['Id_customer', 'Full_name', 'Phone_number', 'Address', 'Date_of_birth', 'Email']
+        mytable.add_rows(mycursor.fetchall())
+        print(mytable)
+    else:
+        mycursor.execute("select * from customer where " + column + " = " + "'" + value + "'")
+        mytable = PrettyTable()
+        mytable.field_names = ['Id_customer', 'Full_name', 'Phone_number', 'Address', 'Date_of_birth', 'Email']
+        mytable.add_rows(mycursor.fetchall())
+        print(mytable)
+
+def read_order(num_search, column, value):
+
+    if num_search == 1 or num_search == 4:
+        mycursor.execute(
+            "select Id_ordering, Payment_method, Registration_date, Total_amount, customer.full_name as Full_name_customer, employee.full_name, concat(brand,' ', model) as Car, car.id_car from ordering "
+            "join customer on customer.id_customer = ordering.id_customer "
+            "join employee on employee.id_employee = ordering.id_employee "
+            "join car on car.id_car = ordering.id_car where " + column + " = " + value)
+        mytable = PrettyTable()
+        mytable.field_names = ['Id_order', 'Payment_method', 'Registration_date', 'Total_amount', 'Full_name_customer', 'Full_name_employee', 'Car', 'Id_car']
+        mytable.add_rows(mycursor.fetchall())
+        print(mytable)
+    else:
+        mycursor.execute(
+            "select Id_ordering, Payment_method, Registration_date, Total_amount, customer.full_name as Full_name_customer, employee.full_name, concat(brand,' ', model) as Car, car.id_car from ordering "
+            "join customer on customer.id_customer = ordering.id_customer "
+            "join employee on employee.id_employee = ordering.id_employee "
+            "join car on car.id_car = ordering.id_car where " + column + " = " + "'" + value + "'")
+        mytable = PrettyTable()
+        mytable.field_names = ['Id_order', 'Payment_method', 'Registration_date', 'Total_amount', 'Full_name_customer', 'Full_name_employee', 'Car', 'Id_car']
+        mytable.add_rows(mycursor.fetchall())
+        print(mytable)
+
+def read_employee(num_search, column, value):
+    if num_search == 1 or num_search == 7:
+        mycursor.execute("select * from employee where " + column + " = " + value)
+        mytable = PrettyTable()
+        mytable.field_names = ['Id_customer', 'Full_name', 'Phone_number', 'Address', 'Date_of_birth', 'Email', 'Salary']
+        mytable.add_rows(mycursor.fetchall())
+        print(mytable)
+    else:
+        mycursor.execute("select * from employee where " + column + " = " + "'" + value + "'")
+        mytable = PrettyTable()
+        mytable.field_names = ['Id_customer', 'Full_name', 'Phone_number', 'Address', 'Date_of_birth', 'Email', 'Salary']
+        mytable.add_rows(mycursor.fetchall())
+        print(mytable)
+
+def read_car(num_search, column, value):
+
+    if num_search == 1 or num_search == 5:
+        mycursor.execute(
+            "select Id_car, concat(brand,' ',model), year_of_release, price, color, equipment.gearbox_type, equipment.car_interior, equipment.electrical_equipment, insurance.insurance_number from car "
+            "join equipment on car.id_equipment = equipment.id_equipment "
+            "join insurance on car.id_insurance = insurance.id_insurance "
+            "where " + column + " = " + value)
+        mytable = PrettyTable()
+        mytable.field_names = ['Id_car', 'Car', 'Year_of_release', 'Price', 'Color', 'Gearbox_type', 'Car_interior',
+                               'Electrical_equipment', 'Insurance_number']
+        mytable.add_rows(mycursor.fetchall())
+        print(mytable)
+
+    else:
+        mycursor.execute(
+            "select Id_car, concat(brand,' ',model), year_of_release, price, color, equipment.gearbox_type, equipment.car_interior, equipment.electrical_equipment, insurance.insurance_number from car "
+            "join equipment on car.id_equipment = equipment.id_equipment "
+            "join insurance on car.id_insurance = insurance.id_insurance "
+            "where " + column + " = " + "'" + value + "'")
+        mytable = PrettyTable()
+        mytable.field_names = ['Id_car', 'Car', 'Year_of_release', 'Price', 'Color', 'Gearbox_type', 'Car_interior',
+                               'Electrical_equipment', 'Insurance_number']
+        mytable.add_rows(mycursor.fetchall())
+        print(mytable)
+
+def delete_customer(num_delete, column, value):
+
+    if num_delete == 1:
+        mycursor.execute("delete from customer where id_customer = " + value)
+        print('\nЗапись клиента успешно удалена')
+
+    else:
+        mycursor.execute("select * from customer where " + column + " = " + '"' + value + '"')
+        mycursor.fetchall()
+        count = mycursor.rowcount
+
+        if count > 1:
+            mycursor.execute("select * from customer where " + column + " = " + '"' + value + '"')
+            mytable = PrettyTable()
+            mytable.field_names = ['Id_customer', 'Full_name', 'Phone_number', 'Address', 'Date_of_birth', 'Email']
+            mytable.add_rows(mycursor.fetchall())
+            print(mytable)
+            id_customer = input('\nВведите Id клиента: ')
+            mycursor.execute("delete from customer where id_customer = " + id_customer)
+            print('\nЗапись клиента успешно удалена')
+
+        elif count == 0:
+            print('\nКлиента с такими данными отсутствует')
+
+        else:
+            mycursor.execute("delete from customer where " + column + " = " + '"' + value + '"')
+            print('\nЗапись клиента успешно удалена')
+
+def delete_order(num_delete, column, value):
+
+    if num_delete == 1:
+        mycursor.execute("delete from ordering where id_ordering = " + value)
+        print('\nЗапись заказа успешно удалена')
+
+    elif num_delete == 4:
+        mycursor.execute("select * from ordering where " + column + " = " + value)
+        mycursor.fetchall()
+        count = mycursor.rowcount
+
+        if count > 1:
+            mycursor.execute('select * from ordering '
+                             'join customer on ordering.id_customer = customer.id_customer '
+                             'join employee on ordering.id_employee = employee.id_employee '
+                             'join car on ordering.id_car = car.id_car '
+                             'where ' + column + ' = ' + value)
+            mytable = PrettyTable()
+            mytable.field_names = ['Id order', 'Payment method', 'Registration date', 'Total amount',
+                                   'Full name customer', 'Full name employee', 'Car', 'Id car']
+            mytable.add_rows(mycursor.fetchall())
+            print(mytable)
+            id_order = input('\nВведите Id заказа: ')
+            mycursor.execute("delete from ordering where id_ordering = " + id_order)
+            print('\nЗапись заказа успешно удалена')
+
+        elif count == 0:
+            print('\nЗаказ с такими данными отсутствует')
+
+        else:
+            mycursor.execute("delete from ordering where " + column + " = " + value)
+            print('\nЗапись заказа успешно удалена')
+
+    else:
+        mycursor.execute("select * from ordering where " + column + " = " + "'" + value + "'")
+        mycursor.fetchall()
+        count = mycursor.rowcount
+
+        if count > 1:
+            mycursor.execute('select * from ordering '
+                             'join customer on ordering.id_customer = customer.id_customer '
+                             'join employee on ordering.id_employee = employee.id_employee '
+                             'join car on ordering.id_car = car.id_car '
+                             'where ' + column + ' = ' + "'" + value + "'")
+            mytable = PrettyTable()
+            mytable.field_names = ['Id order', 'Payment method', 'Registration date', 'Total amount',
+                                   'Full name customer', 'Full name employee', 'Car', 'Id car']
+            mytable.add_rows(mycursor.fetchall())
+            print(mytable)
+            id_order = input('\nВведите Id заказа: ')
+            mycursor.execute("delete from ordering where id_ordering = " + id_order)
+            print('\nЗапись заказа успешно удалена')
+
+        elif count == 0:
+            print('\nЗаказ с такими данными отсутствует')
+
+        else:
+            mycursor.execute("delete from ordering where " + column + " = " + "'" + value + "'")
+            print('\nЗапись заказа успешно удалена')
+
+def delete_employee(num_delete, column, value):
+    if num_delete == 1:
+        mycursor.execute("delete from employee where " + column + " = " + value)
+
+    elif num_delete == 7:
+        mycursor.execute("delete from employee where " + column + " = " + value)
+        mycursor.fetchall()
+        count = mycursor.rowcount
+
+        if count > 1:
+            mycursor.execute("select * from employee where " + column + " = " + value)
+            mytable = PrettyTable()
+            mytable.field_names = ['Id_customer', 'Full_name', 'Phone_number', 'Address',
+                                   'Date_of_birth', 'Email', 'Salary']
+            mytable.add_rows(mycursor.fetchall())
+            print(mytable)
+            id_employee = input('\nВведите Id сотрудника: ')
+            mycursor.execute("delete from employee where id_employee = " + id_employee)
+            print('\nЗапись сотрудника успешно удалена')
+
+        elif count == 0:
+            print('\nСотрудник с такими данными отсутствует')
+
+        else:
+            mycursor.execute("delete from employee where " + column + " = " + value)
+
+    else:
+        mycursor.execute("delete from employee where " + column + " = " + "'" + value + "'")
+        mycursor.fetchall()
+        count = mycursor.rowcount
+
+        if count > 1:
+            mycursor.execute("select * from employee where " + column + " = " + "'" + value + "'")
+            mytable = PrettyTable()
+            mytable.field_names = ['Id_customer', 'Full_name', 'Phone_number', 'Address',
+                                   'Date_of_birth', 'Email', 'Salary']
+            mytable.add_rows(mycursor.fetchall())
+            print(mytable)
+            id_employee = input('\nВведите Id сотрудника: ')
+            mycursor.execute("delete from employee where id_employee = " + id_employee)
+            print('\nЗапись сотрудника успешно удалена')
+
+        elif count == 0:
+            print('\nСотрудник с такими данными отсутствует')
+
+        else:
+            mycursor.execute("delete from employee where " + column + " = " + "'" + value + "'")
+            print('\nЗапись сотрудника успешно удалена')
+
+def delete_car(num_delete, column, value):
+    if num_delete == 1:
+        mycursor.execute("delete from сar where id_car = " + value)
+
+    elif num_delete == 4:
+        mycursor.execute("select * from сar where " + column + " = " + value)
+        mycursor.fetchall()
+        count = mycursor.rowcount
+
+        if count > 1:
+            mycursor.execute("select * from сar where " + column + " = " + value)
+            mytable = PrettyTable()
+            mytable.field_names = ['Id_car', 'Car', 'Year_of_release', 'Price', 'Color', 'Gearbox_type', 'Car_interior',
+                                   'Electrical_equipment', 'Insurance_number']
+            mytable.add_rows(mycursor.fetchall())
+            print(mytable)
+            id_car = input('\nВведите Id клиента: ')
+            mycursor.execute("delete from сar where id_car = " + id_car)
+            print('\nЗапись клиента успешно удалена')
+
+        elif count == 0:
+            print('\nАвтомобиль с такими данными отсутствует')
+
+        else:
+            mycursor.execute("delete from сar where " + column + " = " + value)
+
+            print('\nЗапись автомобиля успешно удалена')
+
+    else:
+        mycursor.execute("select * from сar where " + column + " = " + '"' + value + '"')
+        mycursor.fetchall()
+        count = mycursor.rowcount
+
+        if count > 1:
+            mycursor.execute("select * from сar where " + column + " = " + '"' + value + '"')
+            mytable = PrettyTable()
+            mytable.field_names = ['Id_car', 'Car', 'Year_of_release', 'Price', 'Color', 'Gearbox_type', 'Car_interior',
+                                   'Electrical_equipment', 'Insurance_number']
+            mytable.add_rows(mycursor.fetchall())
+            print(mytable)
+            id_car = input('\nВведите Id клиента: ')
+            mycursor.execute("delete from сar where id_car = " + id_car)
+            print('\nЗапись клиента успешно удалена')
+
+        elif count == 0:
+            print('\nАвтомобиль с такими данными отсутствует')
+
+        else:
+            mycursor.execute("delete from сar where " + column + " = " + '"' + value + '"')
+            print('\nЗапись автомобиля успешно удалена')
 
 # Соединение с БД
 try:
@@ -54,27 +318,27 @@ try:
 
                     if num_search == 1:
                         id_customer = input('\nВведите Id клиента: ')
-                        CRUD.read_customer(num_search, 'id_customer', id_customer)
+                        read_customer(num_search, 'id_customer', id_customer)
 
                     elif num_search == 2:
                         full_name = input('\nВведите ФИО клиента: ')
-                        CRUD.read_customer(num_search, 'full_name', full_name)
+                        read_customer(num_search, 'full_name', full_name)
 
                     elif num_search == 3:
                         phone_number = input('\nВведите номер телефона клиента: ')
-                        CRUD.read_customer(num_search, 'phone_number', phone_number)
+                        read_customer(num_search, 'phone_number', phone_number)
 
                     elif num_search == 4:
                         address = input('\nВведите адрес клиента: ')
-                        CRUD.read_customer(4, 'adress', address)
+                        read_customer(4, 'adress', address)
 
                     elif num_search == 5:
                         date_of_birth = input('\nВведите дату рождения клиента(ГГГГ-ММ-ДД): ')
-                        CRUD.read_customer(5, 'date_of_birth', date_of_birth)
+                        read_customer(5, 'date_of_birth', date_of_birth)
 
                     elif num_search == 6:
                         email = input('\nВведите Email клиента: ')
-                        CRUD.read_customer(6, 'email', email)
+                        read_customer(6, 'email', email)
 
                 # Редактировать запись
                 elif num_act == 3:
@@ -117,28 +381,28 @@ try:
 
                     if num_delete == 1:
                         id_customer = input('\nВведите Id клиента: ')
-                        CRUD.delete_customer(1, 'id_customer', id_customer)
+                        delete_customer(1, 'id_customer', id_customer)
                         # mycursor.execute('delete from customer where id_customer = ' + id_customer)
 
                     elif num_delete == 2:
                         full_name = input('\nВведите ФИО клиента: ')
-                        CRUD.delete_customer(2, 'full_name', full_name)
+                        delete_customer(2, 'full_name', full_name)
 
                     elif num_delete == 3:
                         phone_number = input('\nВведите номер телефона клиента: ')
-                        CRUD.delete_customer(3, 'phone_number', phone_number)
+                        delete_customer(3, 'phone_number', phone_number)
 
                     elif num_delete == 4:
                         address = input('\nВведите адрес клиента: ')
-                        CRUD.delete_customer(3, 'adress', address)
+                        delete_customer(3, 'adress', address)
 
                     elif num_delete == 5:
                         date_of_birth = input('\nВведите дату рождения клиента: ')
-                        CRUD.delete_customer(4, 'date_of_birth', date_of_birth)
+                        delete_customer(4, 'date_of_birth', date_of_birth)
 
                     elif num_delete == 6:
                         email = input('\nВведите Email клиента: ')
-                        CRUD.delete_customer(5, 'email', email)
+                        delete_customer(5, 'email', email)
 
                     else:
                         print('\nНомера выбранной колонки не существует')
@@ -180,31 +444,31 @@ try:
 
                     if num_search == 1:
                         id_order = input('\nВведите Id заказа: ')
-                        CRUD.read_order(1, 'Id_ordering', id_order)
+                        read_order(1, 'Id_ordering', id_order)
 
                     if num_search == 2:
                         payment_method = input('\nВведите способ оплаты заказа(Б/Н): ')
-                        CRUD.read_order(2, 'payment_method', payment_method)
+                        read_order(2, 'payment_method', payment_method)
 
                     if num_search == 3:
                         registration_date = input('\nВведите дату регистрации заказа(Б/Н): ')
-                        CRUD.read_order(3, 'registration_date', registration_date)
+                        read_order(3, 'registration_date', registration_date)
 
                     if num_search == 4:
                         total_amount = input('\nВведите итоговую цену заказа: ')
-                        CRUD.read_order(3, 'total_amount', total_amount)
+                        read_order(3, 'total_amount', total_amount)
 
                     if num_search == 5:
                         full_name_customer = input('\nВведите ФИО клиента: ')
-                        CRUD.read_order(3, 'customer.full_name', full_name_customer)
+                        read_order(3, 'customer.full_name', full_name_customer)
 
                     if num_search == 6:
                         full_name_employee = input('\nВведите ФИО сотруника: ')
-                        CRUD.read_order(3, 'employee.full_name', full_name_employee)
+                        read_order(3, 'employee.full_name', full_name_employee)
 
                     if num_search == 7:
                         brand = input('\nВведите марку автомобиля: ')
-                        CRUD.read_order(3, 'car.brand', brand)
+                        read_order(3, 'car.brand', brand)
 
                 # Редактировать запись
                 elif num_act == 3:
@@ -260,31 +524,31 @@ try:
 
                     if num_delete == 1:
                         id_order = input('\nВведите Id заказа: ')
-                        CRUD.delete_order(1, 'id_ordering', id_order)
+                        delete_order(1, 'id_ordering', id_order)
 
                     elif num_delete == 2:
                         payment_method = input('\nВведите способ оплаты заказа(Б/Н): ')
-                        CRUD.delete_order(2, 'payment_method', payment_method)
+                        delete_order(2, 'payment_method', payment_method)
 
                     elif num_delete == 3:
                         registration_date = input('\nВведите дату регистрации заказа: ')
-                        CRUD.delete_order(3, 'registration_date', registration_date)
+                        delete_order(3, 'registration_date', registration_date)
 
                     elif num_delete == 4:
                         total_amount = input('\nВведите итоговую цену заказа: ')
-                        CRUD.delete_order(4, 'total_amount', total_amount)
+                        delete_order(4, 'total_amount', total_amount)
 
                     elif num_delete == 5:
                         full_name_customer = input('\nВведите ФИО клиента: ')
-                        CRUD.delete_order(5, 'customer.full_name', full_name_customer)
+                        delete_order(5, 'customer.full_name', full_name_customer)
 
                     elif num_delete == 6:
                         brand_and_model = input('\nВведите марку и модель автомобиля: ')
-                        CRUD.delete_order(5, 'concat(car.brand, " ", car.model)', brand_and_model)
+                        delete_order(5, 'concat(car.brand, " ", car.model)', brand_and_model)
 
                     elif num_delete == 7:
                         full_name_employee = input('\nВведите ФИО сотрудника: ')
-                        CRUD.delete_order(5, 'employee.full_name', full_name_employee)
+                        delete_order(5, 'employee.full_name', full_name_employee)
 
                     else:
                         print('\nНомера выбранной колонки не существует')
@@ -324,31 +588,31 @@ try:
 
                     if num_search == 1:
                         id_employee = input('\nВведите Id сотрудника: ')
-                        CRUD.read_employee(1, 'id_employee', id_employee)
+                        read_employee(1, 'id_employee', id_employee)
 
                     elif num_search == 2:
                         full_name = input('\nВведите ФИО сотрудника: ')
-                        CRUD.read_employee(2, 'full_name', full_name)
+                        read_employee(2, 'full_name', full_name)
 
                     elif num_search == 3:
                         phone_number = input('\nВведите номер телефона сотрудника: ')
-                        CRUD.read_employee(3, 'phone_number', phone_number)
+                        read_employee(3, 'phone_number', phone_number)
 
                     elif num_search == 4:
                         address = input('\nВведите адрес сотрудника: ')
-                        CRUD.read_employee(4, 'adress', address)
+                        read_employee(4, 'adress', address)
 
                     elif num_search == 5:
                         date_of_birth = input('\nВведите дату рождения сотрудника: ')
-                        CRUD.read_employee(5, 'date_of_birth', date_of_birth)
+                        read_employee(5, 'date_of_birth', date_of_birth)
 
                     elif num_search == 6:
                         email = input('\nВведите Email сотрудника: ')
-                        CRUD.read_employee(6, 'email', email)
+                        read_employee(6, 'email', email)
 
                     elif num_search == 7:
                         salary = input('\nВведите заработную плату сотрудника: ')
-                        CRUD.read_employee(7, 'salary', salary)
+                        read_employee(7, 'salary', salary)
 
                 # Редактировать запись
                 elif num_act == 3:
@@ -403,31 +667,31 @@ try:
 
                     if num_delete == 1:
                         id_employee = input('\nВведите Id сотрудника: ')
-                        CRUD.delete_employee(1, 'id_employee', id_employee)
+                        delete_employee(1, 'id_employee', id_employee)
 
                     elif num_delete == 2:
                         full_name = input('\nВведите ФИО сотрудника: ')
-                        CRUD.delete_employee(2, 'full_name', full_name)
+                        delete_employee(2, 'full_name', full_name)
 
                     elif num_delete == 3:
                         phone_number = input('Введите номер телефона сотрудника: ')
-                        CRUD.delete_employee(3, 'phone_number', phone_number)
+                        delete_employee(3, 'phone_number', phone_number)
 
                     elif num_delete == 4:
                         address = input('\nВведите адрес сотрудника: ')
-                        CRUD.delete_employee(4, 'adress', address)
+                        delete_employee(4, 'adress', address)
 
                     elif num_delete == 5:
                         date_of_birth = input('\nВведите дату рождения сотрудника: ')
-                        CRUD.delete_employee(5, 'date_of_birth', date_of_birth)
+                        delete_employee(5, 'date_of_birth', date_of_birth)
 
                     elif num_delete == 6:
                         email = input('\nВведите Email сотрудника: ')
-                        CRUD.delete_employee(6, 'email', email)
+                        delete_employee(6, 'email', email)
 
                     elif num_delete == 7:
                         salary = input('\nВведите заработную плату сотрудника: ')
-                        CRUD.delete_employee(7, 'salary', salary)
+                        delete_employee(7, 'salary', salary)
 
                     else:
                         print('\nНомера выбранной колонки не существует')
@@ -470,27 +734,27 @@ try:
 
                     if num_search == 1:
                         id_car = input('\nВведите Id автомобиля: ')
-                        CRUD.read_car(1, 'id_car', id_car)
+                        read_car(1, 'id_car', id_car)
 
                     elif num_search == 2:
                         brand = input('\nВведите марку автомобиля: ')
-                        CRUD.read_car(2, 'brand', brand)
+                        read_car(2, 'brand', brand)
 
                     elif num_search == 3:
                         brand_and_model = input('\nВведите марку и модель автомобиля: ')
-                        CRUD.read_car(3, 'concat(brand, " ", model)', brand_and_model)
+                        read_car(3, 'concat(brand, " ", model)', brand_and_model)
 
                     elif num_search == 4:
                         year_of_release = input('\nВведите год выпуска автомобиля: ')
-                        CRUD.read_car(4, 'year_of_release', year_of_release)
+                        read_car(4, 'year_of_release', year_of_release)
 
                     elif num_search == 5:
                         price = input('\nВведите цену автомобиля: ')
-                        CRUD.read_car(5, 'price', price)
+                        read_car(5, 'price', price)
 
                     elif num_search == 6:
                         color = input('\nВведите цвет автомобиля: ')
-                        CRUD.read_car(6, 'color', color)
+                        read_car(6, 'color', color)
 
                 # Редактировать запись
                 elif num_act == 3:
@@ -556,23 +820,23 @@ try:
 
                     if num_delete == 1:
                         id_car = input('\nВведите Id автомобиля: ')
-                        CRUD.delete_car(1, 'id_car', id_car)
+                        delete_car(1, 'id_car', id_car)
 
                     elif num_delete == 2:
                         brand_and_model = input('\nВведите марку и модель автомобиля: ')
-                        CRUD.delete_car(2, 'concat(brand, " ", model)', brand_and_model)
+                        delete_car(2, 'concat(brand, " ", model)', brand_and_model)
 
                     elif num_delete == 3:
                         year_of_release = input('\nВведите год релиза автомобиля(ГГГГ-ММ-ДД): ')
-                        CRUD.delete_car(3, 'year_of_release', year_of_release)
+                        delete_car(3, 'year_of_release', year_of_release)
 
                     elif num_delete == 4:
                         price = input('\nВведите цену автомобиля: ')
-                        CRUD.delete_car(4, 'price', price)
+                        delete_car(4, 'price', price)
 
                     elif num_delete == 5:
                         color = input('\nВведите цвет автомобиля')
-                        CRUD.delete_car(5, 'color', color)
+                        delete_car(5, 'color', color)
 
                     else:
                         print('\nНомера выбранной колонки не существует')
