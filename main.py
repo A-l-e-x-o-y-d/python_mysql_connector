@@ -126,18 +126,22 @@ def delete_order(num_delete, column, value):
                              'where ' + column + ' = ' + value)
             mytable = PrettyTable()
             mytable.field_names = ['Id order', 'Payment method', 'Registration date', 'Total amount',
-                                   'Full name customer', 'Full name employee', 'Car', 'Id car']
+                                   'Full name customer', 'Full name employee', 'C1ar', 'Id car']
             mytable.add_rows(mycursor.fetchall())
             print(mytable)
             id_order = input('\nВведите Id заказа: ')
-            mycursor.execute("delete from ordering where id_ordering = " + id_order)
+            mycursor.execute('delete ordering from ordering where id_ordering = ' + id_order)
             print('\nЗапись заказа успешно удалена')
 
         elif count == 0:
             print('\nЗаказ с такими данными отсутствует')
 
         else:
-            mycursor.execute("delete from ordering where " + column + " = " + value)
+            mycursor.execute('delete from ordering '
+                             'join customer on ordering.id_customer = customer.id_customer '
+                             'join employee on ordering.id_employee = employee.id_employee '
+                             'join car on ordering.id_car = car.id_car '
+                             'where ' + column + ' = ' + value)
             print('\nЗапись заказа успешно удалена')
 
     else:
@@ -164,7 +168,11 @@ def delete_order(num_delete, column, value):
             print('\nЗаказ с такими данными отсутствует')
 
         else:
-            mycursor.execute("delete from ordering where " + column + " = " + "'" + value + "'")
+            mycursor.execute("delete from ordering "
+                             'join customer on ordering.id_customer = customer.id_customer '
+                             'join employee on ordering.id_employee = employee.id_employee '
+                             'join car on ordering.id_car = car.id_car '
+                             'where ' + column + ' = ' + "'" + value + "'")
             print('\nЗапись заказа успешно удалена')
 
 def delete_employee(num_delete, column, value):
