@@ -288,6 +288,10 @@ def delete_car(num_delete, column, value):
             mycursor.execute("delete from car where " + column + " = " + '"' + value + '"')
             print('\nЗапись автомобиля успешно удалена')
 
+def delete_insurance(column, value):
+    mycursor.execute('delete from insurance where ' + column + ' = ' + value)
+    print('\nЗапись страховки успешно удалена')
+
 
 #--------------------------------------------------------------------------------------------------------------------
 
@@ -337,7 +341,7 @@ try:
 
                 # Читать запись
                 elif num_act == 2:
-                    print('\n1. Id\n2. Full name\n3. Phone number\n4. Address\n5. Date of birth\n6. Email\n')
+                    print('\nКолонки:\n1. Id\n2. Full name\n3. Phone number\n4. Address\n5. Date of birth\n6. Email\n')
                     num_search = int(input('\nВведите номер колонки, по которой будет производиться поиск клиента: '))
 
                     if num_search == 1:
@@ -400,7 +404,7 @@ try:
 
                 # Удалить запись
                 elif num_act == 4:
-                    print('\n1. Id\n2. Full name\n3. Phone number\n4. Address\n5. Date of birth\n6. Email\n')
+                    print('\nКолонки:\n1. Id\n2. Full name\n3. Phone number\n4. Address\n5. Date of birth\n6. Email\n')
                     num_delete = int(input('\nВведите номер колонки, по которой будет производиться удаление клиента: '))
 
                     if num_delete == 1:
@@ -463,7 +467,7 @@ try:
                 # Читать запись
                 elif num_act == 2:
 
-                    print('\n1. Id\n2. Payment method\n3. Registration date\n4. Total amount\n5. Full name customer\n6. Full name employee\n7. car brand\n')
+                    print('\nКолонки:\n1. Id\n2. Payment method\n3. Registration date\n4. Total amount\n5. Full name customer\n6. Full name employee\n7. car brand\n')
                     num_search = int(input('\nВведите номер колонки, по которой будет производиться поиск заказа: '))
 
                     if num_search == 1:
@@ -541,7 +545,7 @@ try:
 
                 # Удалить запись
                 elif num_act == 4:
-                    print('\n1. Id order\n2. Payment method\n3. Registartion date\n4. Total amount\n5. Full name customer\n6. Brand and model\n7. Full name employee\n')
+                    print('\nКолонки:\n1. Id order\n2. Payment method\n3. Registartion date\n4. Total amount\n5. Full name customer\n6. Brand and model\n7. Full name employee\n')
 
                     num_delete = int(
                         input('\nВведите номер колонки, по которой будет производиться удаление заказа: '))
@@ -607,7 +611,7 @@ try:
                 # Читать запись
                 elif num_act == 2:
 
-                    print('\n1. Id\n2. Full name\n3. Phone number\n4. Address\n5. Date of birth\n6. Email\n7. Salary\n')
+                    print('\nКолонки:\n1. Id\n2. Full name\n3. Phone number\n4. Address\n5. Date of birth\n6. Email\n7. Salary\n')
                     num_search = int(input('\nВведите номер колонки, по которой будет производиться поиск сотрудника: '))
 
                     if num_search == 1:
@@ -685,7 +689,7 @@ try:
 
                 # Удалить запись
                 elif num_act == 4:
-                    print('\n1. Id\n2. Full name\n3. Phone number\n4. Address\n5. Date of birth\n6. Email\n7. Salary\n')
+                    print('\nКолонки:\n1. Id\n2. Full name\n3. Phone number\n4. Address\n5. Date of birth\n6. Email\n7. Salary\n')
                     num_delete = int(
                         input('\nВведите номер колонки, по которой будет производиться удаление сотрудника: '))
 
@@ -753,7 +757,7 @@ try:
                 # Читать запись
                 elif num_act == 2:
 
-                    print('\n1. Id\n2. Brand\n3. Brand and model\n4. Year of release\n5. Price\n6. Color\n')
+                    print('\nКолонки:\n1. Id\n2. Brand\n3. Brand and model\n4. Year of release\n5. Price\n6. Color\n')
                     num_search = int(input('\nВведите номер колонки, по которой будет производиться поиск автомобиля: '))
 
                     if num_search == 1:
@@ -839,7 +843,7 @@ try:
 
                 # Удалить запись
                 elif num_act == 4:
-                    print('\n1. Id\n2. Brand and model\n3. Year of release\n4. Price\n5. Color\n')
+                    print('\nКолонки:\n1. Id\n2. Brand and model\n3. Year of release\n4. Price\n5. Color\n')
                     num_delete = int(input('\nВведите номер колонки, по которой будет производиться удаление автомобиля: '))
 
                     if num_delete == 1:
@@ -965,7 +969,7 @@ try:
 
                 # Читать запись
                 elif num_act == 2:
-                    print('\n1. Id\n2. Insurance number\n')
+                    print('\nКолонки:\n1. Id\n2. Insurance number\n')
                     num_search = int(input('\nВведите номер колонки, по которой будет производиться поиск страховки: '))
 
                     if num_search == 1:
@@ -1008,9 +1012,19 @@ try:
 
                 # Удалить запись
                 elif num_act == 4:
-                    id_insurance = input('\nВведите Id страховки: ')
-                    mycursor.execute("delete from insurance where id_insurance = " + id_insurance)
-                    print('\nЗапись страховки успешно удалена')
+                    print('\nКолонки:\n1. Id\n2. Insurance number\n')
+                    num_delete = int(input('\nВведите номер колонки, по которой будет производиться удаление страховки: '))
+
+                    if num_delete == 1:
+                        id_insurance = input('\nВведите Id страховки: ')
+                        delete_insurance('id_insurance', id_insurance)
+
+                    elif num_delete == 2:
+                        insurance_number = input('Введите номер страховки: ')
+                        delete_insurance('insurance_number', insurance_number)
+
+                    else:
+                        print('\nНомера выбранной колонки не существует')
 
                     # Принять изменения
                     db_name.commit()
