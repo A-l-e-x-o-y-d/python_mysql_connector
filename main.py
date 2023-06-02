@@ -87,6 +87,24 @@ def read_insurance(column, value):
     mytable.add_rows(mycursor.fetchall())
     print(mytable)
 
+def read_supplier(num_search, column, value):
+
+    if num_search == 1:
+        mycursor.execute(
+            'select * from supplier where ' + column + ' = ' + value)
+        mytable = PrettyTable()
+        mytable.field_names = ['Id supplier', 'Company name', 'Phone number', 'Address', 'Full name contact person']
+        mytable.add_rows(mycursor.fetchall())
+        print(mytable)
+
+    else:
+        mycursor.execute(
+            'select * from supplier where ' + column + ' = ' + '"' + value + '"')
+        mytable = PrettyTable()
+        mytable.field_names = ['Id supplier', 'Company name', 'Phone number', 'Address', 'Full name contact person']
+        mytable.add_rows(mycursor.fetchall())
+        print(mytable)
+
 def delete_customer(num_delete, column, value):
 
     if num_delete == 1:
@@ -309,14 +327,14 @@ try:
         )
         print("\nSuccessfully connected...")
 
-        print('\n1. Таблицы\n2. Аналитические запросы\n3. Закончить работу\n')
+        print('\n1. Таблицы:\n2. Аналитические запросы\n3. Закончить работу\n')
         num = int(input('\nВведите номер для продолжения: '))
         mycursor = db_name.cursor()  # Объявление курсора
 
         if num == 1:
 
             # Выбор таблицы для взаимодействия
-            print('\nТаблицы:\n1. Customer\n2. Ordering\n3. Employee\n4. Car\n5. Equipment\n6. Insurance\n')
+            print('\nТаблицы:\n1. Customer\n2. Ordering\n3. Employee\n4. Car\n5. Equipment\n6. Insurance\n7. Supplier\n8. Supplier to Delivery\n9. Delivery\n')
             num_table = int(input('\nВведите номер таблицы для взаимодействия: '))
 
             # Клиент
@@ -1031,6 +1049,85 @@ try:
 
                 else:
                     print('\nНомер выбранного действия не существует!')
+
+            elif num_table == 7:
+                print(
+                    '\nДействия с таблицей:\n1. Создать запись\n2. Читать запись\n3. Редактировать запись\n4. Удалить запись\n')
+                num_act = int(input('\nВведите номер действия: '))
+
+                # Создать запись
+                if num_act == 1:
+                    id_supplier = input('Введите Id поставщика: ')
+                    company_name = input('Введите название компании: ')
+                    phone_number = input('Введите номер поставщика: ')
+                    address = input('Введите адрес поставщика: ')
+                    full_name_contact_person = input('Введите ФИО контактного лица')
+
+                # Читать запись
+                if num_act == 2:
+                    print(
+                        '\nКолонки:\n1. Id\n2. Company name\n3. Phone number\n4. Address\n5. Full name contact person\n')
+                    num_search = int(
+                        input('\nВведите номер колонки, по которой будет производиться поиск сотрудника: '))
+
+                    if num_search == 1:
+                        id_supplier = input('Введите Id поставщика: ')
+                        read_supplier(1, 'id_supplier', id_supplier)
+
+                    elif num_search == 2:
+                        company_name = input('Введите название компании: ')
+                        read_supplier(2, 'company_name', company_name)
+
+                    elif num_search == 3:
+                        phone_number = input('Введите номер поставщика: ')
+                        read_supplier(3, 'phone_number', phone_number)
+
+                    elif num_search == 4:
+                        address = input('Введите адрес поставщика: ')
+                        read_supplier(4, 'adress', address)
+
+                    elif num_search == 5:
+                        full_name_contact_person = input('Введите ФИО контактного лица')
+                        read_supplier(5, 'full_name_contact_person', full_name_contact_person)
+
+                # Редактировать запись
+                if num_act == 3:
+                    id_supplier = input('Введите Id поставщика: ')
+                    print(
+                        '\nКолонки:\n1. Id\n2. Company name\n3. Phone number\n4. Address\n5. Full name contact person\n')
+                    num_update = int(input('\nВведите номер колонки для изменения: '))
+
+                    if num_update == 1:
+                        new_id_supplier = input('\nВведите новое Id поставщика: ')
+                        mycursor.execute(
+                            "update supplier set id_supplier = " + new_id_supplier + " where id_supplier = " + id_supplier)
+
+                    elif num_update == 2:
+                        new_company_name = input('\nВведите новое название компании: ')
+                        mycursor.execute(
+                            "update supplier set company_name = " + new_company_name + " where id_supplier = " + id_supplier)
+
+                    elif num_update == 3:
+                        new_phone_number = input('\nВведите новый номер поставщика: ')
+                        mycursor.execute(
+                            "update supplier set phone_number = " + new_phone_number + " where id_supplier = " + id_supplier)
+
+                    elif num_update == 4:
+                        new_address = input('\nВведите новый адрес поставщика: ')
+                        mycursor.execute(
+                            "update supplier set adress = " + new_address + " where id_supplier = " + id_supplier)
+
+                    elif num_update == 5:
+                        new_full_name_contact_person = input('\nВведите новое ФИО поставщика: ')
+                        mycursor.execute(
+                            "update supplier set full_name_contact_person = " + new_full_name_contact_person + " where id_supplier = " + id_supplier)
+
+                # Удалить запись
+                if num_act == 4:
+
+            elif num_table == 8:
+
+            elif num_table == 9:
 
             else:
                 print('\nВыбранной таблицы не существует!')
