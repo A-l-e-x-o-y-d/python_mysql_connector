@@ -79,6 +79,14 @@ def read_car(num_search, column, value):
         mytable.add_rows(mycursor.fetchall())
         print(mytable)
 
+def read_insurance(column, value):
+    mycursor.execute(
+        'select * from insurance where ' + column + ' = ' + value)
+    mytable = PrettyTable()
+    mytable.field_names = ['Id_insurance', 'Insurance_number', 'Start_date', 'End_date']
+    mytable.add_rows(mycursor.fetchall())
+    print(mytable)
+
 def delete_customer(num_delete, column, value):
 
     if num_delete == 1:
@@ -279,6 +287,9 @@ def delete_car(num_delete, column, value):
         else:
             mycursor.execute("delete from car where " + column + " = " + '"' + value + '"')
             print('\nЗапись автомобиля успешно удалена')
+
+
+#--------------------------------------------------------------------------------------------------------------------
 
 # Соединение с БД
 try:
@@ -955,25 +966,15 @@ try:
                 # Читать запись
                 elif num_act == 2:
                     print('\n1. Id\n2. Insurance number\n')
-                    num_search = int(input('\nВведите номер колонки, по которой будет производиться поиск сотрудника: '))
+                    num_search = int(input('\nВведите номер колонки, по которой будет производиться поиск страховки: '))
 
                     if num_search == 1:
                         id_insurance = input('\nВведите Id страховки: ')
-                        mycursor.execute(
-                            "select * from insurance where id_insurance = " + id_insurance)
-                        mytable = PrettyTable()
-                        mytable.field_names = ['Id_insurance', 'Insurance_number', 'Start_date', 'End_date']
-                        mytable.add_rows(mycursor.fetchall())
-                        print(mytable)
+                        read_insurance('id_insurance', id_insurance)
 
                     elif num_search == 2:
                         insurance_number = input('\nВведите номер страховки: ')
-                        mycursor.execute(
-                            "select * from insurance where insurance_number = " + insurance_number)
-                        mytable = PrettyTable()
-                        mytable.field_names = ['Id_insurance', 'Insurance_number', 'Start_date', 'End_date']
-                        mytable.add_rows(mycursor.fetchall())
-                        print(mytable)
+                        read_insurance('insurance_number', insurance_number)
 
                 # Редактировать запись
                 elif num_act == 3:
