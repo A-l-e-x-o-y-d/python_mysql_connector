@@ -863,7 +863,7 @@ try:
                         delete_car(4, 'price', price)
 
                     elif num_delete == 5:
-                        color = input('\nВведите цвет автомобиля')
+                        color = input('\nВведите цвет автомобиля: ')
                         delete_car(5, 'color', color)
 
                     else:
