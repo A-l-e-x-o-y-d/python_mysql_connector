@@ -1020,7 +1020,7 @@ try:
                         delete_insurance('id_insurance', id_insurance)
 
                     elif num_delete == 2:
-                        insurance_number = input('Введите номер страховки: ')
+                        insurance_number = input('\nВведите номер страховки: ')
                         delete_insurance('insurance_number', insurance_number)
 
                     else:
