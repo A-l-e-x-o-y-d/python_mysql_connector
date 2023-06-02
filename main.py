@@ -310,6 +310,34 @@ def delete_insurance(column, value):
     mycursor.execute('delete from insurance where ' + column + ' = ' + value)
     print('\nЗапись страховки успешно удалена')
 
+def delete_supplier(num_delete, column, value):
+
+    if num_delete == 1:
+        mycursor.execute("delete from supplier where id_supplier = " + value)
+        print('\nЗапись клиента успешно удалена')
+
+    else:
+        mycursor.execute("select * from supplier where " + column + " = " + '"' + value + '"')
+        mycursor.fetchall()
+        count = mycursor.rowcount
+
+        if count > 1:
+            mycursor.execute("select * from supplier where " + column + " = " + '"' + value + '"')
+            mytable = PrettyTable()
+            mytable.field_names = ['Id', 'Company name', 'Phone number', 'Address', 'Full name contact person']
+            mytable.add_rows(mycursor.fetchall())
+            print(mytable)
+            id_supplier = input('\nВведите Id поставщика: ')
+            mycursor.execute("delete from supplier where id_supplier = " + id_supplier)
+            print('\nЗапись поставщика успешно удалена')
+
+        elif count == 0:
+            print('\nПоставщика с такими данными отсутствует')
+
+        else:
+            mycursor.execute("delete from supplier where " + column + " = " + '"' + value + '"')
+            print('\nЗапись поставщика успешно удалена')
+
 
 #--------------------------------------------------------------------------------------------------------------------
 
@@ -1050,6 +1078,7 @@ try:
                 else:
                     print('\nНомер выбранного действия не существует!')
 
+            # Поставщик
             elif num_table == 7:
                 print(
                     '\nДействия с таблицей:\n1. Создать запись\n2. Читать запись\n3. Редактировать запись\n4. Удалить запись\n')
@@ -1063,12 +1092,15 @@ try:
                     address = input('Введите адрес поставщика: ')
                     full_name_contact_person = input('Введите ФИО контактного лица')
 
+                    # Принять изменения
+                    db_name.commit()
+
                 # Читать запись
-                if num_act == 2:
+                elif num_act == 2:
                     print(
                         '\nКолонки:\n1. Id\n2. Company name\n3. Phone number\n4. Address\n5. Full name contact person\n')
                     num_search = int(
-                        input('\nВведите номер колонки, по которой будет производиться поиск сотрудника: '))
+                        input('\nВведите номер колонки, по которой будет производиться поиск поставщика: '))
 
                     if num_search == 1:
                         id_supplier = input('Введите Id поставщика: ')
@@ -1091,7 +1123,7 @@ try:
                         read_supplier(5, 'full_name_contact_person', full_name_contact_person)
 
                 # Редактировать запись
-                if num_act == 3:
+                elif num_act == 3:
                     id_supplier = input('Введите Id поставщика: ')
                     print(
                         '\nКолонки:\n1. Id\n2. Company name\n3. Phone number\n4. Address\n5. Full name contact person\n')
@@ -1122,8 +1154,33 @@ try:
                         mycursor.execute(
                             "update supplier set full_name_contact_person = " + new_full_name_contact_person + " where id_supplier = " + id_supplier)
 
+                    # Принять изменения
+                    db_name.commit()
+
                 # Удалить запись
-                if num_act == 4:
+                elif num_act == 4:
+                    print(
+                        '\nКолонки:\n1. Id\n2. Company name\n3. Phone number\n4. Address\n5. Full name contact person\n')
+                    num_delete = int(
+                        input('\nВведите номер колонки, по которой будет производиться удаление поставщика: '))
+
+                    if num_delete == 1:
+                        id_supplier = input('Введите Id поставщика: ')
+
+                    if num_delete == 2:
+                        company_name = input('Введите название компании: ')
+
+                    if num_delete == 3:
+                        phone_number = input('Введите номер поставщика: ')
+
+                    if num_delete == 4:
+                        address = input('Введите адрес поставщика: ')
+
+                    if num_delete == 5:
+                        full_name_contact_person = input('Введите ФИО контактного лица')
+
+                else:
+                    print('\nНомер выбранного действия не существует!')
 
             elif num_table == 8:
 
