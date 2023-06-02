@@ -1166,18 +1166,23 @@ try:
 
                     if num_delete == 1:
                         id_supplier = input('Введите Id поставщика: ')
+                        delete_supplier(1, 'id_supplier', id_supplier)
 
-                    if num_delete == 2:
+                    elif num_delete == 2:
                         company_name = input('Введите название компании: ')
+                        delete_supplier(2, 'company_name', company_name)
 
-                    if num_delete == 3:
+                    elif num_delete == 3:
                         phone_number = input('Введите номер поставщика: ')
+                        delete_supplier(3, 'phone_number', phone_number)
 
-                    if num_delete == 4:
+                    elif num_delete == 4:
                         address = input('Введите адрес поставщика: ')
+                        delete_supplier(4, 'adress', address)
 
-                    if num_delete == 5:
+                    elif num_delete == 5:
                         full_name_contact_person = input('Введите ФИО контактного лица')
+                        delete_supplier(5, 'full_name_contact_person', full_name_contact_person)
 
                 else:
                     print('\nНомер выбранного действия не существует!')
