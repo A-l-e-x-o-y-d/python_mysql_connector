@@ -1043,7 +1043,7 @@ try:
                 brand = input('\nВведите марку автомобиля: ')
                 mycursor.execute('select brand, count(*) from car where brand = "' + brand + '"')
                 mytable = PrettyTable()
-                mytable.field_names = ['car_brand', 'Count_of_sales']
+                mytable.field_names = ['Car_brand', 'Count_of_sales']
                 mytable.add_rows(mycursor.fetchall())
                 print(mytable)
 
