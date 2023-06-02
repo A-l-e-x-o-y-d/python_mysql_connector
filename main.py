@@ -901,7 +901,7 @@ try:
                     mycursor.execute(
                         "select * from equipment where id_equipment = " + id_equipment)
                     mytable = PrettyTable()
-                    mytable.field_names = ['Id_equipment', 'Gearbox_type', 'car_interior', 'Electrical_equipment']
+                    mytable.field_names = ['Id_equipment', 'Gearbox_type', 'Car_interior', 'Electrical_equipment']
                     mytable.add_rows(mycursor.fetchall())
                     print(mytable)
 
