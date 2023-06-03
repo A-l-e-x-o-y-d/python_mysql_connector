@@ -471,7 +471,7 @@ try:
                         delete_customer(3, 'adress', address)
 
                     elif num_delete == 5:
-                        date_of_birth = input('\nВведите дату рождения клиента: ')
+                        date_of_birth = input('\nВведите дату рождения клиента(ГГГГ-ММ-ДД): ')
                         delete_customer(4, 'date_of_birth', date_of_birth)
 
                     elif num_delete == 6:
@@ -525,7 +525,7 @@ try:
                         read_order(2, 'payment_method', payment_method)
 
                     if num_search == 3:
-                        registration_date = input('\nВведите дату регистрации заказа(Б/Н): ')
+                        registration_date = input('\nВведите дату регистрации заказа(ГГГГ-ММ-ДД): ')
                         read_order(3, 'registration_date', registration_date)
 
                     if num_search == 4:
@@ -605,7 +605,7 @@ try:
                         delete_order(2, 'payment_method', payment_method)
 
                     elif num_delete == 3:
-                        registration_date = input('\nВведите дату регистрации заказа: ')
+                        registration_date = input('\nВведите дату регистрации заказа(ГГГГ-ММ-ДД): ')
                         delete_order(3, 'registration_date', registration_date)
 
                     elif num_delete == 4:
@@ -677,7 +677,7 @@ try:
                         read_employee(4, 'adress', address)
 
                     elif num_search == 5:
-                        date_of_birth = input('\nВведите дату рождения сотрудника: ')
+                        date_of_birth = input('\nВведите дату рождения сотрудника(ГГГГ-ММ-ДД): ')
                         read_employee(5, 'date_of_birth', date_of_birth)
 
                     elif num_search == 6:
@@ -756,7 +756,7 @@ try:
                         delete_employee(4, 'adress', address)
 
                     elif num_delete == 5:
-                        date_of_birth = input('\nВведите дату рождения сотрудника: ')
+                        date_of_birth = input('\nВведите дату рождения сотрудника(ГГГГ-ММ-ДД): ')
                         delete_employee(5, 'date_of_birth', date_of_birth)
 
                     elif num_delete == 6:
@@ -787,7 +787,7 @@ try:
                     id_car = input('\nВведите Id автомобиля: ')
                     brand = input('Введите марку автомобиля: ')
                     model = input('Введите модель автомобиля: ')
-                    year_of_release = input('Введите дату выпуска автомобиля(ГГГГ): ')
+                    year_of_release = input('Введите год выпуска автомобиля(ГГГГ): ')
                     price = input('Введите цену автомобиля: ')
                     color = input('Введите цвет автомобиля: ')
                     id_equipment = input('Введите Id комплектации автомобиля: ')
@@ -819,7 +819,7 @@ try:
                         read_car(3, 'concat(brand, " ", model)', brand_and_model)
 
                     elif num_search == 4:
-                        year_of_release = input('\nВведите год выпуска автомобиля: ')
+                        year_of_release = input('\nВведите год выпуска автомобиля(ГГГГ): ')
                         read_car(4, 'year_of_release', year_of_release)
 
                     elif num_search == 5:
@@ -859,7 +859,7 @@ try:
                             "update car set model = " + "'" + new_model + "'" + " where id_car = " + id_car)
 
                     elif num_update == 4:
-                        new_year_of_release = input('\nВведите новую дату выпуска автомобиля(ГГГГ-ММ-ДД): ')
+                        new_year_of_release = input('\nВведите новый год выпуска автомобиля(ГГГГ): ')
                         mycursor.execute(
                             "update car set year_of_release = " + "'" + new_year_of_release + "'" + " where id_car = " + id_car)
 
@@ -901,7 +901,7 @@ try:
                         delete_car(2, 'concat(brand, " ", model)', brand_and_model)
 
                     elif num_delete == 3:
-                        year_of_release = input('\nВведите год релиза автомобиля(ГГГГ-ММ-ДД): ')
+                        year_of_release = input('\nВведите год релиза автомобиля(ГГГГ): ')
                         delete_car(3, 'year_of_release', year_of_release)
 
                     elif num_delete == 4:
@@ -1002,7 +1002,7 @@ try:
                 # Создать запись
                 if num_act == 1:
                     id_insurance = input('\nВведите Id страховки: ')
-                    insurance_number = input('Введите номер страховки: ')
+                    insurance_number = input('Введите номер страховки(16 цифр): ')
                     start_date = input('Введите дату начала действия страховки(ГГГГ-ММ-ДД): ')
                     end_date = input('Введите дату окончания действия страховки(ГГГГ-ММ-ДД): ')
 
@@ -1023,7 +1023,7 @@ try:
                         read_insurance('id_insurance', id_insurance)
 
                     elif num_search == 2:
-                        insurance_number = input('\nВведите номер страховки: ')
+                        insurance_number = input('\nВведите номер страховки(16 цифр): ')
                         read_insurance('insurance_number', insurance_number)
 
                 # Редактировать запись
@@ -1038,7 +1038,7 @@ try:
                             "update insurance set id_insurance = " + new_id_insurance + " where id_insurance = " + id_insurance)
 
                     elif num_update == 2:
-                        new_insurance_number = input('\nВведите новый номер страховки: ')
+                        new_insurance_number = input('\nВведите новый номер страховки(16 цифр): ')
                         mycursor.execute(
                             "update insurance set insurance_number = " + "'" + new_insurance_number + "'" + " where id_insurance = " + id_insurance)
 
@@ -1066,7 +1066,7 @@ try:
                         delete_insurance('id_insurance', id_insurance)
 
                     elif num_delete == 2:
-                        insurance_number = input('\nВведите номер страховки: ')
+                        insurance_number = input('\nВведите номер страховки(16 цифр): ')
                         delete_insurance('insurance_number', insurance_number)
 
                     else:
