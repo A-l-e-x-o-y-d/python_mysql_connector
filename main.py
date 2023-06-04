@@ -105,6 +105,14 @@ def read_supplier(num_search, column, value):
         mytable.add_rows(mycursor.fetchall())
         print(mytable)
 
+def read_delivery(column, value):
+    mycursor.execute(
+        'select * from delivery where ' + column + ' = ' + '"' + value + '"')
+    mytable = PrettyTable()
+    mytable.field_names = ['Id delivery', 'Order date', 'Delivery date']
+    mytable.add_rows(mycursor.fetchall())
+    print(mytable)
+
 def delete_customer(num_delete, column, value):
 
     if num_delete == 1:
@@ -1094,6 +1102,7 @@ try:
 
                     # Принять изменения
                     db_name.commit()
+                    print('Запись поставщика успешно добавлена')
 
                 # Читать запись
                 elif num_act == 2:
@@ -1156,6 +1165,7 @@ try:
 
                     # Принять изменения
                     db_name.commit()
+                    print('Запись поставщика успешно изменена')
 
                 # Удалить запись
                 elif num_act == 4:
@@ -1181,7 +1191,7 @@ try:
                         delete_supplier(4, 'adress', address)
 
                     elif num_delete == 5:
-                        full_name_contact_person = input('Введите ФИО контактного лица')
+                        full_name_contact_person = input('Введите ФИО контактного лица: ')
                         delete_supplier(5, 'full_name_contact_person', full_name_contact_person)
 
                 else:
@@ -1190,6 +1200,73 @@ try:
             elif num_table == 8:
 
             elif num_table == 9:
+                print(
+                    '\nДействия с таблицей:\n1. Создать запись\n2. Читать запись\n3. Редактировать запись\n4. Удалить запись\n')
+                num_act = int(input('\nВведите номер действия: '))
+
+                # Создать запись
+                if num_act == 1:
+
+                    id_delivery = input('Введите Id доставки: ')
+                    order_date = input('Введите дату заказа(ГГГГ-ММ-ДД): ')
+                    delivery_date = input('Введите дату доставки(ГГГГ-ММ-ДД): ')
+
+                    db_name.commit()
+                    print('Запись доставки успешно добавлена')
+
+
+                # Читать запись
+                if num_act == 2:
+                    print('\nКолонки:\n1. Id\n2. Order date\n3. Delivery date\n')
+                    num_search = int(input('\nВведите номер колонки, по которой будет производиться поиск доставки: '))
+
+                    if num_search == 1:
+                        id_delivery = input('\nВведите Id доставки: ')
+                        read_delivery('id_delivery', id_delivery)
+
+                    elif num_search == 2:
+                        order_date = input('\nВведите дату заказа(ГГГГ-ММ-ДД): ')
+                        read_delivery('order_date', order_date)
+
+                    elif num_search == 3:
+                        delivery_date = input('\nВведите дату доставки(ГГГГ-ММ-ДД): ')
+                        read_delivery('delivery_date', delivery_date)
+
+                # Редактировать запись
+                if num_act == 3:
+                    id_delivery = input('\nВведите Id доставки: ')
+                    print('\nКолонки:\n1. Id\n2. Order date\n3. Delivery date\n')
+                    num_update = int(input('\n\nВведите номер колонки для изменения: '))
+
+                    if num_update == 1:
+                        new_id_delivery = input('Введите новое Id доставки: ')
+                        mycursor.execute(
+                            "update delivery set id_delivery = " + new_id_delivery + " where id_delivery = " + id_delivery)
+
+                    elif num_update == 2:
+                        new_order_date = input('\nВведите новую дату заказа: ')
+                        mycursor.execute(
+                            "update delivery set order_date = " + new_order_date + " where id_delivery = " + id_delivery)
+
+                    elif num_update == 3:
+                        new_delivery_date = input('\nВведите новую дату доставки: ')
+                        mycursor.execute(
+                            "update delivery set delivery_date = " + new_delivery_date + " where id_delivery = " + id_delivery)
+
+                    db_name.commit()
+                    print('Запись доставки успешно изменена')
+
+                # Удаление записи
+                if num_act == 4:
+
+                    id_delivery = input('\nВведите Id доставки: ')
+                    mycursor.execute("delete from delivery where id_delivery = " + id_delivery)
+
+                    # Принять изменения
+                    db_name.commit()
+                    print('Запись доставки успешно удалена')
+
+
 
             else:
                 print('\nВыбранной таблицы не существует!')
