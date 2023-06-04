@@ -1231,48 +1231,48 @@ try:
 
                     if num_search == 1:
                         id_supplier_to_delivery = input('Введите Id Поставщик-Доставка: ')
-                        read_delivery('id_delivery', id_delivery)
+                        read_supplier_to_delivery('id_supplier_to_delivery', id_supplier_to_delivery)
 
                     elif num_search == 2:
                         id_supplier = input('Введите Id поставщика: ')
-                        read_delivery('order_date', order_date)
+                        read_supplier_to_delivery('id_supplier', id_supplier)
 
                     elif num_search == 3:
                         id_delivery = input('Введите Id доставки: ')
-                        read_delivery('delivery_date', delivery_date)
+                        read_supplier_to_delivery('id_delivery', id_delivery)
 
                 # Редактировать запись
                 if num_act == 3:
-                    id_delivery = input('\nВведите Id доставки: ')
-                    print('\nКолонки:\n1. Id\n2. Order date\n3. Delivery date\n')
+                    id_supplier_to_delivery = input('Введите Id Поставщик-Доставка: ')
+                    print('\nКолонки:\n1. id supplier to delivery\n2. Id supplier\n3. Id delivery\n')
                     num_update = int(input('\n\nВведите номер колонки для изменения: '))
 
                     if num_update == 1:
-                        new_id_delivery = input('Введите новое Id доставки: ')
+                        new_id_supplier_to_delivery = input('Введите новое Id Поставщик-Доставка: ')
                         mycursor.execute(
-                            "update delivery set id_delivery = " + new_id_delivery + " where id_delivery = " + id_delivery)
+                            "update delivery set id_delivery = " + new_id_supplier_to_delivery + " where id_supplier_to_delivery = " + id_supplier_to_delivery)
 
                     elif num_update == 2:
-                        new_order_date = input('\nВведите новую дату заказа: ')
+                        new_id_supplier = input('\nВведите новое Id поставщика: ')
                         mycursor.execute(
-                            "update delivery set order_date = " + new_order_date + " where id_delivery = " + id_delivery)
+                            "update delivery set id_supplier = " + new_id_supplier + " where id_supplier_to_delivery = " + id_supplier_to_delivery)
 
                     elif num_update == 3:
-                        new_delivery_date = input('\nВведите новую дату доставки: ')
+                        new_id_delivery = input('\nВведите новое Id доставки: ')
                         mycursor.execute(
-                            "update delivery set delivery_date = " + new_delivery_date + " where id_delivery = " + id_delivery)
+                            "update delivery set id_delivery = " + new_id_delivery + " where id_supplier_to_delivery = " + id_supplier_to_delivery)
 
                     db_name.commit()
-                    print('Запись доставки успешно изменена')
+                    print('Запись Поставщик-Доставка успешно изменена')
 
                 # Удаление записи
                 if num_act == 4:
-                    id_delivery = input('\nВведите Id доставки: ')
-                    mycursor.execute("delete from delivery where id_delivery = " + id_delivery)
+                    id_supplier_to_delivery = input('Введите Id Поставщик-Доставка: ')
+                    mycursor.execute("delete from supplier_to_delivery where id_supplier_to_delivery = " + id_supplier_to_delivery)
 
                     # Принять изменения
                     db_name.commit()
-                    print('Запись доставки успешно удалена')
+                    print('Запись Поставщик-Доставка успешно удалена')
 
             # Доставка
             elif num_table == 9:
