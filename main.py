@@ -1226,7 +1226,7 @@ try:
 
                 # Читать запись
                 if num_act == 2:
-                    print('\nКолонки:\n1. id supplier to delivery\n2. Id supplier\n3. Id delivery\n')
+                    print('\nКолонки:\n1. Id supplier to delivery\n2. Id supplier\n3. Id delivery\n')
                     num_search = int(input('\nВведите номер колонки, по которой будет производиться поиск записи: '))
 
                     if num_search == 1:
