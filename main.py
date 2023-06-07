@@ -1293,7 +1293,7 @@ try:
                     order_date = input('Введите дату заказа(ГГГГ-ММ-ДД): ')
                     delivery_date = input('Введите дату доставки(ГГГГ-ММ-ДД): ')
 
-                    mycursor.execute('insert into delivery(id_delivery, order_date, delivery_date) values (' + id_delivery + ',' + order_date + ',' + delivery_date + ')')
+                    mycursor.execute('insert into delivery(id_delivery, order_date, delivery_date) values (' + id_delivery + ',"' + order_date + '","' + delivery_date + '")')
 
                     db_name.commit()
                     print('\nЗапись доставки успешно добавлена')
