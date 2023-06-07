@@ -1110,7 +1110,7 @@ try:
                     company_name = input('Введите название компании: ')
                     phone_number = input('Введите номер поставщика: ')
                     address = input('Введите адрес поставщика: ')
-                    full_name_contact_person = input('Введите ФИО контактного лица')
+                    full_name_contact_person = input('Введите ФИО контактного лица: ')
 
                     mycursor.execute(
                         'insert into supplier(id_supplier, company_name, phone_number, address, full_name_contact_person) values (' + id_supplier + ',"' + company_name + '","' + phone_number + '","' + address + '","' + full_name_contact_person + '"')
