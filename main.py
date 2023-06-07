@@ -121,7 +121,7 @@ def read_delivery(column, value):
     mycursor.execute(
         'select * from delivery where ' + column + ' = ' + '"' + value + '"')
     mytable = PrettyTable()
-    mytable.field_names = ['Id delivery', 'Order date', 'Delivery date']
+    mytable.field_names = ['Id delivery', 'Order date', 'Delivery date', 'Delivery place']
     mytable.add_rows(mycursor.fetchall())
     print(mytable)
 
@@ -1292,8 +1292,9 @@ try:
                     id_delivery = input('\nВведите Id доставки: ')
                     order_date = input('Введите дату заказа(ГГГГ-ММ-ДД): ')
                     delivery_date = input('Введите дату доставки(ГГГГ-ММ-ДД): ')
+                    delivery_place = 'ExpoCar'
 
-                    mycursor.execute('insert into delivery(id_delivery, order_date, delivery_date) values (' + id_delivery + ',"' + order_date + '","' + delivery_date + '")')
+                    mycursor.execute('insert into delivery(id_delivery, order_date, delivery_date, delivery_place) values (' + id_delivery + ',"' + order_date + '","' + delivery_date + '","' + delivery_place + '")')
 
                     db_name.commit()
                     print('\nЗапись доставки успешно добавлена')
