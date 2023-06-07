@@ -1106,14 +1106,14 @@ try:
 
                 # Создать запись
                 if num_act == 1:
-                    id_supplier = input('Введите Id поставщика: ')
+                    id_supplier = input('\nВведите Id поставщика: ')
                     company_name = input('Введите название компании: ')
                     phone_number = input('Введите номер поставщика: ')
                     address = input('Введите адрес поставщика: ')
                     full_name_contact_person = input('Введите ФИО контактного лица: ')
 
                     mycursor.execute(
-                        'insert into supplier(id_supplier, company_name, phone_number, address, full_name_contact_person) values (' + id_supplier + ',"' + company_name + '","' + phone_number + '","' + address + '","' + full_name_contact_person + '"')
+                        'insert into supplier(id_supplier, company_name, phone_number, adress, full_name_contact_person) values (' + id_supplier + ',"' + company_name + '","' + phone_number + '","' + address + '","' + full_name_contact_person + '")')
 
                     # Принять изменения
                     db_name.commit()
@@ -1225,7 +1225,7 @@ try:
                     id_delivery = input('Введите Id доставки: ')
 
                     mycursor.execute(
-                        'insert into supplier_to_delivery(id_supplier_to_delivery, id_supplier, id_delivery) values (' + id_supplier_to_delivery + ',' + id_supplier + ',' + id_delivery)
+                        'insert into supplier_to_delivery(id_supplier_to_delivery, id_supplier, id_delivery) values (' + id_supplier_to_delivery + ',' + id_supplier + ',' + id_delivery + ')')
 
                     db_name.commit()
                     print('Запись поставщик-доставка успешно добавлена')
@@ -1293,7 +1293,7 @@ try:
                     order_date = input('Введите дату заказа(ГГГГ-ММ-ДД): ')
                     delivery_date = input('Введите дату доставки(ГГГГ-ММ-ДД): ')
 
-                    mycursor.execute('insert into delivery(id_delivery, order_date, delivery_date) values (' + id_delivery + ',' + order_date + ',' + delivery_date)
+                    mycursor.execute('insert into delivery(id_delivery, order_date, delivery_date) values (' + id_delivery + ',' + order_date + ',' + delivery_date + ')')
 
                     db_name.commit()
                     print('Запись доставки успешно добавлена')
