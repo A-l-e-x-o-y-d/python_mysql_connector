@@ -1140,7 +1140,7 @@ try:
                         read_supplier(4, 'adress', address)
 
                     elif num_search == 5:
-                        full_name_contact_person = input('Введите ФИО контактного лица')
+                        full_name_contact_person = input('Введите ФИО контактного лица: ')
                         read_supplier(5, 'full_name_contact_person', full_name_contact_person)
 
                 # Редактировать запись
@@ -1289,7 +1289,6 @@ try:
 
                     db_name.commit()
                     print('Запись доставки успешно добавлена')
-
 
                 # Читать запись
                 if num_act == 2:
