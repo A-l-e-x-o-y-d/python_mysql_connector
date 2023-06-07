@@ -1112,6 +1112,9 @@ try:
                     address = input('Введите адрес поставщика: ')
                     full_name_contact_person = input('Введите ФИО контактного лица')
 
+                    mycursor.execute(
+                        'insert into supplier(id_supplier, company_name, phone_number, address, full_name_contact_person) values (' + id_supplier + ',"' + company_name + '","' + phone_number + '","' + address + '","' + full_name_contact_person + '"')
+
                     # Принять изменения
                     db_name.commit()
                     print('Запись поставщика успешно добавлена')
@@ -1124,23 +1127,23 @@ try:
                         input('\nВведите номер колонки, по которой будет производиться поиск поставщика: '))
 
                     if num_search == 1:
-                        id_supplier = input('Введите Id поставщика: ')
+                        id_supplier = input('\nВведите Id поставщика: ')
                         read_supplier(1, 'id_supplier', id_supplier)
 
                     elif num_search == 2:
-                        company_name = input('Введите название компании: ')
+                        company_name = input('\nВведите название компании: ')
                         read_supplier(2, 'company_name', company_name)
 
                     elif num_search == 3:
-                        phone_number = input('Введите номер поставщика: ')
+                        phone_number = input('\nВведите номер поставщика: ')
                         read_supplier(3, 'phone_number', phone_number)
 
                     elif num_search == 4:
-                        address = input('Введите адрес поставщика: ')
+                        address = input('\nВведите адрес поставщика: ')
                         read_supplier(4, 'adress', address)
 
                     elif num_search == 5:
-                        full_name_contact_person = input('Введите ФИО контактного лица: ')
+                        full_name_contact_person = input('\nВведите ФИО контактного лица: ')
                         read_supplier(5, 'full_name_contact_person', full_name_contact_person)
 
                 # Редактировать запись
@@ -1217,9 +1220,12 @@ try:
 
                 # Создать запись
                 if num_act == 1:
-                    id_supplier_to_delivery = input('Введите Id Поставщик-Доставка: ')
+                    id_supplier_to_delivery = input('\nВведите Id Поставщик-Доставка: ')
                     id_supplier = input('Введите Id поставщика: ')
                     id_delivery = input('Введите Id доставки: ')
+
+                    mycursor.execute(
+                        'insert into supplier_to_delivery(id_supplier_to_delivery, id_supplier, id_delivery) values (' + id_supplier_to_delivery + ',' + id_supplier + ',' + id_delivery)
 
                     db_name.commit()
                     print('Запись поставщик-доставка успешно добавлена')
@@ -1230,25 +1236,25 @@ try:
                     num_search = int(input('\nВведите номер колонки, по которой будет производиться поиск записи: '))
 
                     if num_search == 1:
-                        id_supplier_to_delivery = input('Введите Id Поставщик-Доставка: ')
+                        id_supplier_to_delivery = input('\nВведите Id Поставщик-Доставка: ')
                         read_supplier_to_delivery('id_supplier_to_delivery', id_supplier_to_delivery)
 
                     elif num_search == 2:
-                        id_supplier = input('Введите Id поставщика: ')
+                        id_supplier = input('\nВведите Id поставщика: ')
                         read_supplier_to_delivery('id_supplier', id_supplier)
 
                     elif num_search == 3:
-                        id_delivery = input('Введите Id доставки: ')
+                        id_delivery = input('\nВведите Id доставки: ')
                         read_supplier_to_delivery('id_delivery', id_delivery)
 
                 # Редактировать запись
                 if num_act == 3:
-                    id_supplier_to_delivery = input('Введите Id Поставщик-Доставка: ')
+                    id_supplier_to_delivery = input('\nВведите Id Поставщик-Доставка: ')
                     print('\nКолонки:\n1. id supplier to delivery\n2. Id supplier\n3. Id delivery\n')
                     num_update = int(input('\n\nВведите номер колонки для изменения: '))
 
                     if num_update == 1:
-                        new_id_supplier_to_delivery = input('Введите новое Id Поставщик-Доставка: ')
+                        new_id_supplier_to_delivery = input('\nВведите новое Id Поставщик-Доставка: ')
                         mycursor.execute(
                             "update delivery set id_delivery = " + new_id_supplier_to_delivery + " where id_supplier_to_delivery = " + id_supplier_to_delivery)
 
@@ -1267,7 +1273,7 @@ try:
 
                 # Удаление записи
                 if num_act == 4:
-                    id_supplier_to_delivery = input('Введите Id Поставщик-Доставка: ')
+                    id_supplier_to_delivery = input('\nВведите Id Поставщик-Доставка: ')
                     mycursor.execute("delete from supplier_to_delivery where id_supplier_to_delivery = " + id_supplier_to_delivery)
 
                     # Принять изменения
@@ -1283,9 +1289,11 @@ try:
                 # Создать запись
                 if num_act == 1:
 
-                    id_delivery = input('Введите Id доставки: ')
+                    id_delivery = input('\nВведите Id доставки: ')
                     order_date = input('Введите дату заказа(ГГГГ-ММ-ДД): ')
                     delivery_date = input('Введите дату доставки(ГГГГ-ММ-ДД): ')
+
+                    mycursor.execute('insert into delivery(id_delivery, order_date, delivery_date) values (' + id_delivery + ',' + order_date + ',' + delivery_date)
 
                     db_name.commit()
                     print('Запись доставки успешно добавлена')
