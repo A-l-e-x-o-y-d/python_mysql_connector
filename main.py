@@ -1117,7 +1117,7 @@ try:
 
                     # Принять изменения
                     db_name.commit()
-                    print('Запись поставщика успешно добавлена')
+                    print('\nЗапись поставщика успешно добавлена')
 
                 # Читать запись
                 elif num_act == 2:
@@ -1180,7 +1180,7 @@ try:
 
                     # Принять изменения
                     db_name.commit()
-                    print('Запись поставщика успешно изменена')
+                    print('\nЗапись поставщика успешно изменена')
 
                 # Удалить запись
                 elif num_act == 4:
@@ -1228,7 +1228,7 @@ try:
                         'insert into supplier_to_delivery(id_supplier_to_delivery, id_supplier, id_delivery) values (' + id_supplier_to_delivery + ',' + id_supplier + ',' + id_delivery + ')')
 
                     db_name.commit()
-                    print('Запись поставщик-доставка успешно добавлена')
+                    print('\nЗапись поставщик-доставка успешно добавлена')
 
                 # Читать запись
                 if num_act == 2:
@@ -1269,7 +1269,7 @@ try:
                             "update delivery set id_delivery = " + new_id_delivery + " where id_supplier_to_delivery = " + id_supplier_to_delivery)
 
                     db_name.commit()
-                    print('Запись Поставщик-Доставка успешно изменена')
+                    print('\nЗапись Поставщик-Доставка успешно изменена')
 
                 # Удаление записи
                 if num_act == 4:
@@ -1296,7 +1296,7 @@ try:
                     mycursor.execute('insert into delivery(id_delivery, order_date, delivery_date) values (' + id_delivery + ',' + order_date + ',' + delivery_date + ')')
 
                     db_name.commit()
-                    print('Запись доставки успешно добавлена')
+                    print('\nЗапись доставки успешно добавлена')
 
                 # Читать запись
                 if num_act == 2:
@@ -1337,7 +1337,7 @@ try:
                             "update delivery set delivery_date = " + new_delivery_date + " where id_delivery = " + id_delivery)
 
                     db_name.commit()
-                    print('Запись доставки успешно изменена')
+                    print('\nЗапись доставки успешно изменена')
 
                 # Удаление записи
                 if num_act == 4:
