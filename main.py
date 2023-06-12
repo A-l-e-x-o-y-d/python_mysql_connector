@@ -1256,17 +1256,17 @@ try:
                     if num_update == 1:
                         new_id_supplier_to_delivery = input('\nВведите новое Id Поставщик-Доставка: ')
                         mycursor.execute(
-                            "update delivery set id_delivery = " + new_id_supplier_to_delivery + " where id_supplier_to_delivery = " + id_supplier_to_delivery)
+                            "update supplier_to_delivery set id_supplier_to_delivery = " + new_id_supplier_to_delivery + " where id_supplier_to_delivery = " + id_supplier_to_delivery)
 
                     elif num_update == 2:
                         new_id_supplier = input('\nВведите новое Id поставщика: ')
                         mycursor.execute(
-                            "update delivery set id_supplier = " + new_id_supplier + " where id_supplier_to_delivery = " + id_supplier_to_delivery)
+                            "update supplier_to_delivery set id_supplier = " + new_id_supplier + " where id_supplier_to_delivery = " + id_supplier_to_delivery)
 
                     elif num_update == 3:
                         new_id_delivery = input('\nВведите новое Id доставки: ')
                         mycursor.execute(
-                            "update delivery set id_delivery = " + new_id_delivery + " where id_supplier_to_delivery = " + id_supplier_to_delivery)
+                            "update supplier_to_delivery set id_delivery = " + new_id_delivery + " where id_supplier_to_delivery = " + id_supplier_to_delivery)
 
                     db_name.commit()
                     print('\nЗапись Поставщик-Доставка успешно изменена')
