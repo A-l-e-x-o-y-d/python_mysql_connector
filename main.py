@@ -113,7 +113,7 @@ def read_supplier_to_delivery(column, value):
         'join delivery on supplier_to_delivery.id_delivery = delivery.id_delivery '
         'where ' + column + ' = ' + value)
     mytable = PrettyTable()
-    mytable.field_names = ['Id supplier to delivery', 'Company_name', 'Supplier phone number', 'Supplier adress', 'Supplier full name', 'Order date', 'Delivery date']
+    mytable.field_names = ['Id_supplier_to_delivery', 'Company_name', 'Supplier_phone_number', 'Supplier_adress', 'Supplier_full_name', 'Order_date', 'Delivery_date']
     mytable.add_rows(mycursor.fetchall())
     print(mytable)
 
