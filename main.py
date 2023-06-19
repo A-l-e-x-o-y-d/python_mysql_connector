@@ -1241,11 +1241,11 @@ try:
 
                     elif num_search == 2:
                         id_supplier = input('\nВведите Id поставщика: ')
-                        read_supplier_to_delivery('id_supplier', id_supplier)
+                        read_supplier_to_delivery('supplier.id_supplier', id_supplier)
 
                     elif num_search == 3:
                         id_delivery = input('\nВведите Id доставки: ')
-                        read_supplier_to_delivery('id_delivery', id_delivery)
+                        read_supplier_to_delivery('delivery.id_delivery', id_delivery)
 
                 # Редактировать запись
                 if num_act == 3:
